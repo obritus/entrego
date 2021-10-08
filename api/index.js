@@ -5,9 +5,10 @@ import cors from 'cors'
 import morgan from 'morgan'
 
 import api from './routes/index.js'
+import images from './routes/images.js'
 
-const porta = process.env.CARDAPP_PORT || 3005
-const mongodb_url = process.env.CARDAPP_MONGOOSE
+const porta = process.env.PORT || 3005
+const mongodb_url = process.env.MONGOOSE
 
 const app = express()
 
@@ -19,6 +20,7 @@ app
 
 	// ROTAS
 	.use('/', api)
+	.use('/images', images)
 
 	.listen(porta, () => {
 		// BANCO DE DADOS
@@ -26,6 +28,6 @@ app
 		mongoose.connect(
 			mongodb_url,
 			{ useNewUrlParser: true, useUnifiedTopology: true },
-			() => console.log('Conectado ao Banco de Dados')
+			() => console.log('--------- Conectado ao Banco de Dados ---------')
 		)
 	})
