@@ -1,0 +1,88 @@
+#api
+api/node_modules
+api/.env
+
+
+# Logs
+app/logs
+app/*.log
+
+# Runtime data
+app/pids
+app/*.pid
+app/*.seed
+
+# Coverage directory used by tools like istanbul
+app/coverage
+app/.eslintcache
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+app/node_modules
+
+# OSX
+app/.DS_Store
+
+app/release/app/dist
+app/release/build
+app/.erb/dll
+
+app/.idea
+app/npm-debug.log.*
+app/*.css.d.ts
+app/*.sass.d.ts
+app/*.scss.d.ts
+
+
+mobile/node_modules
+# Expo
+mobile/.expo
+mobile/__generated__
+mobile/web-build
+
+# macOS
+mobile/.DS_Store
+
+# Node
+mobile/npm-debug.log
+mobile/yarn-error.log
+
+# Ruby
+mobile/.direnv
+
+# Env
+mobile/.envrc.local
+
+# Emacs
+mobile/*~
+
+# Vim
+mobile/.*.swp
+mobile/.*.swo
+mobile/.*.swn
+mobile/.*.swm
+
+# VSCode
+mobile/.history/
+
+# Android
+mobile/*.apk
+mobile/*.hprof
+mobile/android/**/build
+mobile/android/**/.cxx
+mobile/android/**/local.properties
+mobile/android/captures
+mobile/android/expoview/libs/ReactAndroid-temp
+mobile/android/versioned-react-native/ReactAndroid
+mobile/ReactAndroid-temp.aar
+
+# Dynamic Macros
+mobile/ios/Exponent/Supporting/EXBuildConstants.plist.bak
+mobile/ios/Exponent/Supporting/EXBuildConstants.plist.json
+mobile/ios/Exponent/Supporting/EXBuildConstants.plist
+mobile/ios/Exponent/Supporting/GoogleService-Info.plist
+mobile/ios/Exponent/Supporting/Info.plist.bak
+mobile/ios/Exponent/Supporting/Info.plist.json
+mobile/android/expoview/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
+mobile/android/app/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
+mobile/.kernel-ngrok-url
