@@ -1,9 +1,5 @@
 import express from 'express'
-import mongoose from 'mongoose'
-
 import { GeneratePassword } from '../functions.js'
-
-
 import Model from '../models/Usuario.js'
 
 // -----------------------------------------------------------------------------

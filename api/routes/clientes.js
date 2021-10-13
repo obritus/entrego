@@ -7,6 +7,7 @@ import Model from '../models/Cliente.js'
 
 export default express.Router()
 	.get('/', async (req, res) => {
+		console.log('TEste')
 		try {
 			const Data = await Model.find({})
 
