@@ -2,7 +2,7 @@ import express from 'express'
 import sharp from 'sharp'
 import multer from 'multer'
 
-import { autorize, UploadToS3, Upload } from '../functions.js'
+import { Autorize, UploadToS3, Upload } from '../functions.js'
 import Image from '../models/Image.js' //ESTRUTURA DAS IMAGENS NO DB
 
 export default express.Router()

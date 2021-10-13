@@ -1,9 +1,14 @@
 import express from 'express'
+import { CheckPassword } from '../functions.js'
 
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
 export default express.Router()
-	.get("/", (req, res) => {
-		res.sendStatus(200)
+	.get("/", async (req, res) => {
+		try {
+			res.sendStatus(200)
+		} catch (error) {
+			res.json({ error })
+		}
 	})

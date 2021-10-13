@@ -3,10 +3,10 @@ import crypto from 'crypto'
 import multer from 'multer'
 import aws from 'aws-sdk'
 import jwt from 'jsonwebtoken'
-import path from 'path'
+import { resolve } from 'path'
 import fs from 'fs'
 
-export const autorize = (req, res, next) => {
+export const Autorize = (req, res, next) => {
 	const AuthHeader = req.headers.authorization
 	if (!AuthHeader)
 		return res.status(401).json({ auth: false, msg: 'Não autorizado.' })
@@ -55,7 +55,7 @@ const Storage = {
 }
 
 export const Upload = {
-	dest: path.resolve('tmp'),
+	dest: resolve('tmp'),
 	storage: Storage.local,
 	fileFilter: (req, file, cb) => {
 		const allowedMimes = ['image/jpeg']
@@ -65,4 +65,25 @@ export const Upload = {
 			cb(new Error("Tipo de arquivo inválido"))
 		}
 	}
+}
+
+export const GeneratePassword = pass => {
+	return new Promise((resolve, reject) => {
+		const salt = crypto.randomBytes(16).toString('hex')
+
+		crypto.scrypt(pass, salt, 64, (err, derivedKey) => {
+			if (err) reject(err)
+			resolve(salt + ':' + derivedKey.toString('hex'))
+		})
+	})
+}
+
+export const CheckPassword = (pass, hash) => {
+	return new Promise((resolve, reject) => {
+		const [salt, key] = hash.split(':')
+		crypto.scrypt(pass, salt, 64, (err, derivedKey) => {
+			if (err) reject(err)
+			resolve(key == derivedKey.toString('hex'))
+		})
+	})
 }
