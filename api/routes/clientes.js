@@ -60,8 +60,8 @@ export default express.Router()
 
 	// -------------------------------------------------------------------------
 
-	.post('/', (req, res) => {
-		req.body.password = GeneratePassword(req.body.password)
+	.post('/', async (req, res) => {
+		req.body.password = await GeneratePassword(req.body.password)
 		new Model(req.body)
 			.save()
 			.then(data => {

@@ -40,7 +40,7 @@ export const UploadToS3 = async (fileName, filePath) => {
 const Storage = {
 	local: multer.diskStorage({
 		destination: (req, file, cb) => {
-			cb(null, upld.dest)
+			cb(null, Upload.dest)
 		},
 		filename: (req, file, cb) => {
 			crypto.randomBytes(16, (err, hash) => {

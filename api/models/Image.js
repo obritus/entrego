@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export default mongoose.model('images', new mongoose.Schema(
+const Image = new mongoose.Schema(
 	{
 		location: { type: String, required: true, unique: true },
 		key: { type: String, required: true, unique: true },
@@ -12,4 +12,6 @@ export default mongoose.model('images', new mongoose.Schema(
 		},
 	},
 	{ timestamps: true }
-))
+)
+
+export default mongoose.model('images', Image)

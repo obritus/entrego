@@ -1,9 +1,15 @@
+import 'dotenv/config'
 import express from 'express'
 import sharp from 'sharp'
 import multer from 'multer'
+import aws from "aws-sdk"
+import { resolve } from 'path'
+import { unlink } from 'fs'
 
 import { Autorize, UploadToS3, Upload } from '../functions.js'
 import Image from '../models/Image.js' //ESTRUTURA DAS IMAGENS NO DB
+
+const s3 = new aws.S3()
 
 export default express.Router()
 	.get("/", (req, res) => {
@@ -19,17 +25,18 @@ export default express.Router()
 			.catch((err) => res.json({ err }))
 	})
 
-	.put("/:id", (req, res) => {
-		Image.updateOne({ _id: req.params.id }, req.body)
-			.then(() => res.sendStatus(202))
-			.catch((err) => res.json({ err }))
-	})
-
 	.post("/", multer(Upload).single("image"), async (req, res) => {
 		const _id = req.body._id
 
+		const ExcluirImagemEnviada = () => {
+			// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
+			unlink(req.file.path, (err) => {
+				if (err) throw err
+			})
+		}
+
 		if (_id != null && req.file.originalname != null) {
-			const NewFile = path.resolve("tmp", "s3", req.file.filename)
+			const NewFile = resolve("tmp", "s3", req.file.filename)
 			sharp(req.file.path)
 				.jpeg({ quality: 50 })
 				.resize(1080)
@@ -38,30 +45,51 @@ export default express.Router()
 					// MANDA O ARQUIVO PARA O S3
 					UploadToS3(req.file.filename, NewFile).then((data) => {
 						// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
-						fs.unlink(req.file.path, (err) => {
-							if (err) throw err
-						})
-						fs.unlink(NewFile, (err) => {
+						ExcluirImagemEnviada()
+
+						unlink(NewFile, (err) => {
 							if (err) throw err
 						})
 
 						const Uploaded = {
 							location: data,
+							key: req.file.filename,
 							width: info.width,
-							height: info.height
+							height: info.height,
+							usuario: _id
 						}
 
-						new Image(Uploaded).save().then((data) => res.json(data))
+						new Image(Uploaded)
+							.save()
+							.then((data) => res.json(data))
+							.catch(error => res.json({ error }))
 					})
 				})
-				.catch((err) => res.json({ err }))
+				.catch((err) => {
+					// EXCLUIR O ARQUIVO TEMPORÁRIO
+					ExcluirImagemEnviada()
+
+					res.json({ err })
+				})
 		} else {
+			// EXCLUIR O ARQUIVO TEMPORÁRIO
+			ExcluirImagemEnviada()
+
 			res.json({ msg: "O usuário precisa ser setado." })
 		}
 	})
 
-	.delete("/:id", (req, res) => {
-		Image.findOneAndDelete({ _id: req.params.id })
+	.delete("/:id", async (req, res) => {
+		Image
+			.findOneAndDelete({ _id: req.params.id })
+			.then(data => {
+				s3.deleteObject({
+					Bucket: process.env.BUCKET_NAME,
+					Key: data.key
+				}, (err, data) => {
+					if (err) console.error(err, err.stack)
+				})
+			})
 			.then(() => res.json({ msg: "Imagem excluída." }))
 			.catch((err) => res.json({ err }))
 	})

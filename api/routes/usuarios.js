@@ -34,7 +34,9 @@ export default express.Router()
 
 	.put('/:id', async (req, res) => {
 		try {
-			req.body.password && GeneratePassword(req.body.password)
+			if (req.body.password) {
+				req.body.password = await GeneratePassword(req.body.password)
+			}
 			const data = req.body
 			const Data = await Model.updateOne({ _id: req.params.id }, data)
 
