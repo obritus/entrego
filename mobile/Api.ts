@@ -15,8 +15,11 @@ const api = axios.create({
 // })
 
 const Api = {
-	GetUsuarios: () => api.get('usuarios'),
+	Login: (data: {}) => api.post('login', data),
+	Logout: (data: {}) => api.post('logout', data),
+	
 	GetUsuario: (_id:string) => api.get(`usuarios/${_id}`),
+	GetEntregas: () => api.get('entregas'),
 }
 
 export default Api

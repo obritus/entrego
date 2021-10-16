@@ -19,11 +19,11 @@ export default () => {
 			<Tab.Navigator
 				screenOptions={{
 					tabBarStyle: {
-						backgroundColor: '#1FB2F1',
+						backgroundColor: '#ffffff',
 						borderTopWidth: 0,
 						height: 120,
 					},
-					tabBarActiveBackgroundColor: '#30D9A9',
+					tabBarActiveBackgroundColor: '#afafaf',
 					tabBarItemStyle: {
 						height: 120,
 					},
@@ -40,23 +40,15 @@ export default () => {
 					options={{
 						header: () => false,
 						tabBarIcon: ({ focused }) => (
-							<View
+							<Image
+								source={require('./assets/icon.png')}
+								resizeMode='contain'
 								style={{
-									width: 50,
-									height: 50,
-									backgroundColor: '#000',
-									borderRadius: 50,
+									width: 60,
+									height: 60,
+									marginTop: 10,
 								}}
 							/>
-							// <Image
-							// 	source={require('./assets/map_icon.svg')}
-							// 	resizeMode='contain'
-							// 	style={{
-							// 		width: 60,
-							// 		height: 60,
-							// 		tintColor: '#ffffff',
-							// 	}}
-							// />
 						),
 					}}
 				/>
@@ -65,24 +57,17 @@ export default () => {
 					component={Entregas}
 					options={{
 						tabBarIcon: ({ focused }) => (
-							<View
+							<Image
+								source={require('./assets/icon.png')}
+								resizeMode='contain'
 								style={{
-									width: 50,
-									height: 50,
-									backgroundColor: '#000',
-									borderRadius: 50,
+									width: 60,
+									height: 60,
+									marginTop: 10,
 								}}
 							/>
-							// <Image
-							// 	source={require('./assets/entregas_icon.svg')}
-							// 	resizeMode='contain'
-							// 	style={{
-							// 		width: 60,
-							// 		height: 60,
-							// 		tintColor: '#FFF',
-							// 	}}
-							// />
 						),
+						headerTitleAlign: 'center',
 					}}
 				/>
 				<Tab.Screen
@@ -91,23 +76,15 @@ export default () => {
 					options={{
 						header: () => false,
 						tabBarIcon: ({ focused }) => (
-							<View
+							<Image
+								source={require('./assets/icon.png')}
+								resizeMode='contain'
 								style={{
-									width: 50,
-									height: 50,
-									backgroundColor: '#000',
-									borderRadius: 50,
+									width: 60,
+									height: 60,
+									marginTop: 10,
 								}}
 							/>
-							// <Image
-							// 	source={require('./assets/perfil_icon.svg')}
-							// 	resizeMode='contain'
-							// 	style={{
-							// 		width: 60,
-							// 		height: 60,
-							// 		tintColor: '#FFF',
-							// 	}}
-							// />
 						),
 					}}
 				/>

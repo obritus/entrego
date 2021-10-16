@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, Image, StatusBar } from 'react-native'
+import { View, Text, Image, StatusBar, ImageBackground } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import styled from 'styled-components/native'
 import Api from '../Api'
 
 const Tab = createBottomTabNavigator()
@@ -16,28 +17,60 @@ export default () => {
 			}}
 		>
 			<StatusBar barStyle='dark-content' backgroundColor='#FFF' />
+			{/* VIEW BRANCA */}
 			<View
 				style={{
 					padding: 25,
-					height: 350,
+					flex: 0.5,
 					backgroundColor: '#FFF',
 					borderBottomLeftRadius: 50,
 					borderBottomRightRadius: 50,
 				}}
 			>
-				<Text style={{ color: '#808080', marginBottom: -10 }}>
-					Olá,
-				</Text>
-				<Text
+				<View
 					style={{
-						fontSize: 32,
-						fontWeight: 'bold',
-						marginBottom: 25,
+						flex: 1,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						paddingBottom: 25,
 					}}
 				>
-					Fulano da Silva
-				</Text>
-
+					<View
+						style={{
+							width: 120,
+							height: 120,
+							backgroundColor: '#999',
+							borderRadius: 15,
+						}}
+					>
+						<ImageBackground
+							source={{
+								uri: 'http://afernandes.adv.br/wp-content/uploads/Team-Member-3.jpg',
+							}}
+							style={{ flex: 1, borderRadius: 15 }}
+						/>
+					</View>
+					<View
+						style={{
+							marginLeft: 20,
+							flex: 1,
+							flexDirection: 'column',
+						}}
+					>
+						<Text style={{ color: '#808080', marginBottom: -8 }}>
+							Olá,
+						</Text>
+						<Text
+							style={{
+								flexShrink: 1,
+								fontSize: 30,
+								fontWeight: 'bold',
+							}}
+						>
+							Fulano da Silva
+						</Text>
+					</View>
+				</View>
 				<View
 					style={{
 						flex: 1,
@@ -46,7 +79,7 @@ export default () => {
 					}}
 				>
 					<View>
-						<Text style={{ color: '#808080', marginBottom: -15 }}>
+						<Text style={{ color: '#808080', marginBottom: -13 }}>
 							Saldo
 						</Text>
 						<Text
@@ -64,7 +97,7 @@ export default () => {
 							style={{
 								textAlign: 'right',
 								color: '#808080',
-								marginBottom: -15,
+								marginBottom: -13,
 							}}
 						>
 							Entregas
