@@ -3,6 +3,7 @@ import Styled from 'styled-components'
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { ConfigContext } from './components/providers/configs'
+
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -24,6 +25,7 @@ const Tema = createGlobalStyle`
 		color: #FFF;
 		background: #24292E;
 		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-size: 12pt;
 	}
 	a {
 		color: #CCC;

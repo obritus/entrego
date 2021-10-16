@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import Mapa from '../screens/Home'
 import Entregas from '../screens/Entregas'
-import Perfil from '../screens/Profile'
+import Perfil from '../screens/Perfil'
 
 const Nav = styled.View`
 	display: flex;
@@ -27,7 +27,6 @@ const NavItem = styled.TouchableOpacity`
 const Icon = styled.Image`
 	width: 50px;
 	height: 50px;
-	transform: rotate(90deg);
 `
 
 const Tab = createBottomTabNavigator()

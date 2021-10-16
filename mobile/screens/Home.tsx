@@ -1,14 +1,13 @@
 import React from 'react'
-import { View, Text, ImageBackground } from 'react-native'
-import Styled from 'styled-components/native'
+import { View, Text, ImageBackground, Button } from 'react-native'
+import styled from 'styled-components/native'
 
-const Mapa = Styled.View`
-	height: 100%;
+const Mapa = styled.View`
+	flex: 1;
 	background: #333;
 `
-
-export default () => (
-	<View style={{ height: '100%' }}>
+export default (props: any) => (
+	<View style={{ flex: 2, backgroundColor: 'red' }}>
 		<Mapa>
 			<ImageBackground
 				source={require('../assets/map.png')}

@@ -75,7 +75,7 @@ const HeaderButtonsContainer = styled.div`
 
 const HeaderButtons = () => {
 	const { title } = useConfigContext()
-	const GetTitle = title ? title + ' - MotoGO' : 'MotoGO'
+	const GetTitle = title ? title + ' - EntreGO' : 'EntreGO'
 
 	React.useEffect(() => {
 		document.title = GetTitle
