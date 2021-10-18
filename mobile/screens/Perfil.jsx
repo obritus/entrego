@@ -13,7 +13,7 @@ export default () => {
 		<View
 			style={{
 				flex: 1,
-				backgroundColor: '#1FB2F1',
+				backgroundColor: '#4E71D9',
 			}}
 		>
 			<StatusBar barStyle='dark-content' backgroundColor='#FFF' />
@@ -112,9 +112,31 @@ export default () => {
 						</Text>
 					</View>
 				</View>
-				<Text style={{ textAlign: 'center', color: '#808080' }}>
+			</View>
+			<View
+				style={{
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}
+			>
+				<Text
+					style={{
+						textAlign: 'center',
+						color: '#FFF',
+						paddingTop: 10,
+					}}
+				>
 					Editar Informações
 				</Text>
+				<Image
+					source={require('../assets/arrow_down.png')}
+					resizeMode='contain'
+					style={{
+						width: 40,
+						height: 40,
+					}}
+				/>
 			</View>
 		</View>
 	)

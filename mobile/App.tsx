@@ -19,16 +19,16 @@ export default () => {
 			<Tab.Navigator
 				screenOptions={{
 					tabBarStyle: {
-						backgroundColor: '#ffffff',
+						backgroundColor: '#4E71D9',
 						borderTopWidth: 0,
 						height: 120,
 					},
-					tabBarActiveBackgroundColor: '#afafaf',
+					tabBarActiveBackgroundColor: '#FFFFFF25',
 					tabBarItemStyle: {
 						height: 120,
 					},
 					tabBarLabelStyle: {
-						color: '#000',
+						color: '#FFF',
 						fontSize: 12,
 						paddingBottom: 15,
 					},
@@ -41,11 +41,11 @@ export default () => {
 						header: () => false,
 						tabBarIcon: ({ focused }) => (
 							<Image
-								source={require('./assets/icon.png')}
+								source={require('./assets/home_icon.png')}
 								resizeMode='contain'
 								style={{
-									width: 60,
-									height: 60,
+									width: 40,
+									height: 40,
 									marginTop: 10,
 								}}
 							/>
@@ -58,11 +58,11 @@ export default () => {
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<Image
-								source={require('./assets/icon.png')}
+								source={require('./assets/entregas_icon.png')}
 								resizeMode='contain'
 								style={{
-									width: 60,
-									height: 60,
+									width: 40,
+									height: 40,
 									marginTop: 10,
 								}}
 							/>
@@ -77,11 +77,11 @@ export default () => {
 						header: () => false,
 						tabBarIcon: ({ focused }) => (
 							<Image
-								source={require('./assets/icon.png')}
+								source={require('./assets/perfil_icon.png')}
 								resizeMode='contain'
 								style={{
-									width: 60,
-									height: 60,
+									width: 40,
+									height: 40,
 									marginTop: 10,
 								}}
 							/>

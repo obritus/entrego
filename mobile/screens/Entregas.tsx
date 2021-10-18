@@ -15,7 +15,7 @@ export default () => (
 		style={{
 			flex: 1,
 			padding: StatusBar.currentHeight,
-			backgroundColor: '#1FB2F1',
+			backgroundColor: '#4E71D9',
 		}}
 	>
 		<Box>
