@@ -9,12 +9,11 @@ import {
 	Ubuntu_700Bold,
 } from '@expo-google-fonts/ubuntu'
 
+import { ThemeProvider, Tema } from './Styles'
+
 import Home from './screens/Home'
 import Entregas from './screens/Entregas'
 import Perfil from './screens/Perfil.jsx'
-
-import Icon from './components/Icon'
-import { ThemeProvider, Tema } from './Styles'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
