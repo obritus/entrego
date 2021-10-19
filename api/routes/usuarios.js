@@ -1,4 +1,5 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { GeneratePassword } from '../functions.js'
 import Model from '../models/Usuario.js'
 
@@ -8,7 +9,16 @@ import Model from '../models/Usuario.js'
 export default express.Router()
 	.get('/', async (req, res) => {
 		try {
-			const Data = await Model.find({})
+			const Data = await Model
+				.aggregate()
+				.lookup({
+					from: "images",
+					localField: "_id",
+					foreignField: "usuario",
+					as: "avatar",
+				})
+				.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
+
 
 			res.json(Data)
 		} catch (error) {
@@ -21,9 +31,19 @@ export default express.Router()
 
 	.get('/:id', async (req, res) => {
 		try {
-			const Data = await Model.findOne({ _id: req.params.id })
+			const Data = await Model
+				.aggregate()
+				.lookup({
+					from: "images",
+					localField: "_id",
+					foreignField: "usuario",
+					as: "avatar",
+				})
+				.match({ _id: mongoose.Types.ObjectId(req.params.id) })
+				//REMOVER ARRAY DO AVATAR, RESULTADO ÚNICO
+				.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
 
-			res.json(Data)
+			res.json(Data[0])
 		} catch (error) {
 			console.error(error)
 			res.json({ error })

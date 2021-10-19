@@ -1,53 +1,73 @@
 import React from 'react'
-import { View, Text, Image, StatusBar, ImageBackground } from 'react-native'
+import {
+	View,
+	Text,
+	Image,
+	StatusBar,
+	ImageBackground,
+	StyleSheet,
+} from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import styled from 'styled-components/native'
 import Api from '../Api'
+import { Tema } from '../Styles'
+
+const Box = styled.View`
+	flex: 0.5;
+	padding: 30px;
+	background: ${(props) => props.theme.colors.primary};
+`
 
 const Tab = createBottomTabNavigator()
 
 export default () => {
-	const [usuario, setUsuario] = React.useState({})
-	React.useEffect(() => {}, [])
+	const [usuario, setUsuario] = React.useState([])
+	React.useEffect(() => {
+		const GetUsuario = async () => {
+			try {
+				const Response = await Api.GetUsuario(
+					'61675b2b93224cc1d1be7f9a'
+				)
+				const Data = Response.data
+				setUsuario(Data)
+			} catch (error) {
+				console.error(error)
+			}
+		}
+
+		GetUsuario()
+	}, [])
 	return (
 		<View
 			style={{
 				flex: 1,
-				backgroundColor: '#4E71D9',
+				backgroundColor: Tema.colors.secondary,
+				paddingTop: StatusBar.currentHeight,
 			}}
 		>
-			<StatusBar barStyle='dark-content' backgroundColor='#FFF' />
-			{/* VIEW BRANCA */}
-			<View
-				style={{
-					padding: 25,
-					flex: 0.5,
-					backgroundColor: '#FFF',
-					borderBottomLeftRadius: 50,
-					borderBottomRightRadius: 50,
-				}}
-			>
-				<View
-					style={{
-						flex: 1,
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						paddingBottom: 25,
-					}}
-				>
+			<StatusBar
+				barStyle='light-content'
+				backgroundColor={Tema.colors.primary}
+			/>
+			<Box>
+				<AvatarNome>
 					<View
 						style={{
 							width: 120,
 							height: 120,
 							backgroundColor: '#999',
-							borderRadius: 15,
+							borderRadius: 20,
 						}}
 					>
 						<ImageBackground
 							source={{
-								uri: 'http://afernandes.adv.br/wp-content/uploads/Team-Member-3.jpg',
+								uri: usuario.avatar?.location,
 							}}
-							style={{ flex: 1, borderRadius: 15 }}
+							style={{
+								flex: 1,
+								borderRadius: 20,
+								overflow: 'hidden',
+							}}
 						/>
 					</View>
 					<View
@@ -55,22 +75,30 @@ export default () => {
 							marginLeft: 20,
 							flex: 1,
 							flexDirection: 'column',
+							fontFamily: 'Ubuntu_400Regular',
 						}}
 					>
-						<Text style={{ color: '#808080', marginBottom: -8 }}>
+						<Text
+							style={{
+								color: '#F1F1F1',
+								marginBottom: -3,
+								fontFamily: 'Ubuntu_400Regular',
+							}}
+						>
 							Olá,
 						</Text>
 						<Text
 							style={{
 								flexShrink: 1,
 								fontSize: 30,
-								fontWeight: 'bold',
+								color: Tema.colors.light,
+								fontFamily: 'Ubuntu_700Bold',
 							}}
 						>
-							Fulano da Silva
+							{usuario.name}
 						</Text>
 					</View>
-				</View>
+				</AvatarNome>
 				<View
 					style={{
 						flex: 1,
@@ -79,25 +107,33 @@ export default () => {
 					}}
 				>
 					<View>
-						<Text style={{ color: '#808080', marginBottom: -13 }}>
+						<Text
+							style={{
+								color: '#F1F1F1',
+								marginBottom: -8,
+								fontFamily: 'Ubuntu_400Regular',
+							}}
+						>
 							Saldo
 						</Text>
 						<Text
 							style={{
 								fontSize: 48,
-								fontWeight: 'bold',
 								textAlign: 'left',
+								color: Tema.colors.light,
+								fontFamily: 'Ubuntu_700Bold',
 							}}
 						>
-							R$ 25
+							R$ {usuario.credits}
 						</Text>
 					</View>
 					<View>
 						<Text
 							style={{
 								textAlign: 'right',
-								color: '#808080',
-								marginBottom: -13,
+								color: '#F1F1F1',
+								marginBottom: -8,
+								fontFamily: 'Ubuntu_400Regular',
 							}}
 						>
 							Entregas
@@ -105,14 +141,16 @@ export default () => {
 						<Text
 							style={{
 								fontSize: 48,
-								fontWeight: 'bold',
+								textAlign: 'right',
+								color: Tema.colors.light,
+								fontFamily: 'Ubuntu_700Bold',
 							}}
 						>
-							42
+							{usuario.entregas || 0}
 						</Text>
 					</View>
 				</View>
-			</View>
+			</Box>
 			<View
 				style={{
 					flexDirection: 'column',
@@ -120,15 +158,7 @@ export default () => {
 					alignItems: 'center',
 				}}
 			>
-				<Text
-					style={{
-						textAlign: 'center',
-						color: '#FFF',
-						paddingTop: 10,
-					}}
-				>
-					Editar Informações
-				</Text>
+				<Text style={styles.editarInfo}>Editar Informações</Text>
 				<Image
 					source={require('../assets/arrow_down.png')}
 					resizeMode='contain'
@@ -141,3 +171,26 @@ export default () => {
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	header: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingBottom: 25,
+	},
+	editarInfo: {
+		textAlign: 'center',
+		color: Tema.colors.light,
+		paddingTop: 10,
+		fontFamily: 'Ubuntu_400Regular',
+	},
+})
+
+const AvatarNome = styled.View`
+	flex: 1;
+	flex-direction: row;
+	justify-content: space-between;
+	overflow: hidden;
+	padding-bottom: 60px;
+`

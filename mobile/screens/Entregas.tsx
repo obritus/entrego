@@ -1,7 +1,8 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { SafeAreaView, FlatList, Text } from 'react-native'
 import { StatusBar } from 'react-native'
 import styled from 'styled-components/native'
+import { Tema } from '../Styles'
 
 const Box = styled.View`
 	padding: 15px;
@@ -11,67 +12,10 @@ const Box = styled.View`
 `
 
 export default () => (
-	<ScrollView
-		style={{
-			flex: 1,
-			padding: StatusBar.currentHeight,
-			backgroundColor: '#4E71D9',
-		}}
-	>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-		<Box>
-			<Text>Entrega 1</Text>
-			<Text>Endereço</Text>
-			<Text>Valor</Text>
-		</Box>
-	</ScrollView>
+	<SafeAreaView>
+		<StatusBar
+			barStyle='light-content'
+			backgroundColor={Tema.colors.primary}
+		/>
+	</SafeAreaView>
 )

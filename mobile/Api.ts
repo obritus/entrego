@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
 	baseURL: process.env.NODE_ENV === 'development'
-	? 'http://localhost:3005/'
+	? 'http://192.168.1.10:3005/'
 	: `http://34.95.150.227:3005/`
 })
 

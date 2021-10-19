@@ -1,18 +1,15 @@
+import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { View, Text, ImageBackground, Button } from 'react-native'
 import styled from 'styled-components/native'
+import { Tema } from '../Styles'
 
 const Mapa = styled.View`
 	flex: 1;
-	background: #333;
+	background: ${(props) => props.theme.colors.secondary};
 `
 export default (props: any) => (
-	<View style={{ flex: 2, backgroundColor: 'red' }}>
-		<Mapa>
-			<ImageBackground
-				source={require('../assets/map.png')}
-				style={{ flex: 1 }}
-			/>
-		</Mapa>
-	</View>
+	<Mapa>
+		<StatusBar style='dark' backgroundColor={Tema.colors.secondary} />
+	</Mapa>
 )

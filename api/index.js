@@ -8,6 +8,7 @@ import api from './routes/index.js'
 import images from './routes/images.js'
 import usuarios from './routes/usuarios.js'
 import clientes from './routes/clientes.js'
+import login from './routes/login.js'
 
 express()
 	.use(morgan('dev'))
@@ -20,6 +21,7 @@ express()
 	.use('/images', images)
 	.use('/usuarios', usuarios)
 	.use('/clientes', clientes)
+	.use('/login', login)
 
 	.listen(process.env.PORT, () => {
 		// BANCO DE DADOS
