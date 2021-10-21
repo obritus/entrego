@@ -7,7 +7,6 @@ import Model from '../models/Cliente.js'
 
 export default express.Router()
 	.get('/', async (req, res) => {
-		console.log('TEste')
 		try {
 			const Data = await Model.find({})
 
@@ -61,7 +60,7 @@ export default express.Router()
 	// -------------------------------------------------------------------------
 
 	.post('/', async (req, res) => {
-		req.body.password = await GeneratePassword(req.body.password)
+		req.body.senha = await GeneratePassword(req.body.senha)
 		new Model(req.body)
 			.save()
 			.then(data => {

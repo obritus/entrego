@@ -13,9 +13,19 @@ import Api from '../Api'
 import { Tema } from '../Styles'
 
 const Box = styled.View`
-	flex: 0.5;
+	flex: 1;
 	padding: 30px;
+	align-items: flex-start;
+	justify-content: flex-start;
 	background: ${(props) => props.theme.colors.primary};
+`
+
+const AvatarNome = styled.View`
+	flex: 1;
+	flex-direction: row;
+	justify-content: space-between;
+	overflow: hidden;
+	padding-bottom: 60px;
 `
 
 const Tab = createBottomTabNavigator()
@@ -73,9 +83,10 @@ export default () => {
 					<View
 						style={{
 							marginLeft: 20,
-							flex: 1,
 							flexDirection: 'column',
-							fontFamily: 'Ubuntu_400Regular',
+							justifyContent: 'center',
+							height: 120,
+							flex: 1,
 						}}
 					>
 						<Text
@@ -89,8 +100,7 @@ export default () => {
 						</Text>
 						<Text
 							style={{
-								flexShrink: 1,
-								fontSize: 30,
+								fontSize: 32,
 								color: Tema.colors.light,
 								fontFamily: 'Ubuntu_700Bold',
 							}}
@@ -101,9 +111,9 @@ export default () => {
 				</AvatarNome>
 				<View
 					style={{
-						flex: 1,
 						flexDirection: 'row',
 						justifyContent: 'space-between',
+						width: '100%',
 					}}
 				>
 					<View>
@@ -151,23 +161,6 @@ export default () => {
 					</View>
 				</View>
 			</Box>
-			<View
-				style={{
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-				}}
-			>
-				<Text style={styles.editarInfo}>Editar Informações</Text>
-				<Image
-					source={require('../assets/arrow_down.png')}
-					resizeMode='contain'
-					style={{
-						width: 40,
-						height: 40,
-					}}
-				/>
-			</View>
 		</View>
 	)
 }
@@ -186,11 +179,3 @@ const styles = StyleSheet.create({
 		fontFamily: 'Ubuntu_400Regular',
 	},
 })
-
-const AvatarNome = styled.View`
-	flex: 1;
-	flex-direction: row;
-	justify-content: space-between;
-	overflow: hidden;
-	padding-bottom: 60px;
-`

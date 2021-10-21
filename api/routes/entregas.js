@@ -8,6 +8,10 @@ export default express.Router()
 		res.json({})
 	})
 
-	.get('/:id', (req, res) => {
+	.get('/:id/show', (req, res) => {
 		res.sendStatus(200)
+	})
+
+	.get('/efetuadas', (req, res) => {
+		res.send('Entregas efetuadas')
 	})

@@ -19,7 +19,6 @@ export default express.Router()
 				})
 				.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
 
-
 			res.json(Data)
 		} catch (error) {
 			console.error(error)
@@ -54,8 +53,8 @@ export default express.Router()
 
 	.put('/:id', async (req, res) => {
 		try {
-			if (req.body.password) {
-				req.body.password = await GeneratePassword(req.body.password)
+			if (req.body.senha) {
+				req.body.senha = await GeneratePassword(req.body.senha)
 			}
 			const data = req.body
 			const Data = await Model.updateOne({ _id: req.params.id }, data)
@@ -83,7 +82,7 @@ export default express.Router()
 	// -------------------------------------------------------------------------
 
 	.post('/', async (req, res) => {
-		req.body.password = await GeneratePassword(req.body.password)
+		req.body.senha = await GeneratePassword(req.body.senha)
 		new Model(req.body)
 			.save()
 			.then(data => {

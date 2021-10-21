@@ -1,13 +1,47 @@
 import mongoose from 'mongoose'
 
-export default mongoose.model('clientes', new mongoose.Schema(
-	{
-		email: { type: String, required: true, unique: true, lowercase: true },
-		password: { type: String, required: true },
-		name: { type: String },
-		empresa: { type: String },
-		telefone: { type: Number },
-		address: { type: Array }
-	},
-	{ timestamps: true }
-))
+export default mongoose.model('clientes',
+	new mongoose.Schema(
+		{
+			email: {
+				type: String,
+				required: true,
+				unique: true,
+				lowercase: true,
+				trim: true,
+			},
+			senha: {
+				type: String,
+				required: true,
+				select: false
+			},
+			nome: {
+				type: String,
+				required: true,
+				trim: true
+			},
+			empresa: {
+				type: String,
+				required: true,
+				trim: true
+			},
+			telefone: {
+				type: Number,
+				required: true
+			},
+			endereco: {
+				logradouro: {
+					type: String,
+					required: true,
+					trim: true
+				},
+				longitude: { type: Number },
+				latitude: { type: Number }
+			},
+			logotipo: {
+				type: String,
+				default: ''
+			}
+		},
+		{ timestamps: true }
+	))

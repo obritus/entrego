@@ -7,7 +7,7 @@ import { CheckPassword } from '../functions.js'
 export default express.Router()
 	.get("/", async (req, res) => {
 		try {
-			res.sendStatus(200)
+			res.send('OK')
 		} catch (error) {
 			res.json({ error })
 		}
