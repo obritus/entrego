@@ -1,7 +1,14 @@
 import React from 'react'
 
-export default () => (
-	<div className="container-fluid">
-		<h1 className="p-0 m-0">Index.tsx</h1>
-	</div>
-)
+export default () => {
+	React.useEffect(() => {}, [])
+
+	return (
+		// <Wrapper
+		// 	apiKey={'AIzaSyDIvZg5hysrVjLYfT0KA87ZUuxf949LJWE'}
+		// 	render={render}
+		// >
+		<div>MAPINHA</div>
+		// </Wrapper>
+	)
+}

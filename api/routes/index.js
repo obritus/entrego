@@ -12,3 +12,7 @@ export default express.Router()
 			res.json({ error })
 		}
 	})
+
+	.get('/version', (req, res) => {
+		res.json({ version: '1.0' })
+	})

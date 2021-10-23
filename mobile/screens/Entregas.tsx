@@ -23,6 +23,7 @@ const Stack = createNativeStackNavigator()
 
 export default () => {
 	const [entregas, setEntregas] = React.useState([])
+
 	React.useEffect(() => {
 		Api.GetEntregas().then((data) => {
 			alert(data)

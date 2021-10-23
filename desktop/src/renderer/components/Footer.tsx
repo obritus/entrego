@@ -34,7 +34,7 @@ export default () => {
 		<Footer>
 			<div className="p-0 m-0">
 				<p className="p-0 px-1 m-0">
-					Motoboys Online: <b>33</b>
+					Entregadores Online: <b>33</b>
 				</p>
 			</div>
 			<div className="">
@@ -51,7 +51,7 @@ export default () => {
 					/>
 				</NavLink>
 				<NavLink
-					to="/config"
+					to="/logar"
 					onClick={() => setTitle('Configurações')}
 					className="p-0 px-1"
 					activeClassName="active"

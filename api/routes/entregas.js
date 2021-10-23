@@ -1,11 +1,11 @@
 import express from 'express'
-import { Autorize } from "../functions"
+import { Autorize } from "../functions.js"
 
-import Model from '../models/Entrega'
+import Model from '../models/Entrega.js'
 
 export default express.Router()
-	.get('/', Autorize, (req, res) => {
-		res.json({})
+	.get('/', (req, res) => {
+		res.json([])
 	})
 
 	.get('/:id/show', (req, res) => {

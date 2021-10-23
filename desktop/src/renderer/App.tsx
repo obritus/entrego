@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 
 import Index from './components/pages'
 import Config from './components/pages/Config'
+import Logar from './components/pages/Login'
 
 const Theme = {
 	primary: '',
@@ -77,6 +78,11 @@ export default () => {
 									path="/config"
 									exact
 									component={() => <Config />}
+								/>
+								<Route
+									path="/logar"
+									exact
+									component={() => <Logar />}
 								/>
 							</Switch>
 						</Section>

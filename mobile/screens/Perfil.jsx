@@ -31,7 +31,8 @@ const AvatarNome = styled.View`
 const Tab = createBottomTabNavigator()
 
 export default () => {
-	const [usuario, setUsuario] = React.useState([])
+	const [usuario, setUsuario] = React.useState({})
+
 	React.useEffect(() => {
 		const GetUsuario = async () => {
 			try {
@@ -47,120 +48,134 @@ export default () => {
 
 		GetUsuario()
 	}, [])
+
 	return (
 		<View
 			style={{
 				flex: 1,
 				backgroundColor: Tema.colors.secondary,
-				paddingTop: StatusBar.currentHeight,
+				// paddingTop: StatusBar.currentHeight,
 			}}
 		>
 			<StatusBar
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
 			/>
-			<Box>
-				<AvatarNome>
-					<View
-						style={{
-							width: 120,
-							height: 120,
-							backgroundColor: '#999',
-							borderRadius: 20,
-						}}
-					>
-						<ImageBackground
-							source={{
-								uri: usuario.avatar?.location,
-							}}
+			{Object.keys(usuario).length > 0 && (
+				<Box>
+					<AvatarNome>
+						<View
 							style={{
-								flex: 1,
+								width: 120,
+								height: 120,
+								backgroundColor: '#999',
 								borderRadius: 20,
-								overflow: 'hidden',
 							}}
-						/>
-					</View>
-					<View
+						>
+							<ImageBackground
+								source={{
+									uri: usuario.avatar?.location,
+								}}
+								style={{
+									flex: 1,
+									borderRadius: 20,
+									overflow: 'hidden',
+								}}
+							/>
+						</View>
+						<View
+							style={{
+								marginLeft: 20,
+								flexDirection: 'column',
+								justifyContent: 'center',
+								height: 120,
+								flex: 1,
+							}}
+						>
+							<Text
+								style={{
+									color: '#F1F1F1',
+									marginBottom: -3,
+									fontFamily: 'Ubuntu_400Regular',
+								}}
+							>
+								Olá,
+							</Text>
+							<Text
+								style={{
+									fontSize: 32,
+									color: Tema.colors.light,
+									fontFamily: 'Ubuntu_700Bold',
+								}}
+							>
+								{usuario.name}
+							</Text>
+						</View>
+					</AvatarNome>
+					<Text
 						style={{
-							marginLeft: 20,
-							flexDirection: 'column',
-							justifyContent: 'center',
-							height: 120,
-							flex: 1,
+							textAlign: 'center',
+							color: Tema.colors.light,
+							padding: 30,
+							alignSelf: 'center',
+							fontFamily: 'Ubuntu_400Regular',
 						}}
 					>
-						<Text
-							style={{
-								color: '#F1F1F1',
-								marginBottom: -3,
-								fontFamily: 'Ubuntu_400Regular',
-							}}
-						>
-							Olá,
-						</Text>
-						<Text
-							style={{
-								fontSize: 32,
-								color: Tema.colors.light,
-								fontFamily: 'Ubuntu_700Bold',
-							}}
-						>
-							{usuario.name}
-						</Text>
+						{usuario.email}
+					</Text>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							width: '100%',
+						}}
+					>
+						<View>
+							<Text
+								style={{
+									color: '#F1F1F1',
+									marginBottom: -8,
+									fontFamily: 'Ubuntu_400Regular',
+								}}
+							>
+								Saldo
+							</Text>
+							<Text
+								style={{
+									fontSize: 48,
+									textAlign: 'left',
+									color: Tema.colors.light,
+									fontFamily: 'Ubuntu_700Bold',
+								}}
+							>
+								R$ {usuario.credits}
+							</Text>
+						</View>
+						<View>
+							<Text
+								style={{
+									textAlign: 'right',
+									color: '#F1F1F1',
+									marginBottom: -8,
+									fontFamily: 'Ubuntu_400Regular',
+								}}
+							>
+								Entregas
+							</Text>
+							<Text
+								style={{
+									fontSize: 48,
+									textAlign: 'right',
+									color: Tema.colors.light,
+									fontFamily: 'Ubuntu_700Bold',
+								}}
+							>
+								{usuario.entregas || 0}
+							</Text>
+						</View>
 					</View>
-				</AvatarNome>
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						width: '100%',
-					}}
-				>
-					<View>
-						<Text
-							style={{
-								color: '#F1F1F1',
-								marginBottom: -8,
-								fontFamily: 'Ubuntu_400Regular',
-							}}
-						>
-							Saldo
-						</Text>
-						<Text
-							style={{
-								fontSize: 48,
-								textAlign: 'left',
-								color: Tema.colors.light,
-								fontFamily: 'Ubuntu_700Bold',
-							}}
-						>
-							R$ {usuario.credits}
-						</Text>
-					</View>
-					<View>
-						<Text
-							style={{
-								textAlign: 'right',
-								color: '#F1F1F1',
-								marginBottom: -8,
-								fontFamily: 'Ubuntu_400Regular',
-							}}
-						>
-							Entregas
-						</Text>
-						<Text
-							style={{
-								fontSize: 48,
-								textAlign: 'right',
-								color: Tema.colors.light,
-								fontFamily: 'Ubuntu_700Bold',
-							}}
-						>
-							{usuario.entregas || 0}
-						</Text>
-					</View>
-				</View>
-			</Box>
+				</Box>
+			)}
 		</View>
 	)
 }
