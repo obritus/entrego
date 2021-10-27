@@ -86,3 +86,5 @@ mobile/ios/Exponent/Supporting/Info.plist.json
 mobile/android/expoview/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
 mobile/android/desktop/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
 mobile/.kernel-ngrok-url
+
+web/node_modules
