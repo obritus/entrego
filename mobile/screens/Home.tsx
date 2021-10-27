@@ -1,15 +1,8 @@
 import React from 'react'
-import {
-	View,
-	Text,
-	ImageBackground,
-	Button,
-	Dimensions,
-	StatusBar,
-} from 'react-native'
-import MapView from 'react-native-maps'
+import { View, Text, Image, StatusBar, StyleSheet } from 'react-native'
+import MapView, { Marker, Callout } from 'react-native-maps'
 import styled from 'styled-components/native'
-import * as Permissions from 'expo-permissions'
+import Api from '../Api'
 
 import { Tema } from '../Styles'
 
@@ -18,50 +11,82 @@ const Mapa = styled.View`
 	background: ${(props) => props.theme.colors.light};
 `
 export default (props: any) => {
-	async function alertIfRemoteNotificationsDisabledAsync() {
-		const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS)
-		if (status !== 'granted') {
-			alert(
-				'Hey! You might want to enable notifications for my app, they are good.'
-			)
-		}
-	}
+	const [entregas, setEntregas] = React.useState([])
 
-	async function checkMultiPermissions() {
-		const { status, expires, permissions } = await Permissions.getAsync(
-			Permissions.CALENDAR,
-			Permissions.CONTACTS
-		)
-		if (status !== 'granted') {
-			alert('Hey! You have not enabled selected permissions')
+	React.useEffect(() => {
+		const getEntregas = async () => {
+			const Response = await Api.GetEntregas()
+			const Data = Response.data
+			setEntregas(Data)
 		}
-	}
-	React.useEffect(() => {}, [])
+		getEntregas()
+	}, [])
+
 	return (
 		<Mapa>
-			{/* <StatusBar
-			barStyle='light-content'
-			backgroundColor={Tema.colors.primary}
-		/> */}
+			<StatusBar
+				barStyle='light-content'
+				backgroundColor={Tema.colors.primary}
+			/>
 			<MapView
 				style={{ flex: 1 }}
 				initialRegion={{
 					latitude: -21.572084,
 					longitude: -45.417926,
-					latitudeDelta: 0.008,
-					longitudeDelta: 0.008,
+					latitudeDelta: 0.012,
+					longitudeDelta: 0.012,
 				}}
+				userInterfaceStyle='dark'
+				userLocationPriority='passive'
 				userLocationUpdateInterval={2000}
 				showsUserLocation={true}
 				showsPointsOfInterest={false}
 				showsMyLocationButton={true}
 				showsBuildings={false}
-				key='AIzaSyDIvZg5hysrVjLYfT0KA87ZUuxf949LJWE'
-			></MapView>
-			<Button
-				title='Checar Localização'
-				onPress={() => alertIfRemoteNotificationsDisabledAsync()}
-			/>
+				showsIndoors={false}
+				cacheEnabled={true}
+			>
+				{entregas.length > 0 &&
+					entregas.map((entrega: any) => (
+						<Marker
+							key={entrega.title}
+							flat={true}
+							draggable
+							coordinate={{
+								latitude: entrega.latitude,
+								longitude: entrega.longitude,
+							}}
+							image={require('../assets/marker.png')}
+							style={{ borderRadius: 20 }}
+						>
+							<Callout>
+								<View style={s.Marker}>
+									<Text style={s.Title}>{entrega.title}</Text>
+									<Image
+										source={require('../assets/marker.png')}
+										style={{ width: 64, height: 64 }}
+										resizeMode='contain'
+									/>
+								</View>
+							</Callout>
+						</Marker>
+					))}
+			</MapView>
 		</Mapa>
 	)
 }
+
+const s = StyleSheet.create({
+	Marker: {
+		padding: 10,
+		borderRadius: 5,
+		height: 128,
+	},
+	Title: {
+		fontSize: 18,
+	},
+	Icon: {
+		width: 40,
+		height: 40,
+	},
+})

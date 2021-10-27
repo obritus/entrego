@@ -21,7 +21,7 @@
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png"
 			},
-			"package": "com.motogo.motogo",
+			"package": "com.entrego.entrego",
 			"versionCode": 1
 		},
 		"web": {

@@ -52,8 +52,8 @@ export default () => {
 									source={require('./assets/home_icon.png')}
 									resizeMode='contain'
 									style={{
-										width: 40,
-										height: 40,
+										width: 35,
+										height: 35,
 										marginTop: 15,
 									}}
 								/>
@@ -69,8 +69,8 @@ export default () => {
 									source={require('./assets/entregas_icon.png')}
 									resizeMode='contain'
 									style={{
-										width: 40,
-										height: 40,
+										width: 35,
+										height: 35,
 										marginTop: 10,
 									}}
 								/>
@@ -95,8 +95,8 @@ export default () => {
 									source={require('./assets/perfil_icon.png')}
 									resizeMode='contain'
 									style={{
-										width: 40,
-										height: 40,
+										width: 35,
+										height: 35,
 										marginTop: 10,
 									}}
 								/>

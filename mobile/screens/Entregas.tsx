@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/native'
-import { SafeAreaView, FlatList, Text, Button } from 'react-native'
+import { SafeAreaView, FlatList, Text, Button, Image } from 'react-native'
 import { StatusBar } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Tema } from '../Styles'
@@ -25,9 +25,7 @@ export default () => {
 	const [entregas, setEntregas] = React.useState([])
 
 	React.useEffect(() => {
-		Api.GetEntregas().then((data) => {
-			alert(data)
-		})
+		Api.GetEntregas().then((data) => {})
 	}, [])
 
 	return (

@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap')
+
+$enable-rounded: false
+$dark: #000
+
+@import 'node_modules/bootstrap/scss/bootstrap'
+
+html, body, #__next
+	height: 100%
+
+body
+	font-family: 'Ubuntu', sans-serif
+	font-size: 10pt
+	text-rendering: optimizeLegibility
+	-webkit-font-smoothing: antialiased
+
+main
+	display: flex
+	flex-direction: column
+	min-height: 100%
+
+h1, h2, h3, h4, h5, h6
+	font-weight: 700
+	margin: 0
