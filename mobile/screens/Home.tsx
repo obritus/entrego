@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Image, StatusBar, StyleSheet } from 'react-native'
 import MapView, { Marker, Callout } from 'react-native-maps'
+import MapViewDirections from 'react-native-maps-directions'
 import styled from 'styled-components/native'
 import Api from '../Api'
 
@@ -36,7 +37,6 @@ export default (props: any) => {
 					latitudeDelta: 0.012,
 					longitudeDelta: 0.012,
 				}}
-				userInterfaceStyle='dark'
 				userLocationPriority='passive'
 				userLocationUpdateInterval={2000}
 				showsUserLocation={true}
@@ -59,7 +59,7 @@ export default (props: any) => {
 							image={require('../assets/marker.png')}
 							style={{ borderRadius: 20 }}
 						>
-							<Callout>
+							<Callout onPress={() => alert('teste')}>
 								<View style={s.Marker}>
 									<Text style={s.Title}>{entrega.title}</Text>
 									<Image
@@ -69,6 +69,19 @@ export default (props: any) => {
 									/>
 								</View>
 							</Callout>
+							<MapViewDirections
+								origin={{
+									latitude: entrega.latitude,
+									longitude: entrega.longitude,
+								}}
+								destination={{
+									latitude: -21.57209,
+									longitude: -45.41793,
+								}}
+								apikey='AIzaSyDIvZg5hysrVjLYfT0KA87ZUuxf949LJWE'
+								strokeWidth={3}
+								strokeColor={Tema.colors.primary}
+							/>
 						</Marker>
 					))}
 			</MapView>
