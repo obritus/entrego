@@ -7,7 +7,7 @@ const Footer = styled.footer`
 
 const Default = (props) => {
 	return (
-		<Footer className='bg-dark text-light'>
+		<Footer className='bg-light text-light'>
 			<div className='container'>
 				<div className='row'>
 					<div className='col-12'>

@@ -14,8 +14,13 @@ const Container = styled.div`
 		}
 	}
 `
+const MessageBox = styled.div`
+	color: #fff;
+`
 
-const LoginBox = () => {
+export default () => {
+	// const [message, setMessage] = React.useState(null)
+
 	const formHandler = (e) => {
 		e.preventDefault()
 		const email = e.target[0].value
@@ -26,6 +31,8 @@ const LoginBox = () => {
 				if (res.data.auth === true) {
 					localStorage.setItem('token', res.data.token)
 					window.location.replace('/')
+				} else {
+					setMessage('Usuário ou senha incorretos')
 				}
 			})
 			.catch((err) => {
@@ -34,7 +41,13 @@ const LoginBox = () => {
 	}
 
 	return (
-		<Container>
+		<Container className='pt-3'>
+			{true && (
+				<MessageBox className='bg-primary text-light p-3 mb-3'>
+					{``}
+				</MessageBox>
+			)}
+
 			<form onSubmit={formHandler}>
 				<p className='p-0 m-0'>Email</p>
 				<input
@@ -57,5 +70,3 @@ const LoginBox = () => {
 		</Container>
 	)
 }
-
-export default LoginBox

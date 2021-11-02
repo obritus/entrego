@@ -13,7 +13,6 @@ export default mongoose.model('clientes',
 			senha: {
 				type: String,
 				required: true,
-				select: false
 			},
 			nome: {
 				type: String,

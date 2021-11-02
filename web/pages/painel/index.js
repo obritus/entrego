@@ -1,12 +1,7 @@
 import React from 'react'
-import { LinkProps } from 'next/link'
+import Api from '../../Api.js'
 
 const Index = () => {
-	React.useEffect(() => {
-		document.title = 'Painel | Sistema de Gestão'
-
-		console.log(LinkProps)
-	}, [])
 
 	return (
 		<div>

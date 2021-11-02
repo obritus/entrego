@@ -46,7 +46,7 @@ const Storage = {
 			crypto.randomBytes(16, (err, hash) => {
 				if (err) cb(err)
 				let extension = file.originalname.slice(-4)
-				let filename = `${hash.toString('hex') + extension}`
+				let filename = `${hash.toString(process.env.SECRET) + extension}`
 
 				cb(null, filename)
 			})
