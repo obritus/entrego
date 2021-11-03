@@ -1,19 +1,39 @@
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-import Logotipo from '../assets/logotipo.webp'
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps'
 
 const Map = () => {
 	const [map, setMap] = React.useState(null)
+	const [marker, setMarker] = React.useState([])
+
 	return (
 		<GoogleMap
 			ref={(map) => setMap(map)}
 			defaultZoom={17}
 			defaultCenter={{ lat: -21.535458801711265, lng: -45.451711755654436 }}
-			onClick={(e) => console.log(e.latLng)}
+			defaultOptions={{
+
+			}}
+			onClick={(e) => {
+				const lat = e.latLng.lat()
+				const lng = e.latLng.lng()
+
+				console.log(lat, lng)
+
+				setMarker([
+					...marker,
+					{
+						lat: lat,
+						lng: lng
+					}
+				])
+			}}
 		>
-			<Marker position={{ lat: -21.535458801711265, lng: -45.451711755654436 }} />
+			{marker.length > 0 && marker.map((marker, index) => (
+				<Marker
+					key={index}
+					position={{ lat: marker.lat, lng: marker.lng }}
+				/>
+			))}
 		</GoogleMap>
 	)
 }

@@ -3,11 +3,12 @@ import styled from 'styled-components'
 
 const Footer = styled.footer`
 	margin-top: auto;
+	font-size: 0.8em;
 `
 
 const Default = (props) => {
 	return (
-		<Footer className='bg-light text-light'>
+		<Footer className='bg-dark text-light'>
 			<div className='container'>
 				<div className='row'>
 					<div className='col-12'>

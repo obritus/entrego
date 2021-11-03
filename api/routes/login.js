@@ -10,6 +10,7 @@ export default express.Router()
 	.post('/', async (req, res) => {
 		const email = req.body.email
 		const senha = req.body.senha
+		const keep = req.body.keep
 
 		// ESCOLHER QUAL MODEL USAR:
 		const Model = req.query.model === 'cliente' ? Cliente : Usuario
@@ -27,7 +28,9 @@ export default express.Router()
 
 		if (User) {
 			if (await CheckPassword(senha, User.senha)) {
-				const token = jwt.sign({ user_id: User._id }, process.env.SECRET)
+				const token = jwt.sign({ user_id: User._id }, process.env.SECRET, {
+					expiresIn: keep ? '1y' : '1d'
+				})
 				const _id = User._id
 				const nome = User.nome
 				res.json({ auth: true, token, _id, nome })

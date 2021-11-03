@@ -1,3 +1,14 @@
 {
-	"dartsass.disableCompileOnSave": true,
+	"liveSassCompile.settings.formats": [
+		{
+			"format": "compressed",
+			"extensionName": ".css",
+			"savePath": "/web/public/styles/"
+		}
+	],
+	"liveSassCompile.settings.excludeList": [
+		"**/node_modules/**",
+		".vscode/**",
+		"desktop/**"
+	]
 }
