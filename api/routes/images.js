@@ -56,7 +56,7 @@ export default express.Router()
 							key: req.file.filename,
 							width: info.width,
 							height: info.height,
-							usuario: _id
+							entregador: _id
 						}
 
 						new Image(Uploaded)

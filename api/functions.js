@@ -43,13 +43,10 @@ const Storage = {
 			cb(null, Upload.dest)
 		},
 		filename: (req, file, cb) => {
-			crypto.randomBytes(16, (err, hash) => {
-				if (err) cb(err)
-				let extension = file.originalname.slice(-4)
-				let filename = `${hash.toString(process.env.SECRET) + extension}`
-
-				cb(null, filename)
-			})
+			// GENERATE A RANDOM FILE NAME
+			const fileName = crypto.randomBytes(18).toString('hex')
+			const fileExt = file.originalname.split('.')[1]
+			cb(null, `${fileName}.${fileExt}`)
 		}
 	})
 }

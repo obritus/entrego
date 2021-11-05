@@ -1,16 +1,18 @@
 import React from 'react'
-import { View, Text, Image, StatusBar, StyleSheet } from 'react-native'
-import MapView, { Marker, Callout } from 'react-native-maps'
-import MapViewDirections from 'react-native-maps-directions'
-import styled from 'styled-components/native'
+import {
+	View,
+	Text,
+	Image,
+	StatusBar,
+	StyleSheet,
+	Button,
+	TouchableOpacity,
+} from 'react-native'
+import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
 
 import { Tema } from '../Styles'
 
-const Mapa = styled.View`
-	flex: 1;
-	background: ${(props) => props.theme.colors.light};
-`
 export default (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
 
@@ -21,21 +23,26 @@ export default (props: any) => {
 			setEntregas(Data)
 		}
 		getEntregas()
-	}, [])
+
+		setInterval(() => {
+			getEntregas()
+		}, 10000)
+	}, [setEntregas])
 
 	return (
-		<Mapa>
+		<View style={{ flex: 1, backgroundColor: Tema.colors.light }}>
 			<StatusBar
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
 			/>
 			<MapView
 				style={{ flex: 1 }}
-				initialRegion={{
+				provider={PROVIDER_GOOGLE}
+				region={{
 					latitude: -21.572084,
 					longitude: -45.417926,
-					latitudeDelta: 0.012,
-					longitudeDelta: 0.012,
+					latitudeDelta: 0.115,
+					longitudeDelta: 0.1121,
 				}}
 				userLocationPriority='passive'
 				userLocationUpdateInterval={2000}
@@ -44,48 +51,59 @@ export default (props: any) => {
 				showsMyLocationButton={true}
 				showsBuildings={false}
 				showsIndoors={false}
-				cacheEnabled={true}
 			>
 				{entregas.length > 0 &&
 					entregas.map((entrega: any) => (
 						<Marker
 							key={entrega.title}
-							flat={true}
-							draggable
 							coordinate={{
 								latitude: entrega.latitude,
 								longitude: entrega.longitude,
 							}}
-							image={require('../assets/marker.png')}
-							style={{ borderRadius: 20 }}
+							//icon={require('../assets/marker.png')}
 						>
-							<Callout onPress={() => alert('teste')}>
+							<Callout>
 								<View style={s.Marker}>
 									<Text style={s.Title}>{entrega.title}</Text>
-									<Image
-										source={require('../assets/marker.png')}
-										style={{ width: 64, height: 64 }}
-										resizeMode='contain'
-									/>
+									<Text style={s.Description}>
+										Entregar na Rua do Abacaxi, 123.
+									</Text>
+									<TouchableOpacity
+										style={{
+											flexDirection: 'row',
+											justifyContent: 'center',
+											backgroundColor:
+												Tema.colors.secondary,
+											padding: 5,
+										}}
+										onPress={() => {
+											//NAVIGATE TO DELIVERY
+										}}
+									>
+										<Text
+											style={{
+												fontFamily: 'Ubuntu Regular',
+												color: Tema.colors.primary,
+												marginEnd: 4,
+											}}
+										>
+											ENTREGAR
+										</Text>
+										<Text
+											style={{
+												fontFamily: 'Ubuntu Bold',
+												color: Tema.colors.primary,
+											}}
+										>
+											R$ {entrega.price}
+										</Text>
+									</TouchableOpacity>
 								</View>
 							</Callout>
-							<MapViewDirections
-								origin={{
-									latitude: entrega.latitude,
-									longitude: entrega.longitude,
-								}}
-								destination={{
-									latitude: -21.57209,
-									longitude: -45.41793,
-								}}
-								apikey='AIzaSyDIvZg5hysrVjLYfT0KA87ZUuxf949LJWE'
-								strokeWidth={3}
-								strokeColor={Tema.colors.primary}
-							/>
 						</Marker>
 					))}
 			</MapView>
-		</Mapa>
+		</View>
 	)
 }
 
@@ -93,10 +111,20 @@ const s = StyleSheet.create({
 	Marker: {
 		padding: 10,
 		borderRadius: 5,
-		height: 128,
+		width: 160,
 	},
 	Title: {
-		fontSize: 18,
+		fontSize: 12,
+		fontFamily: 'Ubuntu Bold',
+		textAlign: 'center',
+		marginBottom: 5,
+		color: Tema.colors.primary,
+	},
+	Description: {
+		fontSize: 10,
+		fontFamily: 'Ubuntu Italic',
+		textAlign: 'center',
+		marginBottom: 5,
 	},
 	Icon: {
 		width: 40,

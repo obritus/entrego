@@ -1,23 +1,20 @@
 import React from 'react'
-import styled from 'styled-components/native'
-import { SafeAreaView, FlatList, Text, Button, Image } from 'react-native'
+
+import { Swipeable } from 'react-native-gesture-handler'
+import {
+	SafeAreaView,
+	FlatList,
+	Text,
+	View,
+	Image,
+	Permission,
+} from 'react-native'
 import { StatusBar } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Tema } from '../Styles'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import Api from '../Api'
 
-const Box = styled.View`
-	padding: 15px;
-	margin-bottom: 15px;
-	border-radius: 15px;
-	background: #fff;
-`
-
-const Teste = styled.SafeAreaView`
-	flex: 1;
-	background-color: red;
-`
+import EntregaCard from '../components/EntregaCard'
 
 const Stack = createNativeStackNavigator()
 
@@ -25,21 +22,54 @@ export default () => {
 	const [entregas, setEntregas] = React.useState([])
 
 	React.useEffect(() => {
-		Api.GetEntregas().then((data) => {})
+		Api.GetEntregas().then((data) => {
+			setEntregas(data.data)
+		})
 	}, [])
 
 	return (
-		<SafeAreaView>
+		<View style={{ flex: 1 }}>
 			<StatusBar
-				barStyle='light-content'
-				backgroundColor={Tema.colors.primary}
+				barStyle='dark-content'
+				backgroundColor={Tema.colors.light}
 			/>
-			<TouchableOpacity onPress={() => alert('teste')}>
-				<Text>Olá</Text>
-			</TouchableOpacity>
-			<Stack.Navigator>
-				<Stack.Screen component={Teste} name='Entrega' />
-			</Stack.Navigator>
-		</SafeAreaView>
+			{entregas.length > 0 && (
+				<View style={{ flex: 1 }}>
+					<FlatList
+						style={{
+							flex: 1,
+							marginHorizontal: 30,
+						}}
+						data={entregas}
+						showsVerticalScrollIndicator={false}
+						renderItem={({ item }) => <EntregaCard item={item} />}
+					/>
+					<Text
+						style={{
+							textAlign: 'center',
+							fontFamily: 'Ubuntu Bold',
+							fontSize: 14,
+							paddingVertical: 15,
+							color: Tema.colors.primary,
+						}}
+					>
+						{entregas.length} Entregas finalizadas
+					</Text>
+					<FlatList
+						style={{
+							flex: 1,
+							paddingHorizontal: 15,
+							maxHeight: 100,
+							flexDirection: 'row',
+						}}
+						data={entregas}
+						horizontal={true}
+						renderItem={({ item }) => (
+							<EntregaCard item={item} horizontal={true} />
+						)}
+					/>
+				</View>
+			)}
+		</View>
 	)
 }

@@ -14,5 +14,5 @@ export default express.Router()
 	})
 
 	.get('/version', (req, res) => {
-		res.json({ version: '1.0' })
+		res.json({ version: '2.0' })
 	})

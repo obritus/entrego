@@ -1,4 +1,22 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config');
+/**
+ * Metro configuration for React Native
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
+const fs = require('fs')
+const path = require('path')
+const exclusionList = require('metro-config/src/defaults/exclusionList')
 
-module.exports = getDefaultConfig(__dirname);
+
+
+module.exports = {
+	transformer: {
+		getTransformOptions: async () => ({
+			transform: {
+				experimentalImportSupport: false,
+				inlineRequires: true,
+			},
+		}),
+	},
+}

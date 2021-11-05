@@ -6,9 +6,9 @@ const Image = new mongoose.Schema(
 		key: { type: String, required: true, unique: true },
 		width: { type: Number },
 		height: { type: Number },
-		usuario: {
+		entregador: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "usuarios",
+			ref: "entregadores",
 		},
 	},
 	{ timestamps: true }

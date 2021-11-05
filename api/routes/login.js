@@ -3,7 +3,7 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 import { CheckPassword } from '../functions.js'
 
-import Usuario from '../models/Usuario.js'
+import Entregador from '../models/Entregador.js'
 import Cliente from '../models/Cliente.js'
 
 export default express.Router()
@@ -13,7 +13,7 @@ export default express.Router()
 		const keep = req.body.keep
 
 		// ESCOLHER QUAL MODEL USAR:
-		const Model = req.query.model === 'cliente' ? Cliente : Usuario
+		const Model = req.query.model === 'cliente' ? Cliente : Entregador
 
 		// VERIFICAR SE FOI INFORMADO O EMAIL E SENHA:
 		if (!email || !senha) {

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import Api from '../Api.js'
-import Logotipo from '../assets/logotipo.webp'
+import Logotipo from '../assets/logotipo_negativo.svg'
 
 const Container = styled.div`
 	display: flex;

@@ -18,7 +18,7 @@ const Api = {
 	Login: (data: {}) => api.post('login', data),
 	Logout: (data: {}) => api.post('logout', data),
 	
-	GetUsuario: (_id:string) => api.get(`usuarios/${_id}`),
+	GetEntregador: (_id:string) => api.get(`entregadores/${_id}`),
 	GetEntregas: (query?: {}) => api.get('entregas', { params: query }),
 	GetEntrega: (_id: string) => api.get('entregas' + _id),
 }

@@ -30,6 +30,12 @@ export default express.Router()
 			"latitude": -21.55715,
 			"longitude": -45.43719,
 			"price": 6
+		},
+		{
+			"title": "Empresa C",
+			"latitude": -21.53417351619092,
+			"longitude": -45.455719569985135,
+			"price": 6
 		}
 		])
 	})
@@ -39,5 +45,5 @@ export default express.Router()
 	})
 
 	.get('/efetuadas', (req, res) => {
-		res.send('Entregas efetuadas')
+		res.send('Entregas efetuadas: 10')
 	})

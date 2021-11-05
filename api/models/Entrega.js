@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 export default mongoose.model('entregas',
 	new mongoose.Schema(
 		{
-			usuario: {
+			entregador: {
 				type: mongoose.Schema.Types.ObjectId,
-				ref: 'usuarios'
+				ref: 'entregadores'
 			},
 			cliente: {
 				type: mongoose.Schema.Types.ObjectId,
