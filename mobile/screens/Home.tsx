@@ -2,10 +2,8 @@ import React from 'react'
 import {
 	View,
 	Text,
-	Image,
 	StatusBar,
 	StyleSheet,
-	Button,
 	TouchableOpacity,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
@@ -23,10 +21,6 @@ export default (props: any) => {
 			setEntregas(Data)
 		}
 		getEntregas()
-
-		setInterval(() => {
-			getEntregas()
-		}, 10000)
 	}, [setEntregas])
 
 	return (
@@ -56,13 +50,22 @@ export default (props: any) => {
 					entregas.map((entrega: any) => (
 						<Marker
 							key={entrega.title}
+							title={entrega.title}
+							tracksViewChanges={false}
 							coordinate={{
 								latitude: entrega.latitude,
 								longitude: entrega.longitude,
 							}}
 							//icon={require('../assets/marker.png')}
 						>
-							<Callout>
+							<Callout
+								onPress={() =>
+									props.navigation.navigate('Entregas', {
+										screen: 'Detalhes da entrega',
+										entrega,
+									})
+								}
+							>
 								<View style={s.Marker}>
 									<Text style={s.Title}>{entrega.title}</Text>
 									<Text style={s.Description}>
@@ -75,9 +78,6 @@ export default (props: any) => {
 											backgroundColor:
 												Tema.colors.secondary,
 											padding: 5,
-										}}
-										onPress={() => {
-											//NAVIGATE TO DELIVERY
 										}}
 									>
 										<Text

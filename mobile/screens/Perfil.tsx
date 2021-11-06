@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	View,
 	Text,
 	StatusBar,
 	ImageBackground,
 	StyleSheet,
+	ActivityIndicator,
+	Image,
+	Animated,
 } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Api from '../Api'
 import { Tema } from '../Styles'
 
@@ -31,21 +33,16 @@ const styles = StyleSheet.create({
 		background: Tema.colors.primary,
 	},
 	avatarNome: {
-		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		overflow: 'hidden',
-		paddingBottom: 60,
+		paddingBottom: 30,
 	},
 	separador: {
 		width: 300,
 		height: 10,
-		background: Tema.colors.light,
-		marginVertical: 40,
 	},
 })
-
-const Tab = createBottomTabNavigator()
 
 type user = {
 	_id: string
@@ -62,7 +59,7 @@ type user = {
 export default () => {
 	const [usuario, setUsuario] = React.useState({} as user)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const GetEntregador = async () => {
 			try {
 				const Response = await Api.GetEntregador(
@@ -82,8 +79,7 @@ export default () => {
 		<View
 			style={{
 				flex: 1,
-				borderBottomEndRadius: 30,
-				borderBottomStartRadius: 30,
+				justifyContent: 'center',
 				overflow: 'hidden',
 				backgroundColor: Tema.colors.primary,
 			}}
@@ -92,7 +88,7 @@ export default () => {
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
 			/>
-			{Object.keys(usuario).length > 0 && (
+			{Object.keys(usuario).length > 0 ? (
 				<View style={styles.box}>
 					<View style={styles.avatarNome}>
 						<View
@@ -119,14 +115,13 @@ export default () => {
 								marginLeft: 20,
 								flexDirection: 'column',
 								justifyContent: 'center',
-								height: 85,
+								height: 90,
 								flex: 1,
 							}}
 						>
 							<Text
 								style={{
 									color: '#F1F1F1',
-									marginBottom: -3,
 									fontFamily: 'Ubuntu Regular',
 									fontSize: 12,
 								}}
@@ -142,20 +137,17 @@ export default () => {
 							>
 								{usuario.nome}
 							</Text>
+							<Text
+								style={{
+									color: '#F1F1F1',
+									fontFamily: 'Ubuntu Italic',
+									fontSize: 12,
+								}}
+							>
+								{usuario.email}
+							</Text>
 						</View>
 					</View>
-					<View style={styles.separador} />
-					<Text
-						style={{
-							textAlign: 'center',
-							color: Tema.colors.light,
-							padding: 30,
-							alignSelf: 'center',
-							fontFamily: 'Ubuntu Regular',
-						}}
-					>
-						{usuario.email}
-					</Text>
 					<View
 						style={{
 							flexDirection: 'row',
@@ -172,17 +164,20 @@ export default () => {
 									fontSize: 12,
 								}}
 							>
-								Saldo
+								Dias restantes
 							</Text>
 							<Text
 								style={{
 									fontSize: 36,
 									textAlign: 'left',
-									color: Tema.colors.light,
+									color:
+										usuario.creditos > 0
+											? Tema.colors.light
+											: Tema.colors.danger,
 									fontFamily: 'Ubuntu Bold',
 								}}
 							>
-								R$ {usuario.creditos}
+								{usuario.creditos}
 							</Text>
 						</View>
 						<View>
@@ -209,7 +204,28 @@ export default () => {
 							</Text>
 						</View>
 					</View>
+					<Text
+						style={{
+							textAlign: 'center',
+							color: Tema.colors.light,
+							paddingTop: 30,
+							alignSelf: 'center',
+							fontFamily: 'Ubuntu Regular',
+						}}
+					>
+						Editar Informações
+					</Text>
+					<Image
+						source={require('../assets/arrow_down.png')}
+						style={{
+							width: 32,
+							height: 32,
+							alignSelf: 'center',
+						}}
+					/>
 				</View>
+			) : (
+				<ActivityIndicator size='large' color={Tema.colors.light} />
 			)}
 		</View>
 	)

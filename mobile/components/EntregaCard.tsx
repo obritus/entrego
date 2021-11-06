@@ -1,16 +1,16 @@
 import React from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, Button, TouchableOpacity, StyleSheet } from 'react-native'
 import styled from 'styled-components/native'
 import { Tema } from '../Styles'
 
-const Container = styled.View`
-	height: 100px;
-	flex-direction: row;
-	background-color: ${Tema.colors.primary};
-	border-radius: 5px;
-	margin-bottom: 15px;
-	overflow: hidden;
-`
+const s = StyleSheet.create({
+	box: {
+		height: 100,
+		flexDirection: 'row',
+		backgroundColor: Tema.colors.primary,
+	},
+})
+
 const ContainerBox = styled.View`
 	flex: 1;
 	padding: 20px;
@@ -41,12 +41,18 @@ export default (props: any) => {
 	React.useEffect(() => {}, [])
 
 	return (
-		<Container
+		<TouchableOpacity
+			onPress={props.onPress}
 			style={{
 				marginRight: props.horizontal ? 15 : 0,
+				marginBottom: props.horizontal ? 0 : 15,
 				backgroundColor: props.horizontal
 					? Tema.colors.secondary
 					: Tema.colors.primary,
+				height: 100,
+				flexDirection: 'row',
+				borderRadius: 5,
+				overflow: 'hidden',
 			}}
 		>
 			<ContainerBox
@@ -76,6 +82,6 @@ export default (props: any) => {
 					Rua Fulaninho, 1500 Jardim Andere
 				</Address>
 			</ContainerBox>
-		</Container>
+		</TouchableOpacity>
 	)
 }
