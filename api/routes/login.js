@@ -23,17 +23,15 @@ export default express.Router()
 		}
 
 		// FAZ A BUSCA NO BANCO DE DADOS:
-		const User = await Model.findOne({ email })
-			.select('_id email senha')
+		const User = await Model.findOne({ email }).select('+senha')
 
 		if (User) {
 			if (await CheckPassword(senha, User.senha)) {
-				const token = jwt.sign({ user_id: User._id }, process.env.SECRET, {
+				const token = jwt.sign({ user_id: User._id },
+					process.env.SECRET, {
 					expiresIn: keep ? '1y' : '1d'
 				})
-				const _id = User._id
-				const nome = User.nome
-				res.json({ auth: true, token, _id, nome })
+				res.json({ auth: true, token, user: User })
 			} else {
 				res.json({ auth: false, msg: 'Senha incorreta.' })
 			}

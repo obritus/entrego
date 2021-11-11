@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useEffect } from 'react'
 import {
 	View,
@@ -6,10 +7,12 @@ import {
 	ImageBackground,
 	StyleSheet,
 	ActivityIndicator,
+	Button,
 	Image,
 	Animated,
 } from 'react-native'
 import Api from '../Api'
+import AuthContext from '../components/AuthContext'
 import { Tema } from '../Styles'
 
 const styles = StyleSheet.create({
@@ -23,20 +26,23 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: Tema.colors.light,
 		paddingTop: 10,
+
 		fontFamily: 'Ubuntu Regular',
 	},
 	box: {
 		flex: 1,
-		padding: 30,
+		paddingHorizontal: 30,
+
 		alignItems: 'flex-start',
 		justifyContent: 'flex-start',
 		background: Tema.colors.primary,
 	},
 	avatarNome: {
+		height: 150,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'center',
 		overflow: 'hidden',
-		paddingBottom: 30,
 	},
 	separador: {
 		width: 300,
@@ -56,8 +62,18 @@ type user = {
 	entregas: number
 }
 
-export default () => {
+const Perfil: React.FC = () => {
 	const [usuario, setUsuario] = React.useState({} as user)
+	const { setLogged } = React.useContext(AuthContext)
+
+	const handleLogout = async () => {
+		try {
+			await AsyncStorage.clear()
+		} catch (error) {
+			console.log(error)
+		}
+		setLogged(false)
+	}
 
 	useEffect(() => {
 		const GetEntregador = async () => {
@@ -115,7 +131,7 @@ export default () => {
 								marginLeft: 20,
 								flexDirection: 'column',
 								justifyContent: 'center',
-								height: 90,
+								height: 150,
 								flex: 1,
 							}}
 						>
@@ -223,6 +239,7 @@ export default () => {
 							alignSelf: 'center',
 						}}
 					/>
+					<Button onPress={handleLogout} title='Sair' />
 				</View>
 			) : (
 				<ActivityIndicator size='large' color={Tema.colors.light} />
@@ -230,3 +247,5 @@ export default () => {
 		</View>
 	)
 }
+
+export default Perfil

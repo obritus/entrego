@@ -6,6 +6,8 @@ export const Tema: Styled.DefaultTheme = {
 		primary: '#141e30',
 		secondary: '#FCCBCA',
 		danger: '#d42252',
+		warning: '#ffc107',
+		info: 'cyan',
 		success: '#2a2773',
 		light: '#FFFFFF',
 		dark: '#303030',

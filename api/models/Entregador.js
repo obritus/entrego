@@ -21,6 +21,10 @@ export default mongoose.model('entregadores',
 				type: Number,
 				unique: true
 			},
+			cnh: {
+				type: Number,
+				unique: true
+			},
 			creditos: {
 				type: Number,
 				required: true,

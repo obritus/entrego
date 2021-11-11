@@ -11,6 +11,26 @@ import Api from '../Api'
 
 import { Tema } from '../Styles'
 
+interface Entregas {
+	id: number
+	price: number
+	status: number
+	cliente: {
+		nome: string
+		logotipo: string | ''
+		latitude: number
+		longitude: number
+	}
+	contato: {
+		nome: string
+		telefone: number
+		latitude: number
+		longitude: number
+		endereco: string
+		observacoes?: string
+	}
+}
+
 export default (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
 
@@ -47,14 +67,14 @@ export default (props: any) => {
 				showsIndoors={false}
 			>
 				{entregas.length > 0 &&
-					entregas.map((entrega: any) => (
+					entregas.map((entrega: Entregas) => (
 						<Marker
-							key={entrega.title}
-							title={entrega.title}
+							key={entrega.id}
+							title={entrega.cliente.nome}
 							tracksViewChanges={false}
 							coordinate={{
-								latitude: entrega.latitude,
-								longitude: entrega.longitude,
+								latitude: entrega.cliente.latitude,
+								longitude: entrega.cliente.longitude,
 							}}
 							//icon={require('../assets/marker.png')}
 						>
@@ -67,9 +87,8 @@ export default (props: any) => {
 								}
 							>
 								<View style={s.Marker}>
-									<Text style={s.Title}>{entrega.title}</Text>
-									<Text style={s.Description}>
-										Entregar na Rua do Abacaxi, 123.
+									<Text style={s.Title}>
+										{entrega.cliente.nome}
 									</Text>
 									<TouchableOpacity
 										style={{
@@ -87,15 +106,7 @@ export default (props: any) => {
 												marginEnd: 4,
 											}}
 										>
-											ENTREGAR
-										</Text>
-										<Text
-											style={{
-												fontFamily: 'Ubuntu Bold',
-												color: Tema.colors.primary,
-											}}
-										>
-											R$ {entrega.price}
+											2 ENTREGAS DISPONÍVEIS
 										</Text>
 									</TouchableOpacity>
 								</View>
@@ -110,8 +121,7 @@ export default (props: any) => {
 const s = StyleSheet.create({
 	Marker: {
 		padding: 10,
-		borderRadius: 5,
-		width: 160,
+		width: 260,
 	},
 	Title: {
 		fontSize: 12,

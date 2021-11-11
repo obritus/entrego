@@ -19,11 +19,6 @@ export default mongoose.model('clientes',
 				required: true,
 				trim: true
 			},
-			empresa: {
-				type: String,
-				required: true,
-				trim: true
-			},
 			telefone: {
 				type: Number,
 				required: true

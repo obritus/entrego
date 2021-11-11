@@ -2,17 +2,20 @@ import React from 'react'
 import {
 	View,
 	Text,
-	StyleSheet,
-	TouchableOpacity,
 	FlatList,
 	ActivityIndicator,
+	StatusBar,
 } from 'react-native'
 import Api from '../Api'
 import { Tema } from '../Styles'
 
 import EntregaCard from './EntregaCard'
 
-export default (props: any) => {
+interface Props {
+	navigation: any
+}
+
+const EntregasList: React.FC<Props> = (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
 
 	React.useEffect(() => {
@@ -25,6 +28,10 @@ export default (props: any) => {
 		<View style={{ flex: 1, justifyContent: 'center' }}>
 			{entregas.length > 0 ? (
 				<View style={{ flex: 1 }}>
+					<StatusBar
+						barStyle='light-content'
+						backgroundColor={Tema.colors.primary}
+					/>
 					<FlatList
 						style={{
 							flex: 1,
@@ -36,9 +43,7 @@ export default (props: any) => {
 							<EntregaCard
 								item={item}
 								onPress={() =>
-									props.navigation.navigate(
-										'Detalhes da entrega'
-									)
+									props.navigation.navigate('Detalhes', item)
 								}
 							/>
 						)}
@@ -68,9 +73,7 @@ export default (props: any) => {
 								item={item}
 								horizontal={true}
 								onPress={() =>
-									props.navigation.navigate({
-										name: 'Detalhes da entrega',
-									})
+									props.navigation.navigate('Detalhes', item)
 								}
 							/>
 						)}
@@ -82,3 +85,5 @@ export default (props: any) => {
 		</View>
 	)
 }
+
+export default EntregasList

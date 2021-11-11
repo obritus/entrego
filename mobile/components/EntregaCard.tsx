@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Image, Button, TouchableOpacity, StyleSheet } from 'react-native'
-import styled from 'styled-components/native'
+import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Tema } from '../Styles'
 
 const s = StyleSheet.create({
@@ -9,44 +8,61 @@ const s = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: Tema.colors.primary,
 	},
+	ContainerBox: {
+		flex: 1,
+		padding: 20,
+	},
+	Valor: {
+		fontSize: 18,
+		fontFamily: 'Ubuntu Bold',
+		color: Tema.colors.light,
+		marginRight: 10,
+	},
+	Title: {
+		fontSize: 16,
+		color: Tema.colors.light,
+		fontFamily: 'Ubuntu Light',
+		textAlign: 'right',
+	},
+	Address: {
+		fontSize: 11,
+		color: Tema.colors.light,
+		fontFamily: 'Ubuntu Bold',
+		textAlign: 'right',
+	},
+	ImageCaixa: {
+		width: 50,
+		height: 50,
+		marginEnd: -35,
+	},
 })
 
-const ContainerBox = styled.View`
-	flex: 1;
-	padding: 20px;
-`
-const Valor = styled.Text`
-	font-size: 18px;
-	font-family: 'Ubuntu Bold';
-	color: ${Tema.colors.light};
-	margin-right: 10px;
-`
-const Title = styled.Text`
-	font-size: 16px;
-	color: #fff;
-	font-family: 'Ubuntu Light';
-	text-align: right;
-`
-const Address = styled.Text`
-	font-size: 11px;
-	color: #fff;
-	font-family: 'Ubuntu Bold';
-	text-align: right;
-`
-const ImageCaixa = styled.Image`
-	width: 50px;
-	height: 50px;
-`
-export default (props: any) => {
+interface Props {
+	horizontal?: boolean | false
+	item: {
+		cliente: {
+			nome: string
+			longitude: number
+			latitude: number
+		}
+		contato: {
+			endereco: string
+		}
+		price: number
+	}
+	onPress: () => void
+}
+
+const EntregaCard: React.FC<Props> = ({ horizontal, item, onPress }) => {
 	React.useEffect(() => {}, [])
 
 	return (
 		<TouchableOpacity
-			onPress={props.onPress}
+			onPress={onPress}
 			style={{
-				marginRight: props.horizontal ? 15 : 0,
-				marginBottom: props.horizontal ? 0 : 15,
-				backgroundColor: props.horizontal
+				marginRight: horizontal ? 15 : 0,
+				marginBottom: horizontal ? 0 : 15,
+				backgroundColor: horizontal
 					? Tema.colors.secondary
 					: Tema.colors.primary,
 				height: 100,
@@ -55,8 +71,9 @@ export default (props: any) => {
 				overflow: 'hidden',
 			}}
 		>
-			<ContainerBox
+			<View
 				style={{
+					...s.ContainerBox,
 					justifyContent: 'center',
 					maxWidth: 100,
 					backgroundColor: '#252E4E',
@@ -64,24 +81,38 @@ export default (props: any) => {
 					alignItems: 'center',
 				}}
 			>
-				<Valor>R$ {props.item.price}</Valor>
-				<ImageCaixa
+				<Text style={s.Valor}>R$ {item.price}</Text>
+				<Image
 					source={require('../assets/package_icon.png')}
-					style={{
-						marginRight: -50,
-					}}
+					style={s.ImageCaixa}
 				/>
-			</ContainerBox>
-			<ContainerBox style={{ justifyContent: 'space-between' }}>
-				<Title style={{ color: props.horizontal ? '#BD7E7D' : '#FFF' }}>
-					{props.item.title}
-				</Title>
-				<Address
-					style={{ color: props.horizontal ? '#BD7E7D' : '#FFF' }}
+			</View>
+			<View
+				style={{
+					...s.ContainerBox,
+					justifyContent: 'space-between',
+					paddingStart: 55,
+				}}
+			>
+				<Text
+					style={{
+						...s.Title,
+						color: horizontal ? '#BD7E7D' : '#FFF',
+					}}
 				>
-					Rua Fulaninho, 1500 Jardim Andere
-				</Address>
-			</ContainerBox>
+					{item.cliente.nome}
+				</Text>
+				<Text
+					style={{
+						...s.Address,
+						color: horizontal ? '#BD7E7D' : '#FFF',
+					}}
+				>
+					{item.contato.endereco}
+				</Text>
+			</View>
 		</TouchableOpacity>
 	)
 }
+
+export default EntregaCard
