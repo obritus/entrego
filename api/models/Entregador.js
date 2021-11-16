@@ -11,7 +11,6 @@ export default mongoose.model('entregadores',
 			senha: {
 				type: String,
 				required: true,
-				select: false
 			},
 			nome: {
 				type: String,

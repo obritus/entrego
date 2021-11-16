@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { PanGestureHandler } from 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
 import {
 	View,
@@ -6,13 +6,12 @@ import {
 	StatusBar,
 	ImageBackground,
 	StyleSheet,
-	ActivityIndicator,
 	Button,
 	Image,
 	Animated,
 } from 'react-native'
 import Api from '../Api'
-import AuthContext from '../components/AuthContext'
+import { useAuth, User } from '../components/AuthContext'
 import { Tema } from '../Styles'
 
 const styles = StyleSheet.create({
@@ -26,7 +25,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: Tema.colors.light,
 		paddingTop: 10,
-
 		fontFamily: 'Ubuntu Regular',
 	},
 	box: {
@@ -48,48 +46,11 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 10,
 	},
+	swipeBox: {},
 })
 
-type user = {
-	_id: string
-	nome: string
-	email: string
-	cpf: number
-	creditos: number
-	avatar: {
-		location: string
-	}
-	entregas: number
-}
-
 const Perfil: React.FC = () => {
-	const [usuario, setUsuario] = React.useState({} as user)
-	const { setLogged } = React.useContext(AuthContext)
-
-	const handleLogout = async () => {
-		try {
-			await AsyncStorage.clear()
-		} catch (error) {
-			console.log(error)
-		}
-		setLogged(false)
-	}
-
-	useEffect(() => {
-		const GetEntregador = async () => {
-			try {
-				const Response = await Api.GetEntregador(
-					'61675b2b93224cc1d1be7f9a'
-				)
-				const Data = Response.data
-				setUsuario(Data)
-			} catch (error) {
-				console.error(error)
-			}
-		}
-
-		GetEntregador()
-	}, [])
+	const { logOut, user } = useAuth()
 
 	return (
 		<View
@@ -101,11 +62,11 @@ const Perfil: React.FC = () => {
 			}}
 		>
 			<StatusBar
-				barStyle='light-content'
+				barStyle='default'
 				backgroundColor={Tema.colors.primary}
 			/>
-			{Object.keys(usuario).length > 0 ? (
-				<View style={styles.box}>
+			<View style={styles.box}>
+				<Animated.View style={styles.swipeBox}>
 					<View style={styles.avatarNome}>
 						<View
 							style={{
@@ -117,7 +78,7 @@ const Perfil: React.FC = () => {
 						>
 							<ImageBackground
 								source={{
-									uri: usuario.avatar?.location,
+									uri: user?.avatar?.location,
 								}}
 								style={{
 									flex: 1,
@@ -151,7 +112,7 @@ const Perfil: React.FC = () => {
 									fontFamily: 'Ubuntu Bold',
 								}}
 							>
-								{usuario.nome}
+								{user?.nome}
 							</Text>
 							<Text
 								style={{
@@ -160,7 +121,7 @@ const Perfil: React.FC = () => {
 									fontSize: 12,
 								}}
 							>
-								{usuario.email}
+								{user?.email}
 							</Text>
 						</View>
 					</View>
@@ -186,14 +147,15 @@ const Perfil: React.FC = () => {
 								style={{
 									fontSize: 36,
 									textAlign: 'left',
-									color:
-										usuario.creditos > 0
-											? Tema.colors.light
-											: Tema.colors.danger,
+									// color:
+									// 	user?.creditos > 0
+									// 		? Tema.colors.light
+									// 		: Tema.colors.danger,
+									color: Tema.colors.light,
 									fontFamily: 'Ubuntu Bold',
 								}}
 							>
-								{usuario.creditos}
+								{user?.creditos}
 							</Text>
 						</View>
 						<View>
@@ -216,7 +178,7 @@ const Perfil: React.FC = () => {
 									fontFamily: 'Ubuntu Bold',
 								}}
 							>
-								{usuario.entregas || 0}
+								{user?.entregas || 0}
 							</Text>
 						</View>
 					</View>
@@ -227,6 +189,7 @@ const Perfil: React.FC = () => {
 							paddingTop: 30,
 							alignSelf: 'center',
 							fontFamily: 'Ubuntu Regular',
+							opacity: 0.5,
 						}}
 					>
 						Editar Informações
@@ -237,13 +200,16 @@ const Perfil: React.FC = () => {
 							width: 32,
 							height: 32,
 							alignSelf: 'center',
+							opacity: 0.5,
 						}}
 					/>
-					<Button onPress={handleLogout} title='Sair' />
-				</View>
-			) : (
-				<ActivityIndicator size='large' color={Tema.colors.light} />
-			)}
+				</Animated.View>
+				<Button
+					onPress={logOut}
+					title='Sair'
+					color={Tema.colors.primary}
+				/>
+			</View>
 		</View>
 	)
 }

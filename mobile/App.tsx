@@ -1,4 +1,3 @@
-import { NativeViewGestureHandler } from 'react-native-gesture-handler'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { AuthProvider } from './components/AuthContext'

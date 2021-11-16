@@ -1,37 +1,83 @@
-import React from 'react'
-import { createContext, useContext } from 'react'
+import React, { useEffect, useState, createContext } from 'react'
+import { Button, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+export interface User {
+	_id: string | ''
+	nome: string | ''
+	email: string | ''
+	cpf: number | 0
+	creditos: number | 0
+	avatar: {
+		location: string | ''
+	}
+	entregas: number | 0
+}
+
 interface AuthContext {
-	logged: boolean | false
-	user: {}
-	setLogged: (logged: boolean) => void
-	setUser: (user: string) => void
+	auth: boolean | false
+	user: User | undefined
+	setAuth: (auth: boolean) => void
+	setUser: (user: User) => void
+	logOut: () => void
+	setLoading: (auth: boolean) => void
+	loading: boolean
 }
 
 const AuthContext = createContext<AuthContext>({} as AuthContext)
 
-export const AuthProvider: React.FC = ({ children }) => {
-	const [logged, setLogged] = React.useState(false)
-	const [user, setUser] = React.useState({})
+const InitialState: User = {
+	_id: '',
+	nome: '',
+	email: '',
+	cpf: 0,
+	creditos: 0,
+	avatar: {
+		location: '',
+	},
+	entregas: 0,
+}
 
-	AsyncStorage.getItem('user')
-		.then((user) => {
-			if (user) {
-				setLogged(true)
-			}
-		})
-		.catch((err) => {
-			console.log(err)
-		})
+export const AuthProvider: React.FC = ({ children }) => {
+	const [auth, setAuth] = useState(false)
+	const [user, setUser] = useState<User>(InitialState)
+	const [loading, setLoading] = useState(true)
+
+	const logOut = async () => {
+		try {
+			await AsyncStorage.clear()
+			setAuth(false)
+			setUser(InitialState)
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	useEffect(() => {
+		AsyncStorage.getItem('user')
+			.then((user: string | null) => {
+				setLoading(false)
+				const Parseado = user && JSON.parse(user)
+				if (Parseado) {
+					setAuth(true)
+					setUser(Parseado)
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}, [])
 
 	return (
 		<AuthContext.Provider
 			value={{
-				logged,
+				auth,
 				user,
-				setLogged,
+				setAuth,
 				setUser,
+				logOut,
+				loading,
+				setLoading,
 			}}
 		>
 			{children}
@@ -39,4 +85,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 	)
 }
 
-export default AuthContext
+export const useAuth = (): AuthContext => {
+	const context = React.useContext(AuthContext)
+	return context
+}

@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
 	View,
 	Text,
 	StatusBar,
 	StyleSheet,
 	TouchableOpacity,
+	Button,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
+import { useAuth } from '../components/AuthContext'
 
 import { Tema } from '../Styles'
 
@@ -33,6 +35,7 @@ interface Entregas {
 
 export default (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
+	const { logOut } = useAuth()
 
 	React.useEffect(() => {
 		const getEntregas = async () => {
@@ -49,6 +52,7 @@ export default (props: any) => {
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
 			/>
+			<Button title='TESTE' onPress={() => logOut()} />
 			<MapView
 				style={{ flex: 1 }}
 				provider={PROVIDER_GOOGLE}

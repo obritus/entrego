@@ -23,15 +23,25 @@ export default express.Router()
 		}
 
 		// FAZ A BUSCA NO BANCO DE DADOS:
-		const User = await Model.findOne({ email }).select('+senha')
+		const User = await Model
+			.aggregate()
+			.lookup({
+				from: 'images',
+				localField: '_id',
+				foreignField: req.query.model === 'cliente' ? 'cliente' : 'entregador',
+				as: req.query.model === 'cliente' ? 'logotipo' : 'avatar',
+			})
+			.match({ email })
+			//REMOVER ARRAY DO AVATAR, RESULTADO ÚNICO
+			.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
 
-		if (User) {
-			if (await CheckPassword(senha, User.senha)) {
-				const token = jwt.sign({ user_id: User._id },
+		if (User[0]) {
+			if (await CheckPassword(senha, User[0].senha)) {
+				const token = jwt.sign({ user_id: User[0]._id },
 					process.env.SECRET, {
 					expiresIn: keep ? '1y' : '1d'
 				})
-				res.json({ auth: true, token, user: User })
+				res.json({ auth: true, token, user: User[0] })
 			} else {
 				res.json({ auth: false, msg: 'Senha incorreta.' })
 			}

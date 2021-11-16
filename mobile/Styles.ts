@@ -8,10 +8,10 @@ export const Tema: Styled.DefaultTheme = {
 		danger: '#d42252',
 		warning: '#ffc107',
 		info: 'cyan',
-		success: '#2a2773',
+		success: '#3BAD21',
 		light: '#FFFFFF',
 		dark: '#303030',
-	},
+	}
 }
 
 const {

@@ -25,8 +25,12 @@ export default express.Router()
 			.catch((err) => res.json({ err }))
 	})
 
+	// -----------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------
+
 	.post("/", multer(Upload).single("image"), async (req, res) => {
-		const _id = req.body._id
+		const _id = req.body._id // ID DO USUARIO OU EMPRESA
+		const model = req.body.model // MODELO DO USUARIO OU EMPRESA
 
 		const ExcluirImagemEnviada = () => {
 			// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
@@ -35,11 +39,11 @@ export default express.Router()
 			})
 		}
 
-		if (_id != null && req.file.originalname != null) {
+		if (_id != null && req.file.originalname != null && model != null) {
 			const NewFile = resolve("tmp", "s3", req.file.filename)
 			sharp(req.file.path)
-				.jpeg({ quality: 50 })
-				.resize(1080)
+				.jpeg({ quality: 60 })
+				.resize(512)
 				.toFile(NewFile)
 				.then((info) => {
 					// MANDA O ARQUIVO PARA O S3
@@ -56,8 +60,10 @@ export default express.Router()
 							key: req.file.filename,
 							width: info.width,
 							height: info.height,
-							entregador: _id
+							[model]: _id, // DEFINE QUAL MODELO ESTA IMAGEM É
 						}
+
+						console.log('Uploaded do images:', Uploaded)
 
 						new Image(Uploaded)
 							.save()
@@ -68,7 +74,7 @@ export default express.Router()
 				.catch((err) => {
 					// EXCLUIR O ARQUIVO TEMPORÁRIO
 					ExcluirImagemEnviada()
-
+					console.error(err)
 					res.json({ err })
 				})
 		} else {
@@ -78,6 +84,9 @@ export default express.Router()
 			res.json({ msg: "O usuário precisa ser setado." })
 		}
 	})
+
+	// -----------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------
 
 	.put("/:id", multer(Upload).single("image"), async (req, res) => {
 		const _id = req.params.id
@@ -92,8 +101,8 @@ export default express.Router()
 		if (_id != null && req.file.originalname != null) {
 			const NewFile = resolve("tmp", "s3", req.file.filename)
 			sharp(req.file.path)
-				.jpeg({ quality: 50 })
-				.resize(1080)
+				.jpeg({ quality: 60 })
+				.resize(512)
 				.toFile(NewFile)
 				.then((info) => {
 					// MANDA O ARQUIVO PARA O S3
