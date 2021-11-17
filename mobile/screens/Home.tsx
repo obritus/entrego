@@ -1,17 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
 	View,
 	Text,
 	StatusBar,
 	StyleSheet,
 	TouchableOpacity,
-	Button,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
 import { useAuth } from '../components/AuthContext'
 
-import { Tema } from '../Styles'
+import Tema from '../Styles'
 
 interface Entregas {
 	id: number
@@ -47,14 +46,22 @@ export default (props: any) => {
 	}, [setEntregas])
 
 	return (
-		<View style={{ flex: 1, backgroundColor: Tema.colors.light }}>
+		<View
+			style={{
+				flex: 1,
+				backgroundColor: Tema.colors.light,
+			}}
+		>
 			<StatusBar
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
 			/>
-			<Button title='TESTE' onPress={() => logOut()} />
 			<MapView
-				style={{ flex: 1 }}
+				style={{
+					flex: 1,
+					borderBottomRightRadius: 15,
+					borderBottomLeftRadius: 15,
+				}}
 				provider={PROVIDER_GOOGLE}
 				region={{
 					latitude: -21.572084,
@@ -80,7 +87,7 @@ export default (props: any) => {
 								latitude: entrega.cliente.latitude,
 								longitude: entrega.cliente.longitude,
 							}}
-							//icon={require('../assets/marker.png')}
+							icon={require('../assets/marker.png')}
 						>
 							<Callout
 								onPress={() =>

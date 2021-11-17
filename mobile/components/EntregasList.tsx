@@ -7,7 +7,7 @@ import {
 	StatusBar,
 } from 'react-native'
 import Api from '../Api'
-import { Tema } from '../Styles'
+import Tema from '../Styles'
 
 import EntregaCard from './EntregaCard'
 
@@ -19,9 +19,12 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
 
 	React.useEffect(() => {
-		Api.GetEntregas().then((data) => {
-			setEntregas(data.data)
-		})
+		const GetEntregas = async () => {
+			const response = await Api.GetEntregas()
+			const data = await response.data
+			setEntregas(data)
+		}
+		GetEntregas()
 	}, [])
 
 	return (

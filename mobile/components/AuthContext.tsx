@@ -1,5 +1,4 @@
 import React, { useEffect, useState, createContext } from 'react'
-import { Button, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export interface User {
@@ -16,7 +15,7 @@ export interface User {
 
 interface AuthContext {
 	auth: boolean | false
-	user: User | undefined
+	user: User
 	setAuth: (auth: boolean) => void
 	setUser: (user: User) => void
 	logOut: () => void

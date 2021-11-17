@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Tema } from '../Styles'
+import Tema from '../Styles'
 
 const s = StyleSheet.create({
 	box: {

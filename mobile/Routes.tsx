@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image, ActivityIndicator, StyleSheet } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { Tema } from './Styles'
+import Tema from './Styles'
 import { useAuth } from './components/AuthContext'
 
 import Home from './screens/Home'

@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { Tema } from '../Styles'
+import Tema from '../Styles'
 import Api from '../Api'
 
 import { useAuth } from '../components/AuthContext'

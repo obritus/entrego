@@ -1,8 +1,5 @@
-import * as Styled from 'styled-components/native'
-
-export const Tema: Styled.DefaultTheme = {
+export default {
 	colors: {
-		// primary: '#2A2773',
 		primary: '#141e30',
 		secondary: '#FCCBCA',
 		danger: '#d42252',
@@ -11,15 +8,9 @@ export const Tema: Styled.DefaultTheme = {
 		success: '#3BAD21',
 		light: '#FFFFFF',
 		dark: '#303030',
+	},
+	fonts: {
+		regular: 'Ubuntu Regular',
+		bold: 'Ubuntu Bold'
 	}
 }
-
-const {
-	default: styled,
-	css,
-	ThemeProvider
-} = Styled as Styled.ReactNativeThemedStyledComponentsModule<Styled.DefaultTheme>
-
-export {css, ThemeProvider}
-
-export default styled

@@ -10,7 +10,7 @@ import {
 	Linking,
 	Alert,
 } from 'react-native'
-import { Tema } from '../Styles'
+import Tema from '../Styles'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 const s = StyleSheet.create({

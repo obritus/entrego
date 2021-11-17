@@ -1,4 +1,8 @@
-import { PanGestureHandler } from 'react-native-gesture-handler'
+import {
+	PanGestureHandler,
+	State,
+	GestureHandlerRootView,
+} from 'react-native-gesture-handler'
 import React, { useEffect } from 'react'
 import {
 	View,
@@ -6,13 +10,13 @@ import {
 	StatusBar,
 	ImageBackground,
 	StyleSheet,
-	Button,
 	Image,
 	Animated,
 } from 'react-native'
 import Api from '../Api'
-import { useAuth, User } from '../components/AuthContext'
-import { Tema } from '../Styles'
+import { useAuth } from '../components/AuthContext'
+import Tema from '../Styles'
+import EditProfile from '../components/EditProfile'
 
 const styles = StyleSheet.create({
 	header: {
@@ -25,14 +29,11 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: Tema.colors.light,
 		paddingTop: 10,
-		fontFamily: 'Ubuntu Regular',
+		fontFamily: Tema.fonts.regular,
 	},
 	box: {
 		flex: 1,
 		paddingHorizontal: 30,
-
-		alignItems: 'flex-start',
-		justifyContent: 'flex-start',
 		background: Tema.colors.primary,
 	},
 	avatarNome: {
@@ -50,15 +51,61 @@ const styles = StyleSheet.create({
 })
 
 const Perfil: React.FC = () => {
-	const { logOut, user } = useAuth()
+	const { user } = useAuth()
+	const translateY = new Animated.Value(0)
+	const [inputRange, setInputRange] = React.useState(0)
+	let offset = 0
+
+	const animatedEvent = Animated.event(
+		[
+			{
+				nativeEvent: {
+					translationY: translateY,
+				},
+			},
+		],
+		{ useNativeDriver: true }
+	)
+
+	const onHandlerStateChange = (event: any) => {
+		if (event.nativeEvent.oldState === State.ACTIVE) {
+			let opened = false
+			const { translationY } = event.nativeEvent
+			offset += translationY
+
+			if (translationY >= 60) {
+				opened = true
+			} else {
+				translateY.setValue(offset)
+				translateY.setOffset(0)
+				offset = 0
+			}
+
+			Animated.timing(translateY, {
+				toValue: opened ? 500 : 0,
+				duration: 200,
+				useNativeDriver: true,
+			}).start(() => {
+				offset = opened ? 500 : 0
+				translateY.setOffset(offset)
+				translateY.setValue(0)
+			})
+		}
+	}
 
 	return (
-		<View
+		<GestureHandlerRootView
+			onLayout={(event) => {
+				setInputRange(event.nativeEvent.layout.height / 2)
+				console.log(inputRange)
+			}}
 			style={{
 				flex: 1,
 				justifyContent: 'center',
 				overflow: 'hidden',
 				backgroundColor: Tema.colors.primary,
+				borderBottomRightRadius: 15,
+				borderBottomLeftRadius: 15,
 			}}
 		>
 			<StatusBar
@@ -66,8 +113,22 @@ const Perfil: React.FC = () => {
 				backgroundColor={Tema.colors.primary}
 			/>
 			<View style={styles.box}>
-				<Animated.View style={styles.swipeBox}>
-					<View style={styles.avatarNome}>
+				<EditProfile translateY={translateY} />
+				<Animated.View
+					style={{
+						...styles.swipeBox,
+					}}
+				>
+					<Animated.View
+						style={{
+							...styles.avatarNome,
+							opacity: translateY.interpolate({
+								inputRange: [0, 100],
+								outputRange: [1, 0],
+								extrapolate: 'clamp',
+							}),
+						}}
+					>
 						<View
 							style={{
 								width: 90,
@@ -99,7 +160,7 @@ const Perfil: React.FC = () => {
 							<Text
 								style={{
 									color: '#F1F1F1',
-									fontFamily: 'Ubuntu Regular',
+									fontFamily: Tema.fonts.regular,
 									fontSize: 12,
 								}}
 							>
@@ -109,7 +170,7 @@ const Perfil: React.FC = () => {
 								style={{
 									fontSize: 20,
 									color: Tema.colors.light,
-									fontFamily: 'Ubuntu Bold',
+									fontFamily: Tema.fonts.bold,
 								}}
 							>
 								{user?.nome}
@@ -124,12 +185,17 @@ const Perfil: React.FC = () => {
 								{user?.email}
 							</Text>
 						</View>
-					</View>
-					<View
+					</Animated.View>
+					<Animated.View
 						style={{
 							flexDirection: 'row',
 							justifyContent: 'space-between',
 							width: '100%',
+							opacity: translateY.interpolate({
+								inputRange: [0, 100],
+								outputRange: [1, 0],
+								extrapolate: 'clamp',
+							}),
 						}}
 					>
 						<View>
@@ -137,7 +203,7 @@ const Perfil: React.FC = () => {
 								style={{
 									color: '#F1F1F1',
 									marginBottom: -2,
-									fontFamily: 'Ubuntu Regular',
+									fontFamily: Tema.fonts.regular,
 									fontSize: 12,
 								}}
 							>
@@ -147,12 +213,11 @@ const Perfil: React.FC = () => {
 								style={{
 									fontSize: 36,
 									textAlign: 'left',
-									// color:
-									// 	user?.creditos > 0
-									// 		? Tema.colors.light
-									// 		: Tema.colors.danger,
-									color: Tema.colors.light,
-									fontFamily: 'Ubuntu Bold',
+									color:
+										user?.creditos > 0
+											? Tema.colors.light
+											: Tema.colors.danger,
+									fontFamily: Tema.fonts.bold,
 								}}
 							>
 								{user?.creditos}
@@ -164,7 +229,7 @@ const Perfil: React.FC = () => {
 									textAlign: 'right',
 									color: '#F1F1F1',
 									marginBottom: -2,
-									fontFamily: 'Ubuntu Regular',
+									fontFamily: Tema.fonts.regular,
 									fontSize: 12,
 								}}
 							>
@@ -175,42 +240,77 @@ const Perfil: React.FC = () => {
 									fontSize: 36,
 									textAlign: 'right',
 									color: Tema.colors.light,
-									fontFamily: 'Ubuntu Bold',
+									fontFamily: Tema.fonts.bold,
 								}}
 							>
 								{user?.entregas || 0}
 							</Text>
 						</View>
-					</View>
-					<Text
-						style={{
-							textAlign: 'center',
-							color: Tema.colors.light,
-							paddingTop: 30,
-							alignSelf: 'center',
-							fontFamily: 'Ubuntu Regular',
-							opacity: 0.5,
-						}}
+					</Animated.View>
+					<PanGestureHandler
+						onGestureEvent={animatedEvent}
+						onHandlerStateChange={onHandlerStateChange}
 					>
-						Editar Informações
-					</Text>
-					<Image
-						source={require('../assets/arrow_down.png')}
-						style={{
-							width: 32,
-							height: 32,
-							alignSelf: 'center',
-							opacity: 0.5,
-						}}
-					/>
+						<Animated.View
+							style={{
+								width: '100%',
+								transform: [
+									{
+										translateY: translateY.interpolate({
+											inputRange: [0, inputRange],
+											outputRange: [0, inputRange],
+											extrapolate: 'clamp',
+										}),
+									},
+								],
+							}}
+						>
+							<Animated.Text
+								style={{
+									textAlign: 'center',
+									color: Tema.colors.light,
+									paddingTop: 30,
+									alignSelf: 'center',
+									fontFamily: Tema.fonts.regular,
+									opacity: translateY.interpolate({
+										inputRange: [0, 100],
+										outputRange: [0.5, 1],
+										extrapolate: 'clamp',
+									}),
+								}}
+							>
+								Editar Informações
+							</Animated.Text>
+							<Animated.Image
+								source={require('../assets/arrow_down.png')}
+								style={{
+									width: 32,
+									height: 32,
+									alignSelf: 'center',
+									opacity: translateY.interpolate({
+										inputRange: [0, 100],
+										outputRange: [0.5, 1],
+										extrapolate: 'clamp',
+									}),
+									transform: [
+										{
+											rotate: translateY.interpolate({
+												inputRange: [0, inputRange],
+												outputRange: [
+													`${0}deg`,
+													`${-180}deg`,
+												],
+												extrapolate: 'clamp',
+											}),
+										},
+									],
+								}}
+							/>
+						</Animated.View>
+					</PanGestureHandler>
 				</Animated.View>
-				<Button
-					onPress={logOut}
-					title='Sair'
-					color={Tema.colors.primary}
-				/>
 			</View>
-		</View>
+		</GestureHandlerRootView>
 	)
 }
 
