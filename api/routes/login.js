@@ -41,6 +41,7 @@ export default express.Router()
 					process.env.SECRET, {
 					expiresIn: keep ? '1y' : '1d'
 				})
+				delete User[0].senha
 				res.json({ auth: true, token, user: User[0] })
 			} else {
 				res.json({ auth: false, msg: 'Senha incorreta.' })

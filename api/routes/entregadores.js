@@ -11,11 +11,12 @@ export default express.Router()
 		try {
 			const Data = await Model
 				.aggregate()
+				.project('-senha')
 				.lookup({
-					from: "images",
-					localField: "_id",
-					foreignField: "entregador",
-					as: "avatar",
+					from: 'images',
+					localField: '_id',
+					foreignField: 'entregador',
+					as: 'avatar',
 				})
 				.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
 
@@ -32,6 +33,7 @@ export default express.Router()
 		try {
 			const Data = await Model
 				.aggregate()
+				.project('-senha')
 				.lookup({
 					from: "images",
 					localField: "_id",
@@ -51,7 +53,7 @@ export default express.Router()
 
 	// -------------------------------------------------------------------------
 
-	.put('/:id', async (req, res) => {
+	.patch('/:id', async (req, res) => {
 		try {
 			if (req.body.senha) {
 				req.body.senha = await GeneratePassword(req.body.senha)

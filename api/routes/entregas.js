@@ -100,6 +100,16 @@ export default express.Router()
 		])
 	})
 
+	.post('/', (req, res) => {
+		try {
+			const entrega = new Model(req.body)
+			entrega.save()
+			res.json(entrega)
+		} catch (error) {
+			res.status(400).json({ error: error.message })
+		}
+	})
+
 	.get('/:id/show', (req, res) => {
 		res.sendStatus(200)
 	})

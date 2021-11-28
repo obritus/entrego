@@ -1,0 +1,629 @@
+{
+	"_type": "export",
+	"__export_format": 4,
+	"__export_date": "2021-11-26T02:08:58.141Z",
+	"__export_source": "insomnia.desktop.app:v2021.6.0",
+	"resources": [
+		{
+			"_id": "req_a98a2bdc6e7e4542ad1cd36d4b443b3e",
+			"parentId": "fld_d866f81885224f92bb8e86d09fd6cc60",
+			"modified": 1636683558322,
+			"created": 1636600136183,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "PUT",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"email\": \"fulaninho@gmail.com\",\n\t\"senha\": \"123456\",\n\t\"keep\": true\n}"
+			},
+			"parameters": [
+				{
+					"id": "pair_fa5dc140e19441ec97fe15e251168881",
+					"name": "model",
+					"value": "usuario",
+					"description": ""
+				}
+			],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_2427c9f394c94c3da6e27c50410cf1e6"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1636600136249,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_d866f81885224f92bb8e86d09fd6cc60",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1636600160367,
+			"created": 1636600129120,
+			"name": "login",
+			"description": "",
+			"environment": { "path": "login/" },
+			"environmentPropertyOrder": { "&": ["path"] },
+			"metaSortKey": -1636600129120,
+			"_type": "request_group"
+		},
+		{
+			"_id": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"parentId": null,
+			"modified": 1634164563752,
+			"created": 1634164563752,
+			"name": "EntreGO",
+			"description": "",
+			"scope": "collection",
+			"_type": "workspace"
+		},
+		{
+			"_id": "req_fdba2c66d26d436fa3f3b6c67880bfdf",
+			"parentId": "fld_eb68ca723e744b90a6910f3bcec40688",
+			"modified": 1636544262496,
+			"created": 1636544210382,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "GET",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1636544210382,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_eb68ca723e744b90a6910f3bcec40688",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1636544431389,
+			"created": 1636544198729,
+			"name": "entregas",
+			"description": "",
+			"environment": { "path": "entregas/", "_id": "" },
+			"environmentPropertyOrder": { "&": ["path", "_id"] },
+			"metaSortKey": -1636544198729,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_043ab254956a490dbc3ce596db2e38f3",
+			"parentId": "fld_eb68ca723e744b90a6910f3bcec40688",
+			"modified": 1636544301467,
+			"created": 1636544295586,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "POST",
+			"description": "",
+			"method": "POST",
+			"body": { "mimeType": "application/json", "text": "" },
+			"parameters": [],
+			"headers": [
+				{ "name": "Content-Type", "value": "application/json" }
+			],
+			"authentication": {},
+			"metaSortKey": -1635557425026.5,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b751e0ee573f4af9b0f08f3610983e43",
+			"parentId": "fld_8843092128a241919391a7389ae2de94",
+			"modified": 1636684104091,
+			"created": 1634575929894,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "GET",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [],
+			"headers": [
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600930,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_8843092128a241919391a7389ae2de94",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1636684206715,
+			"created": 1634570572569,
+			"name": "images",
+			"description": "Rotas das imagens, upload e exclusão de imagens dos entregadores e clientes.",
+			"environment": {
+				"path": "images/",
+				"_id": "618dd1667d7740406c5f783c"
+			},
+			"environmentPropertyOrder": { "&": ["path", "_id"] },
+			"metaSortKey": -1634570572569,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_759396fbc30f416f91aa94b99aca5933",
+			"parentId": "fld_8843092128a241919391a7389ae2de94",
+			"modified": 1636684133629,
+			"created": 1634164600730,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "POST",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"name": "_id",
+						"value": "61675b2b93224cc1d1be7f9a",
+						"id": "pair_885c981bd576478fa3e9767e9eab1dc5"
+					},
+					{
+						"id": "pair_49ce7c790fa348728908f7cd0135212d",
+						"name": "image",
+						"value": "",
+						"description": "",
+						"type": "file",
+						"fileName": "D:\\Backup\\Imagens\\165719028_576354510162857_4646649279166766114_n.jpg"
+					},
+					{
+						"id": "pair_666a281503e84593a71c97c8b3fb8430",
+						"name": "model",
+						"value": "entregador",
+						"description": ""
+					}
+				]
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "multipart/form-data",
+					"id": "pair_2d5caff1b5ad481d9ce8b6c6656a156a"
+				},
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600880,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_19f8b7c4588a44b6a147b7cf90138a1a",
+			"parentId": "fld_8843092128a241919391a7389ae2de94",
+			"modified": 1637029999125,
+			"created": 1634605426665,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "PUT ID",
+			"description": "",
+			"method": "PUT",
+			"body": {
+				"mimeType": "multipart/form-data",
+				"params": [
+					{
+						"id": "pair_0da27de28610468eb11fcc3bd0b34cb4",
+						"name": "image",
+						"value": "",
+						"description": "",
+						"type": "file",
+						"fileName": "D:\\Backup\\Imagens\\LG PC Suite\\No Number\\1b9e20f4-d2cb-47ab-bab8-e452de82f904-1.jpeg"
+					},
+					{
+						"id": "pair_090cab314721401f8055ada371045820",
+						"name": "entregador",
+						"value": "61675b2b93224cc1d1be7f9a",
+						"description": ""
+					}
+				]
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "multipart/form-data",
+					"id": "pair_2d5caff1b5ad481d9ce8b6c6656a156a"
+				},
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600830,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_69fbdde9e00749b38354696edb83b6c1",
+			"parentId": "fld_8843092128a241919391a7389ae2de94",
+			"modified": 1636682910325,
+			"created": 1634168386225,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "DELETE ID",
+			"description": "",
+			"method": "DELETE",
+			"body": {},
+			"parameters": [],
+			"headers": [
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600780,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_01e6086da7524cf2b3e517873ff364cd",
+			"parentId": "fld_928f93cc543f45caacc886489997a576",
+			"modified": 1636544478921,
+			"created": 1635964664311,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "GET",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [],
+			"headers": [
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600930,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_928f93cc543f45caacc886489997a576",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1636544512617,
+			"created": 1635964664278,
+			"name": "clientes",
+			"description": "",
+			"environment": {
+				"path": "clientes/",
+				"_id": "61676ac5aeac55045b208177"
+			},
+			"environmentPropertyOrder": { "&": ["path", "_id"] },
+			"metaSortKey": -1634570568382.5,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_11f09f2308c64ef4819ee9d0b9823d2d",
+			"parentId": "fld_928f93cc543f45caacc886489997a576",
+			"modified": 1635964703074,
+			"created": 1635964664300,
+			"url": "{{ _.base_url }}clientes",
+			"name": "POST",
+			"description": "",
+			"method": "POST",
+			"body": { "mimeType": "application/json", "text": "" },
+			"parameters": [],
+			"headers": [
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				},
+				{ "name": "Content-Type", "value": "application/json" }
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600880,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_3e9384aeed06423abbebbab500bbb32a",
+			"parentId": "fld_928f93cc543f45caacc886489997a576",
+			"modified": 1636544598078,
+			"created": 1635964664315,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "PUT ID",
+			"description": "",
+			"method": "PUT",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"email\": \"empresafulana@gmail.com\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_2d5caff1b5ad481d9ce8b6c6656a156a"
+				},
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600830,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9f2d7c0c325a4ed88a4ba853f153b420",
+			"parentId": "fld_928f93cc543f45caacc886489997a576",
+			"modified": 1636544592039,
+			"created": 1635964664308,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "DELETE ID",
+			"description": "",
+			"method": "DELETE",
+			"body": {},
+			"parameters": [],
+			"headers": [
+				{
+					"id": "pair_e6c62c2013944e1daf53633f7cf0f80b",
+					"name": "",
+					"value": "",
+					"description": ""
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634164600780,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_5bde49ca4e3649ae9d4cbb34be901828",
+			"parentId": "fld_cf6e03cfee9446fdba2ca4d056fbc2bc",
+			"modified": 1636040165384,
+			"created": 1634570639671,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "GET",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1634570639671,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "fld_cf6e03cfee9446fdba2ca4d056fbc2bc",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1636680606455,
+			"created": 1634570564196,
+			"name": "entregadores",
+			"description": "",
+			"environment": {
+				"path": "entregadores/",
+				"_id": "61675b2b93224cc1d1be7f9a"
+			},
+			"environmentPropertyOrder": { "&": ["path", "_id"] },
+			"metaSortKey": -1634570564196,
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_45dbce6158544d97bef992960b8a27df",
+			"parentId": "fld_cf6e03cfee9446fdba2ca4d056fbc2bc",
+			"modified": 1636544658808,
+			"created": 1636039960467,
+			"url": "{{ _.base_url }}{{ _.path }}",
+			"name": "POST",
+			"description": "",
+			"method": "POST",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n        \"_id\": \"61675b2b93224cc1d1be7f9a\",\n        \"email\": \"piloto2@admin.com.br\",\n        \"nome\": \"Fulaninho da Silva\",\n        \"cpf\": 33333333333,\n        \"credits\": 60,\n        \"senha\": \"123456\",\n        \"avatar\":            \"616da695610c38e606a816d6\"\n        \n    }"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_dc771586823e4a0db2afb1453336f5c1"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634418375136.875,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e333d39763674386b5f634b004bce45f",
+			"parentId": "fld_cf6e03cfee9446fdba2ca4d056fbc2bc",
+			"modified": 1636544718562,
+			"created": 1634595018988,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "GET ID",
+			"description": "",
+			"method": "GET",
+			"body": {},
+			"parameters": [],
+			"headers": [],
+			"authentication": {},
+			"metaSortKey": -1634266110602.75,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9bebf51b329349308d64883a6126cb08",
+			"parentId": "fld_cf6e03cfee9446fdba2ca4d056fbc2bc",
+			"modified": 1637892377476,
+			"created": 1634571819669,
+			"url": "{{ _.base_url }}{{ _.path }}{{ _._id }}",
+			"name": "PUT ID",
+			"description": "",
+			"method": "PATCH",
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"senha\": \"123456\"\n}"
+			},
+			"parameters": [],
+			"headers": [
+				{
+					"name": "Content-Type",
+					"value": "application/json",
+					"id": "pair_eaae4e8efd6d4213b2992b859851722b"
+				}
+			],
+			"authentication": {},
+			"metaSortKey": -1634266110552.75,
+			"isPrivate": false,
+			"settingStoreCookies": true,
+			"settingSendCookies": true,
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingRebuildPath": true,
+			"settingFollowRedirects": "global",
+			"_type": "request"
+		},
+		{
+			"_id": "env_1d3d6d9d7375a93b868d83707deda0c04681c273",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1634249798924,
+			"created": 1634164563760,
+			"name": "Base Environment",
+			"data": { "base_url": "http://34.95.150.227:3005/" },
+			"dataPropertyOrder": { "&": ["base_url"] },
+			"color": null,
+			"isPrivate": false,
+			"metaSortKey": 1634164563760,
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_1d3d6d9d7375a93b868d83707deda0c04681c273",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1634164563762,
+			"created": 1634164563762,
+			"name": "Default Jar",
+			"cookies": [],
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "spc_b6adb995b92c4882b4b7bcd48cc6d8c1",
+			"parentId": "wrk_6fdaae753bce49278f7e5d3e3644906d",
+			"modified": 1634164563754,
+			"created": 1634164563754,
+			"fileName": "EntreGO",
+			"contents": "",
+			"contentType": "yaml",
+			"_type": "api_spec"
+		},
+		{
+			"_id": "env_e729af10787943b3ba522f2ef152dc52",
+			"parentId": "env_1d3d6d9d7375a93b868d83707deda0c04681c273",
+			"modified": 1635964756252,
+			"created": 1634249693081,
+			"name": "LOCAL",
+			"data": { "base_url": "http://localhost:3005/" },
+			"dataPropertyOrder": { "&": ["base_url"] },
+			"color": null,
+			"isPrivate": false,
+			"metaSortKey": 1634249693081,
+			"_type": "environment"
+		}
+	]
+}

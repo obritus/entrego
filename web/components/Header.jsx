@@ -33,8 +33,8 @@ const HeaderNav = styled.nav`
 	}
 `
 
-export default (props) => (
-	<Container className=''>
+const Header = (props) => (
+	<Container className={``}>
 		<div className='container justify-content-center'>
 			<HeaderNav className=''>
 				<Link href='/' passHref={true}>
@@ -44,7 +44,7 @@ export default (props) => (
 				<Link href='/conheca'>Conheça</Link>
 				<div className='vr'></div>
 				{props.logged ? (
-					<Link href='/logout'>Sair</Link>
+					<Link href='/painel'>Painel</Link>
 				) : (
 					<Link href='/entrar'>Entrar</Link>
 				)}
@@ -52,3 +52,5 @@ export default (props) => (
 		</div>
 	</Container>
 )
+
+export default Header

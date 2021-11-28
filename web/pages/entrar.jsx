@@ -21,12 +21,27 @@ const Container = styled.div`
 			font-weight: 700;
 		}
 	}
+	@media (max-width: 576px) {
+		div {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		form {
+			button {
+				font-weight: 700;
+			}
+		}
+	}
 `
 const MessageBox = styled.div`
 	color: #fff;
 `
 
-export default () => {
+const Entrar = () => {
 	const [message, setMessage] = React.useState('')
 
 	const [load, setLoad] = React.useState(false)
@@ -107,3 +122,5 @@ export default () => {
 		</Container>
 	)
 }
+
+export default Entrar

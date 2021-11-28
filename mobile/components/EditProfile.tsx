@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { Animated, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import {
+	Animated,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	TextInput,
+} from 'react-native'
 import { useAuth } from './AuthContext'
 import Tema from '../Styles'
 import { ScrollView } from 'react-native-gesture-handler'
@@ -27,11 +34,18 @@ const s = StyleSheet.create({
 		fontFamily: Tema.fonts.regular,
 		textAlign: 'center',
 	},
+	label: {},
+
+	input: {
+		padding: 15,
+	},
 })
 
 export default (props: any) => {
-	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [telefone, setTelefone] = useState('')
 	const { logOut } = useAuth()
+
 	return (
 		<Animated.View
 			style={{
@@ -69,6 +83,24 @@ export default (props: any) => {
 				>
 					Editar Perfil
 				</Text>
+				<View>
+					<Text>E-mail:</Text>
+					<TextInput
+						style={s.input}
+						placeholder='E-mail'
+						value={email}
+						onChangeText={(text) => setEmail(text)}
+					/>
+				</View>
+				<View>
+					<Text>Celular:</Text>
+					<TextInput
+						style={s.input}
+						placeholder='Celular'
+						value={telefone}
+						onChangeText={(text) => setTelefone(text)}
+					/>
+				</View>
 				<TouchableOpacity onPress={logOut} style={s.button}>
 					<Text style={s.buttonText}>Desconectar-se</Text>
 				</TouchableOpacity>
