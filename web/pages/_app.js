@@ -6,7 +6,7 @@ import '../public/styles/App.css'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import { useAuth } from '../components/AuthContext'
+import AuthProvider, { useAuth } from '../components/AuthContext'
 
 const Section = styled.section`
 	flex: 1;
@@ -20,7 +20,7 @@ const App = ({ Component, pageProps }) => {
 	}, [])
 
 	return (
-		<useAuth data={{}}>
+		<AuthProvider>
 			<main>
 				<Head>
 					<title>EntreGO</title>
@@ -35,8 +35,7 @@ const App = ({ Component, pageProps }) => {
 				</Section>
 				<Footer />
 			</main>
-
-		</useAuth>
+		</AuthProvider>
 	)
 }
 

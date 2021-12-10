@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import Api from '../Api.js'
 import Logotipo from '../assets/logotipo_negativo.svg'
+import { useAuth } from '../components/AuthContext'
+import { setCookie } from 'nookies'
+import Redirect from 'next'
 
 const Container = styled.div`
 	display: flex;
@@ -43,7 +46,7 @@ const MessageBox = styled.div`
 
 const Entrar = () => {
 	const [message, setMessage] = React.useState('')
-
+	const { user, setUser } = useAuth()
 	const [load, setLoad] = React.useState(false)
 
 	const formHandler = (e) => {
@@ -55,8 +58,10 @@ const Entrar = () => {
 		Api.login({ email, senha, keep })
 			.then((res) => {
 				if (res.data.auth === true) {
-					localStorage.setItem('token', res.data.token)
-					window.location.replace('/')
+					setCookie(null, 'entrego.token', res.data.token, {
+						maxAge: 30 * 24 * 60 * 60,
+					})
+					Redirect('/')
 				} else {
 					setMessage('Usuário ou senha incorretos')
 				}
