@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
+import Head from 'next/head'
 import Api from '../Api.js'
 import Logotipo from '../assets/logotipo_negativo.svg'
 import { useAuth } from '../components/AuthContext'
@@ -73,6 +74,9 @@ const Entrar = () => {
 
 	return (
 		<Container>
+			<Head>
+				<title>Entrar | Entrego</title>
+			</Head>
 			<div>
 				<Image src={Logotipo} alt='EntreGO' width={128} height={92} />
 			</div>

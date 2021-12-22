@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import Image from 'next/image'
 import AppScreen from '../assets/app_screen.jpg'
 import styled from 'styled-components'
@@ -12,6 +13,11 @@ const Container = styled.div`
 const Sobre = () => {
 	return (
 		<Container>
+			<Head>
+				<title>
+					Conheça o projeto | Entrego | O aplicativo de entrega...
+				</title>
+			</Head>
 			<div className='p-4 container'>
 				<div>
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit.

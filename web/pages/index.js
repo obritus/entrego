@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps'
 
 import boxEntrega from '../components/boxEntrega'
@@ -47,6 +48,11 @@ const Index = () => {
 
 	return (
 		<div className='bg-dark d-flex h-100'>
+			<Head>
+				<title>
+					Entrego | O aplicativo de entrega...
+				</title>
+			</Head>
 			<WrappedMap
 				loadingElement={<div style={{ height: `100%` }} />}
 				containerElement={<div style={{ flex: 1, minHeight: '100%' }} />}
