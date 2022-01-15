@@ -4,7 +4,7 @@ export default {
 		secondary: '#FCCBCA',
 		danger: '#d42252',
 		warning: '#ffc107',
-		info: 'cyan',
+		info: '#05F2F2',
 		success: '#3BAD21',
 		light: '#FFFFFF',
 		dark: '#303030',

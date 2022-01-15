@@ -8,6 +8,7 @@ import {
 	Keyboard,
 	ActivityIndicator,
 	StatusBar,
+	ImageBackground,
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -18,24 +19,24 @@ import { useAuth } from '../components/AuthContext'
 
 const s = StyleSheet.create({
 	loginContainer: {
-		flex: 1,
-		justifyContent: 'center',
+		flex: 3,
+		padding: 50,
+		paddingBottom: 60,
+		justifyContent: 'flex-end',
 	},
 	label: {
 		marginBottom: 15,
 	},
 	input: {
-		fontFamily: 'Ubuntu Regular',
-		color: Tema.colors.dark,
-		backgroundColor: Tema.colors.light,
-		borderRadius: 4,
-		padding: 15,
-	},
-	labelText: {
-		fontFamily: 'Ubuntu Regular',
+		fontFamily: Tema.fonts.regular,
 		color: Tema.colors.light,
-		marginBottom: 5,
-		fontSize: 10,
+		backgroundColor: Tema.colors.primary,
+		borderWidth: 0,
+		borderBottomWidth: 2,
+		padding: 0,
+		paddingBottom: 10,
+		fontSize: 18,
+		borderColor: Tema.colors.light,
 	},
 	messageBox: {
 		padding: 15,
@@ -50,8 +51,8 @@ interface Props {
 }
 
 const Login: React.FC<Props> = ({ navigation }) => {
-	const [email, setEmail] = useState('')
-	const [senha, setSenha] = useState('')
+	const [email, setEmail] = useState('fulaninho@gmail.com')
+	const [senha, setSenha] = useState('123456')
 	const [message, setMessage] = useState('' as string)
 	const [loading, setLoading] = useState(false)
 
@@ -93,13 +94,20 @@ const Login: React.FC<Props> = ({ navigation }) => {
 	}
 
 	return (
-		<View
+		<ImageBackground
 			style={{
 				flex: 1,
-				padding: 50,
-				justifyContent: 'center',
 				backgroundColor: Tema.colors.primary,
+				padding: 0,
+				paddingBottom: 30,
 			}}
+			imageStyle={{
+				top: undefined,
+				width: '100%',
+				height: 92,
+				resizeMode: 'stretch',
+			}}
+			source={require('../assets/bg.png')}
 		>
 			<StatusBar
 				barStyle='light-content'
@@ -113,13 +121,23 @@ const Login: React.FC<Props> = ({ navigation }) => {
 				/>
 			) : (
 				<View style={s.loginContainer}>
+					<View style={{ flex: 1, justifyContent: 'center' }}>
+						<ImageBackground
+							source={require('../assets/logotipo.png')}
+							resizeMode='contain'
+							style={{
+								width: '100%',
+								height: '60%',
+								justifyContent: 'center',
+							}}
+						></ImageBackground>
+					</View>
 					<Text
 						style={{
 							fontSize: 26,
-							fontFamily: 'Ubuntu Light',
+							fontFamily: 'Ubuntu Bold',
 							color: Tema.colors.light,
 							marginBottom: 15,
-							textAlign: 'center',
 						}}
 					>
 						Bem-vindo!
@@ -130,6 +148,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 								style={{
 									fontFamily: 'Ubuntu Regular',
 									color: Tema.colors.dark,
+									fontSize: 18,
 								}}
 							>
 								{message}
@@ -147,7 +166,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 					</View>
 					<View style={s.label}>
 						<TextInput
-							style={s.input}
+							style={{ ...s.input, marginBottom: 20 }}
 							placeholder='Senha'
 							defaultValue='123456'
 							textContentType='password'
@@ -159,7 +178,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 						style={{
 							padding: 10,
 							backgroundColor: Tema.colors.secondary,
-							borderRadius: 4,
+							borderRadius: 50,
 							alignItems: 'center',
 							marginBottom: 15,
 							paddingVertical: 20,
@@ -170,33 +189,45 @@ const Login: React.FC<Props> = ({ navigation }) => {
 							style={{
 								color: Tema.colors.dark,
 								fontFamily: 'Ubuntu Bold',
+								fontSize: 24,
 							}}
 						>
 							Entrar
 						</Text>
 					</TouchableOpacity>
+
 					<TouchableOpacity
 						style={{
 							padding: 10,
-							backgroundColor: Tema.colors.info,
 							borderRadius: 4,
-							alignItems: 'center',
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'flex-end',
 						}}
 						// onPress={handleLogin}
 						onPress={() => navigation.navigate('@RecuperarSenha')}
 					>
 						<Text
 							style={{
-								color: Tema.colors.dark,
-								fontFamily: 'Ubuntu Bold',
+								color: Tema.colors.light,
+								fontFamily: 'Ubuntu Regular',
 							}}
 						>
-							Esqueci a senha
+							Não consegue entrar?{' '}
+						</Text>
+						<Text
+							style={{
+								color: Tema.colors.light,
+								fontFamily: 'Ubuntu Bold',
+								textDecorationLine: 'underline',
+							}}
+						>
+							Recuperar senha
 						</Text>
 					</TouchableOpacity>
 				</View>
 			)}
-		</View>
+		</ImageBackground>
 	)
 }
 
