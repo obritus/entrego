@@ -8,6 +8,7 @@ import {
 	Button,
 	Image,
 	Linking,
+	ImageBackground,
 	Alert,
 } from 'react-native'
 import Tema from '../Styles'
@@ -33,6 +34,19 @@ const s = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 11,
 	},
+	avatarNome: {
+		height: 90,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		overflow: 'hidden',
+		marginBottom: 30,
+	},
+	separador: {
+		width: 300,
+		height: 10,
+	},
+	swipeBox: {},
 })
 
 interface Props {
@@ -63,32 +77,55 @@ interface Props {
 const EntregaDetalhes: React.FC<Props> = ({ navigation, route }) => {
 	return (
 		<ScrollView style={s.Box}>
-			<Text
-				style={{
-					...s.TextBold,
-					fontSize: 24,
-					textAlign: 'center',
-					marginBottom: 15,
-				}}
-			>
-				Detalhes da entrega
-			</Text>
-			<Image
-				source={{
-					uri:
-						route.params.cliente.logotipo ||
-						'https://github.com/google.png',
-				}}
-				style={{
-					width: 100,
-					height: 100,
-					marginBottom: 15,
-					alignSelf: 'center',
-				}}
-			/>
-			<Text style={{ ...s.Text, marginBottom: 30 }}>
-				{route.params.cliente.nome}
-			</Text>
+			<View style={{ ...s.avatarNome }}>
+				<View
+					style={{
+						width: 90,
+						height: 90,
+						backgroundColor: '#999',
+						borderRadius: 20,
+					}}
+				>
+					<ImageBackground
+						source={{
+							uri:
+								route.params.cliente.logotipo ||
+								'https://github.com/google.png',
+						}}
+						style={{
+							width: 90,
+							height: 90,
+						}}
+					/>
+				</View>
+				<View
+					style={{
+						marginLeft: 20,
+						flexDirection: 'column',
+						justifyContent: 'center',
+						height: 150,
+						flex: 1,
+					}}
+				>
+					<Text
+						style={{
+							fontSize: 20,
+							color: Tema.colors.dark,
+							fontFamily: Tema.fonts.bold,
+						}}
+					>
+						{route.params.cliente.nome}
+					</Text>
+					<Text
+						style={{
+							fontFamily: 'Ubuntu Italic',
+							fontSize: 12,
+						}}
+					>
+						{route.params.cliente.nome}
+					</Text>
+				</View>
+			</View>
 			<Text style={s.TextBold}>Endereço da Entrega</Text>
 			<TouchableOpacity
 				style={{

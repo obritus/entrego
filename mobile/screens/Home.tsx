@@ -52,6 +52,7 @@ export default (props: any) => {
 				backgroundColor: Tema.colors.light,
 			}}
 		>
+			<View style={s.ProfileIcon} />
 			<StatusBar
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
@@ -150,5 +151,17 @@ const s = StyleSheet.create({
 	Icon: {
 		width: 40,
 		height: 40,
+	},
+	ProfileIcon: {
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+		borderWidth: 1,
+		borderColor: Tema.colors.primary,
+		backgroundColor: Tema.colors.primary,
+		position: 'absolute',
+		top: 30,
+		right: 30,
+		zIndex: 1100,
 	},
 })

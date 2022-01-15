@@ -37,7 +37,7 @@ const Entregas: React.FC = () => {
 						name='Detalhes'
 						component={EntregaDetalhes}
 						options={{
-							headerShown: false,
+							headerShown: true,
 						}}
 					/>
 				</Stack.Navigator>

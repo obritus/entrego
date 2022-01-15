@@ -118,6 +118,7 @@ const Routes: React.FC<Props> = () => {
 								</Text>
 							</View>
 						),
+						header: () => false,
 					}}
 				/>
 

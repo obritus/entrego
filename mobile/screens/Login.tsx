@@ -141,6 +141,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 							style={s.input}
 							placeholder='Email'
 							textContentType='emailAddress'
+							defaultValue='fulaninho@gmail.com'
 							onChangeText={(text) => setEmail(text)}
 						/>
 					</View>
@@ -148,6 +149,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 						<TextInput
 							style={s.input}
 							placeholder='Senha'
+							defaultValue='123456'
 							textContentType='password'
 							secureTextEntry={true}
 							onChangeText={(text) => setSenha(text)}
