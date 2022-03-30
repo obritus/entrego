@@ -10,16 +10,9 @@ import Redirect from 'next'
 
 const Container = styled.div`
 	display: flex;
-	height: 100%;
+	min-height: calc(100vh - 130px);
+	background: red;
 	flex-direction: row;
-	div {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-	}
 	form {
 		button {
 			font-weight: 700;
@@ -77,10 +70,10 @@ const Entrar = () => {
 			<Head>
 				<title>Entrar | Entrego</title>
 			</Head>
-			<div>
+			<div className='w-100 w-md-50 p-4'>
 				<Image src={Logotipo} alt='EntreGO' width={128} height={92} />
 			</div>
-			<div className='bg-primary text-light'>
+			<div className='bg-primary text-light w-100 w-md-50 p-5'>
 				<form
 					onSubmit={formHandler}
 					className='d-flex flex-column align-items-center'

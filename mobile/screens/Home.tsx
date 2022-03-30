@@ -5,6 +5,7 @@ import {
 	StatusBar,
 	StyleSheet,
 	TouchableOpacity,
+	ImageBackground,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
@@ -52,10 +53,13 @@ export default (props: any) => {
 				backgroundColor: Tema.colors.light,
 			}}
 		>
-			<View style={s.ProfileIcon} />
 			<StatusBar
 				barStyle='light-content'
 				backgroundColor={Tema.colors.primary}
+			/>
+			<ImageBackground
+				source={require('../assets/bg.png')}
+				style={s.ProfileIcon}
 			/>
 			<MapView
 				style={{
@@ -153,13 +157,14 @@ const s = StyleSheet.create({
 		height: 40,
 	},
 	ProfileIcon: {
-		width: 60,
-		height: 60,
+		width: 64,
+		height: 64,
 		borderRadius: 30,
 		borderWidth: 1,
 		borderColor: Tema.colors.primary,
 		backgroundColor: Tema.colors.primary,
 		position: 'absolute',
+		overflow: 'hidden',
 		top: 30,
 		right: 30,
 		zIndex: 1100,

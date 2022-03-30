@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
 	baseURL: process.env.NODE_ENV === 'development'
-	? 'http://192.168.1.7:3005/'
+	? 'http://192.168.1.75:3005/'
 	: `https://api-ux3p6ca4ia-rj.a.run.app/`
 })
 
@@ -14,8 +14,13 @@ const api = axios.create({
 // 	return config
 // })
 
+interface Login {
+	email: string
+	senha: string
+}
+
 const Api = {
-	Login: (data: {}) => api.post('login', data),
+	Login: (data: Login) => api.post('login', data),
 	Logout: (data: {}) => api.post('logout', data),
 	
 	GetEntregador: (_id:string) => api.get(`entregadores/${_id}`),
