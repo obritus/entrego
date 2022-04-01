@@ -1,5 +1,12 @@
 import React from 'react'
-import { View, Text, Image, ActivityIndicator, StyleSheet } from 'react-native'
+import {
+	View,
+	Text,
+	Image,
+	SafeAreaView,
+	ActivityIndicator,
+	StyleSheet,
+} from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import Tema from './Styles'
@@ -30,9 +37,9 @@ const Routes: React.FC<Props> = () => {
 
 	if (loading) {
 		return (
-			<View style={s.container}>
+			<SafeAreaView style={s.container}>
 				<ActivityIndicator size='large' color={Tema.colors.primary} />
-			</View>
+			</SafeAreaView>
 		)
 	}
 
@@ -61,6 +68,7 @@ const Routes: React.FC<Props> = () => {
 					component={Home}
 					options={{
 						header: () => false,
+
 						tabBarIcon: ({ focused }) => (
 							<Image
 								source={require('./assets/home_icon.png')}
@@ -79,7 +87,7 @@ const Routes: React.FC<Props> = () => {
 					options={{
 						tabBarIcon: ({ focused }) => (
 							<Image
-								source={require('./assets/entregas_icon.png')}
+								source={require(`./assets/entregas_icon.png`)}
 								style={{
 									width: 24,
 									height: 24,

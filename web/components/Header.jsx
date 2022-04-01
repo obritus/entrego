@@ -34,9 +34,9 @@ const HeaderNav = styled.nav`
 `
 
 const Header = (props) => (
-	<Container className={``}>
+	<Container>
 		<div className='container justify-content-center'>
-			<HeaderNav className=''>
+			<HeaderNav>
 				<Link href='/' passHref={true}>
 					Mapa
 				</Link>

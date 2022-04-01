@@ -42,10 +42,6 @@ const Map = () => {
 const WrappedMap = withScriptjs(withGoogleMap(Map))
 
 const Index = () => {
-	React.useEffect(() => {
-		console.log(window.innerHeight)
-	}, [])
-
 	return (
 		<div className='bg-dark d-flex h-100'>
 			<Head>

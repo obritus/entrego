@@ -1,12 +1,7 @@
 import React, { useContext } from 'react'
-import {
-	View,
-	Text,
-	FlatList,
-	ActivityIndicator,
-	StatusBar,
-} from 'react-native'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import Api from '../Api'
+import { BarraDeStatus } from '../App'
 import Tema from '../Styles'
 
 import EntregaCard from './EntregaCard'
@@ -31,10 +26,6 @@ const EntregasList: React.FC<Props> = (props: any) => {
 		<View style={{ flex: 1, justifyContent: 'center' }}>
 			{entregas.length > 0 ? (
 				<View style={{ flex: 1 }}>
-					<StatusBar
-						barStyle='light-content'
-						backgroundColor={Tema.colors.primary}
-					/>
 					<FlatList
 						style={{
 							flex: 1,

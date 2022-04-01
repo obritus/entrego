@@ -1,11 +1,18 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { StatusBar, StatusBarProps } from 'react-native'
+import { NavigationContainer, useIsFocused } from '@react-navigation/native'
 import { AuthProvider } from './components/AuthContext'
 import Routes from './Routes'
+import Tema from './Styles'
 
+export const BarraDeStatus = (props: StatusBarProps) => {
+	const isFocused = useIsFocused()
+	return isFocused ? <StatusBar {...props} /> : null
+}
 const App: React.FC = () => {
 	return (
 		<AuthProvider>
+			<StatusBar barStyle='light-content' backgroundColor={'#000'} />
 			<NavigationContainer>
 				<Routes />
 			</NavigationContainer>

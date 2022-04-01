@@ -1,14 +1,15 @@
 import React from 'react'
 import {
-	View,
 	Text,
-	StatusBar,
+	View,
+	SafeAreaView,
 	StyleSheet,
 	TouchableOpacity,
 	ImageBackground,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
+import { BarraDeStatus } from '../App'
 import { useAuth } from '../components/AuthContext'
 
 import Tema from '../Styles'
@@ -35,7 +36,7 @@ interface Entregas {
 
 export default (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
-	const { logOut } = useAuth()
+	const { logOut, user } = useAuth()
 
 	React.useEffect(() => {
 		const getEntregas = async () => {
@@ -47,18 +48,16 @@ export default (props: any) => {
 	}, [setEntregas])
 
 	return (
-		<View
+		<SafeAreaView
 			style={{
 				flex: 1,
 				backgroundColor: Tema.colors.light,
 			}}
 		>
-			<StatusBar
-				barStyle='light-content'
-				backgroundColor={Tema.colors.primary}
-			/>
 			<ImageBackground
-				source={require('../assets/bg.png')}
+				source={{
+					uri: user?.avatar?.location,
+				}}
 				style={s.ProfileIcon}
 			/>
 			<MapView
@@ -130,7 +129,7 @@ export default (props: any) => {
 						</Marker>
 					))}
 			</MapView>
-		</View>
+		</SafeAreaView>
 	)
 }
 
@@ -159,9 +158,7 @@ const s = StyleSheet.create({
 	ProfileIcon: {
 		width: 64,
 		height: 64,
-		borderRadius: 30,
-		borderWidth: 1,
-		borderColor: Tema.colors.primary,
+		borderRadius: 32,
 		backgroundColor: Tema.colors.primary,
 		position: 'absolute',
 		overflow: 'hidden',

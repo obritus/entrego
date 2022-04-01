@@ -7,7 +7,6 @@ import {
 	StyleSheet,
 	Keyboard,
 	ActivityIndicator,
-	StatusBar,
 	ImageBackground,
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -16,6 +15,7 @@ import Tema from '../Styles'
 import Api from '../Api'
 
 import { useAuth } from '../components/AuthContext'
+import { BarraDeStatus } from '../App'
 
 const s = StyleSheet.create({
 	loginContainer: {
@@ -109,10 +109,6 @@ const Login: React.FC<Props> = ({ navigation }) => {
 			}}
 			source={require('../assets/bg.png')}
 		>
-			<StatusBar
-				barStyle='light-content'
-				backgroundColor={Tema.colors.primary}
-			/>
 			{loading ? (
 				<ActivityIndicator
 					animating={loading}

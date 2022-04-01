@@ -3,20 +3,12 @@ import {
 	State,
 	GestureHandlerRootView,
 } from 'react-native-gesture-handler'
-import React, { useEffect } from 'react'
-import {
-	View,
-	Text,
-	StatusBar,
-	ImageBackground,
-	StyleSheet,
-	Image,
-	Animated,
-} from 'react-native'
-import Api from '../Api'
+import * as React from 'react'
+import { View, Text, ImageBackground, StyleSheet, Animated } from 'react-native'
 import { useAuth } from '../components/AuthContext'
 import Tema from '../Styles'
 import EditProfile from '../components/EditProfile'
+import { BarraDeStatus } from '../App'
 
 const styles = StyleSheet.create({
 	header: {
@@ -108,10 +100,6 @@ const Perfil: React.FC = () => {
 				borderBottomLeftRadius: 15,
 			}}
 		>
-			<StatusBar
-				barStyle='default'
-				backgroundColor={Tema.colors.primary}
-			/>
 			<View style={styles.box}>
 				<EditProfile translateY={translateY} />
 				<Animated.View

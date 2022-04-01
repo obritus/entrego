@@ -13,6 +13,7 @@ import {
 } from 'react-native'
 import Tema from '../Styles'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { BarraDeStatus } from '../App'
 
 const s = StyleSheet.create({
 	Box: {
@@ -166,7 +167,7 @@ const EntregaDetalhes: React.FC<Props> = ({ navigation, route }) => {
 				}}
 				onPress={() => {
 					Linking.openURL(
-						`https://api.whatsapp.com/send?phone=55${route.params.contato.telefone}`
+						`https://wa.me/55${route.params.contato.telefone}`
 					)
 				}}
 			>

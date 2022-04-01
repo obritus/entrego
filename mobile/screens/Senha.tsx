@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet, StatusBar } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { BarraDeStatus } from '../App'
 import Tema from '../Styles'
 
 const s = StyleSheet.create({
@@ -15,9 +16,10 @@ const s = StyleSheet.create({
 })
 export default () => {
 	return (
-		<StatusBar
-			barStyle='dark-content'
-			backgroundColor={Tema.colors.secondary}
+		<BarraDeStatus
+			barStyle='light-content'
+			backgroundColor='#000'
+			translucent={false}
 		/>
 	)
 }
