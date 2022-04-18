@@ -2,14 +2,14 @@ import React from 'react'
 import {
 	Text,
 	View,
-	SafeAreaView,
+	StatusBar,
 	StyleSheet,
+	SafeAreaView,
 	TouchableOpacity,
 	ImageBackground,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
-import { BarraDeStatus } from '../App'
 import { useAuth } from '../components/AuthContext'
 
 import Tema from '../Styles'
@@ -54,6 +54,10 @@ export default (props: any) => {
 				backgroundColor: Tema.colors.light,
 			}}
 		>
+			<StatusBar
+				barStyle={'dark-content'}
+				backgroundColor={Tema.colors.light}
+			/>
 			<View
 				style={{
 					width: 64,
@@ -69,7 +73,7 @@ export default (props: any) => {
 			>
 				<TouchableOpacity
 					onPress={() => props.navigation.navigate('Perfil')}
-					style={{ width: 64, height: 64, position: 'relative' }}
+					style={{ width: 64, height: 64 }}
 				>
 					<ImageBackground
 						source={{
@@ -81,11 +85,7 @@ export default (props: any) => {
 			</View>
 
 			<MapView
-				style={{
-					flex: 1,
-					borderBottomRightRadius: 15,
-					borderBottomLeftRadius: 15,
-				}}
+				style={{ flex: 1 }}
 				provider={PROVIDER_GOOGLE}
 				region={{
 					latitude: -21.572084,

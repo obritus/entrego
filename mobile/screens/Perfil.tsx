@@ -4,11 +4,19 @@ import {
 	GestureHandlerRootView,
 } from 'react-native-gesture-handler'
 import * as React from 'react'
-import { View, Text, ImageBackground, StyleSheet, Animated } from 'react-native'
+import {
+	View,
+	Text,
+	ImageBackground,
+	StyleSheet,
+	Animated,
+	StatusBar,
+} from 'react-native'
 import { useAuth } from '../components/AuthContext'
 import Tema from '../Styles'
 import EditProfile from '../components/EditProfile'
 import { BarraDeStatus } from '../App'
+import { DarkTheme } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
 	header: {
@@ -89,17 +97,18 @@ const Perfil: React.FC = () => {
 		<GestureHandlerRootView
 			onLayout={(event) => {
 				setInputRange(event.nativeEvent.layout.height / 2)
-				console.log(inputRange)
 			}}
 			style={{
 				flex: 1,
 				justifyContent: 'center',
 				overflow: 'hidden',
 				backgroundColor: Tema.colors.primary,
-				borderBottomRightRadius: 15,
-				borderBottomLeftRadius: 15,
 			}}
 		>
+			<StatusBar
+				barStyle={'light-content'}
+				backgroundColor={Tema.colors.primary}
+			/>
 			<View style={styles.box}>
 				<EditProfile translateY={translateY} />
 				<Animated.View
