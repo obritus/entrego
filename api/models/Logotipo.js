@@ -6,22 +6,16 @@ const Image = new mongoose.Schema(
 		key: { type: String, required: true, unique: true },
 		width: { type: Number, required: true },
 		height: { type: Number, required: true },
-		entregador: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'entregadores',
-			trim: true,
-			unique: true,
-			required: false,
-		},
+		// ID DA EMPRESA
 		cliente: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'clientes',
 			trim: true,
 			unique: true,
-			required: false,
-		},
+			required: true,
+		}
 	},
 	{ timestamps: true }
 )
 
-export default mongoose.model('images', Image)
+export default mongoose.model('logotipos', Image)

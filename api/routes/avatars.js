@@ -7,19 +7,19 @@ import { resolve } from 'path'
 import { unlink } from 'fs'
 
 import { Autorize, UploadToS3, Upload } from '../functions.js'
-import Image from '../models/Image.js' //ESTRUTURA DAS IMAGENS NO DB
+import Avatar from '../models/Avatar.js' //ESTRUTURA DOS AVATARES
 
 const s3 = new aws.S3()
 
 export default express.Router()
 	.get("/", (req, res) => {
-		Image.find()
+		Avatar.find()
 			.then((data) => res.json(data))
 			.catch((err) => res.json({ err }))
 	})
 
-	.get("/:id", (req, res) => {
-		Image.find({ empreendimento: req.params.id })
+	.get('/:id', (req, res) => {
+		Avatar.find({ _id: req.params._id })
 			.select({ createdAt: false, updatedAt: false })
 			.then((data) => res.json(data))
 			.catch((err) => res.json({ err }))
@@ -30,26 +30,26 @@ export default express.Router()
 
 	.post("/", multer(Upload).single("image"), async (req, res) => {
 		const _id = req.body._id // ID DO USUARIO OU EMPRESA
-		const model = req.body.model // MODELO DO USUARIO OU EMPRESA
+		const type = req.body.type // MODELO DO USUARIO OU EMPRESA
 
-		const ExcluirImagemEnviada = () => {
+		const ExcluirAvatarmEnviada = () => {
 			// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
 			unlink(req.file.path, (err) => {
 				if (err) throw err
 			})
 		}
 
-		if (_id != null && req.file.originalname != null && model != null) {
+		if (_id != null && req.file.originalname != null && type != null) {
 			const NewFile = resolve("tmp", "s3", req.file.filename)
 			sharp(req.file.path)
-				.jpeg({ quality: 60 })
+				.jpeg({ quality: 80 })
 				.resize(512)
 				.toFile(NewFile)
 				.then((info) => {
 					// MANDA O ARQUIVO PARA O S3
 					UploadToS3(req.file.filename, NewFile).then((data) => {
 						// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
-						ExcluirImagemEnviada()
+						ExcluirAvatarmEnviada()
 
 						unlink(NewFile, (err) => {
 							if (err) throw err
@@ -60,12 +60,13 @@ export default express.Router()
 							key: req.file.filename,
 							width: info.width,
 							height: info.height,
-							[model]: _id, // DEFINE QUAL MODELO ESTA IMAGEM É
+							user: _id,
+							type: type // CLIENTE OU ENTREGADOR
 						}
 
 						console.log('Uploaded do images:', Uploaded)
 
-						new Image(Uploaded)
+						new Avatar(Uploaded)
 							.save()
 							.then((data) => res.json(data))
 							.catch(error => res.json({ error }))
@@ -73,13 +74,13 @@ export default express.Router()
 				})
 				.catch((err) => {
 					// EXCLUIR O ARQUIVO TEMPORÁRIO
-					ExcluirImagemEnviada()
+					ExcluirAvatarmEnviada()
 					console.error(err)
 					res.json({ err })
 				})
 		} else {
 			// EXCLUIR O ARQUIVO TEMPORÁRIO
-			ExcluirImagemEnviada()
+			ExcluirAvatarmEnviada()
 
 			res.json({ msg: "O usuário precisa ser setado." })
 		}
@@ -91,7 +92,7 @@ export default express.Router()
 	.put("/:id", multer(Upload).single("image"), async (req, res) => {
 		const _id = req.params.id
 
-		const ExcluirImagemEnviada = () => {
+		const ExcluirAvatarmEnviada = () => {
 			// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
 			unlink(req.file.path, (err) => {
 				if (err) throw err
@@ -101,14 +102,14 @@ export default express.Router()
 		if (_id != null && req.file.originalname != null) {
 			const NewFile = resolve("tmp", "s3", req.file.filename)
 			sharp(req.file.path)
-				.jpeg({ quality: 60 })
+				.jpeg({ quality: 80 })
 				.resize(512)
 				.toFile(NewFile)
 				.then((info) => {
 					// MANDA O ARQUIVO PARA O S3
 					UploadToS3(req.file.filename, NewFile).then((data) => {
 						// EXCLUIR O ARQUIVO TEMPORÁRIO DEPOIS DE MOVER PRA PASTA
-						ExcluirImagemEnviada()
+						ExcluirAvatarmEnviada()
 
 						unlink(NewFile, (err) => {
 							if (err) throw err
@@ -121,27 +122,27 @@ export default express.Router()
 							height: info.height,
 						}
 
-						Image.updateOne({ _id }, Uploaded)
+						Avatar.updateOne({ _id }, Uploaded)
 							.then((data) => res.json(data))
 							.catch(error => res.json({ error }))
 					})
 				})
 				.catch((err) => {
 					// EXCLUIR O ARQUIVO TEMPORÁRIO
-					ExcluirImagemEnviada()
+					ExcluirAvatarmEnviada()
 
 					res.json({ err })
 				})
 		} else {
 			// EXCLUIR O ARQUIVO TEMPORÁRIO
-			ExcluirImagemEnviada()
+			ExcluirAvatarmEnviada()
 
 			res.json({ msg: "A imagem precisa ser setada." })
 		}
 	})
 
 	.delete("/:id", async (req, res) => {
-		Image
+		Avatar
 			.findOneAndDelete({ _id: req.params.id })
 			.then(data => {
 				s3.deleteObject({
@@ -151,6 +152,6 @@ export default express.Router()
 					if (err) console.error(err, err.stack)
 				})
 			})
-			.then(() => res.json({ msg: "Imagem excluída." }))
+			.then(() => res.json({ msg: "Avatarm excluída." }))
 			.catch((err) => res.json({ err }))
 	})

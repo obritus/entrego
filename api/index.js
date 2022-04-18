@@ -5,7 +5,8 @@ import cors from 'cors'
 import morgan from 'morgan'
 
 import api from './routes/index.js'
-import images from './routes/images.js'
+import avatars from './routes/avatars.js'
+import logotipos from './routes/logotipos.js'
 import entregadores from './routes/entregadores.js'
 import clientes from './routes/clientes.js'
 import login from './routes/login.js'
@@ -19,7 +20,7 @@ express()
 
 	// ROTAS
 	.use('/', api)
-	.use('/images', images)
+	.use('/avatars', avatars)
 	.use('/entregadores', entregadores)
 	.use('/clientes', clientes)
 	.use('/login', login)

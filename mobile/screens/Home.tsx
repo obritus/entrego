@@ -54,12 +54,32 @@ export default (props: any) => {
 				backgroundColor: Tema.colors.light,
 			}}
 		>
-			<ImageBackground
-				source={{
-					uri: user?.avatar?.location,
+			<View
+				style={{
+					width: 64,
+					height: 64,
+					borderRadius: 32,
+					backgroundColor: Tema.colors.primary,
+					position: 'absolute',
+					overflow: 'hidden',
+					top: 30,
+					right: 30,
+					zIndex: 1100,
 				}}
-				style={s.ProfileIcon}
-			/>
+			>
+				<TouchableOpacity
+					onPress={() => props.navigation.navigate('Perfil')}
+					style={{ width: 64, height: 64, position: 'relative' }}
+				>
+					<ImageBackground
+						source={{
+							uri: user?.avatar?.location,
+						}}
+						style={s.ProfileIcon}
+					/>
+				</TouchableOpacity>
+			</View>
+
 			<MapView
 				style={{
 					flex: 1,
@@ -155,15 +175,5 @@ const s = StyleSheet.create({
 		width: 40,
 		height: 40,
 	},
-	ProfileIcon: {
-		width: 64,
-		height: 64,
-		borderRadius: 32,
-		backgroundColor: Tema.colors.primary,
-		position: 'absolute',
-		overflow: 'hidden',
-		top: 30,
-		right: 30,
-		zIndex: 1100,
-	},
+	ProfileIcon: { width: 64, height: 64 },
 })
