@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image'
 import Head from 'next/head'
-import Api from '../Api.js'
+import Api from '../Api.ts'
 import Logotipo from '../assets/logotipo_negativo.svg'
 import { useAuth } from '../components/AuthContext'
 import { setCookie } from 'nookies'
@@ -67,7 +67,7 @@ const Entrar = () => {
 	return (
 		<Container>
 			<Head>
-				<title>Entrar | Entrego</title>
+				<title>Entrar &bull; Entrego</title>
 			</Head>
 			<div className='w-100 w-md-50 d-flex align-items-center justify-content-center'>
 				<Image src={Logotipo} alt='EntreGO' width={128} height={92} />
@@ -86,7 +86,7 @@ const Entrar = () => {
 						className='lead text-center my-3'
 						style={{ fontSize: '2em' }}
 					>
-						Bem-vindo de volta!
+						Bem-vindo de volta! {process.env.TESTE}
 					</h1>
 					<p className='p-0 m-0 mb-2 text-left w-100'>Email</p>
 					<input

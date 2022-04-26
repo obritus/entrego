@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+interface Login {
+	email: string
+	password: string
+}
+
 const api = axios.create({
 	baseURL: process.env.NODE_ENV === 'development'
 		? 'http://localhost:3005/'
@@ -7,7 +12,7 @@ const api = axios.create({
 })
 
 const Api = {
-	login: data => api.post('login?model=cliente', data),
+	login: (data: Login) => api.post('login?model=cliente', data),
 	logout: () => api.post('logout'),
 }
 

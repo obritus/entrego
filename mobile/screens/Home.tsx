@@ -7,6 +7,7 @@ import {
 	SafeAreaView,
 	TouchableOpacity,
 	ImageBackground,
+	PermissionsAndroid,
 } from 'react-native'
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
@@ -32,6 +33,29 @@ interface Entregas {
 		endereco: string
 		observacoes?: string
 	}
+}
+
+const ObterPermissao = async () => {
+	// try {
+	// 	const granted = await PermissionsAndroid.request(
+	// 		PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+	// 		{
+	// 			title: 'Permissão de localização',
+	// 			message:
+	// 				'Precisamos de sua permissão para acessar sua localização',
+	// 			buttonNeutral: 'Ask Me Later',
+	// 			buttonNegative: 'Cancel',
+	// 			buttonPositive: 'OK',
+	// 		}
+	// 	)
+	// 	if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+	// 		console.log('You can use the camera')
+	// 	} else {
+	// 		console.log('Camera permission denied')
+	// 	}
+	// } catch (err) {
+	// 	console.warn(err)
+	// }
 }
 
 export default (props: any) => {
@@ -80,6 +104,33 @@ export default (props: any) => {
 							uri: user?.avatar?.location,
 						}}
 						style={s.ProfileIcon}
+					/>
+				</TouchableOpacity>
+			</View>
+
+			<View style={s.EntregasIcon}>
+				<TouchableOpacity
+					// onPress={() => props.navigation.navigate('Entregas')}
+					onPress={ObterPermissao}
+					style={{
+						width: 100,
+						height: 100,
+						borderRadius: 50,
+					}}
+				>
+					<ImageBackground
+						source={require('../assets/entregas_icon.png')}
+						style={{
+							width: '100%',
+							height: 100,
+							borderRadius: 50,
+						}}
+						imageStyle={{
+							width: 42,
+							height: 42,
+							top: 29,
+							left: 29,
+						}}
 					/>
 				</TouchableOpacity>
 			</View>
@@ -155,7 +206,7 @@ export default (props: any) => {
 
 const s = StyleSheet.create({
 	Marker: {
-		padding: 10,
+		padding: 20,
 		width: 260,
 	},
 	Title: {
@@ -176,4 +227,17 @@ const s = StyleSheet.create({
 		height: 40,
 	},
 	ProfileIcon: { width: 64, height: 64 },
+	EntregasIcon: {
+		width: 100,
+		height: 100,
+		borderRadius: 50,
+		backgroundColor: Tema.colors.light,
+		position: 'absolute',
+		overflow: 'hidden',
+		bottom: 30,
+		alignSelf: 'center',
+		zIndex: 1100,
+		borderColor: '#00000015',
+		borderWidth: 2,
+	},
 })

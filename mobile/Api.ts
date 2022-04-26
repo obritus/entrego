@@ -1,18 +1,19 @@
 import axios from 'axios'
+import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 
 const api = axios.create({
 	baseURL: process.env.NODE_ENV === 'development'
-	? 'http://192.168.1.75:3005/'
+	? 'http://192.168.1.2:3005/'
 	: `https://api-ux3p6ca4ia-rj.a.run.app/`
 })
 
-// api.interceptors.request.use(async (config:any) => {
-// 	const token = sessionStorage.getItem('token')
-// 	if (token) {
-// 		config.headers.Authorization = `Bearer ${token}`
-// 	}
-// 	return config
-// })
+api.interceptors.request.use(async (config:any) => {
+	const token = useAsyncStorage('token')
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`
+	}
+	return config
+})
 
 interface Login {
 	email: string

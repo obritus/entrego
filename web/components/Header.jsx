@@ -33,24 +33,27 @@ const HeaderNav = styled.nav`
 	}
 `
 
-const Header = (props) => (
-	<Container>
-		<div className='container justify-content-center'>
-			<HeaderNav>
-				<Link href='/' passHref={true}>
-					Mapa
-				</Link>
-				<div className='vr'></div>
-				<Link href='/conheca'>Conheça</Link>
-				<div className='vr'></div>
-				{props.logged ? (
-					<Link href='/painel'>Painel</Link>
-				) : (
-					<Link href='/entrar'>Entrar</Link>
-				)}
-			</HeaderNav>
-		</div>
-	</Container>
-)
+const Header = (props) => {
+	// const { logged } = React.useContext()
+	return (
+		<Container>
+			<div className='container justify-content-center'>
+				<HeaderNav>
+					<Link href='/' passHref={true}>
+						Mapa
+					</Link>
+					<div className='vr'></div>
+					<Link href='/conheca'>Conheça</Link>
+					<div className='vr'></div>
+					{props.logged ? (
+						<Link href='/painel'>Painel</Link>
+					) : (
+						<Link href='/entrar'>Entrar</Link>
+					)}
+				</HeaderNav>
+			</div>
+		</Container>
+	)
+}
 
 export default Header

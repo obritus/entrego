@@ -12,7 +12,6 @@ export const BarraDeStatus = (props: StatusBarProps) => {
 const App: React.FC = () => {
 	return (
 		<AuthProvider>
-			<StatusBar barStyle='light-content' backgroundColor={'#000'} />
 			<NavigationContainer>
 				<Routes />
 			</NavigationContainer>
