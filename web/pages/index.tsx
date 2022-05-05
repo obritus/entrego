@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 
 import boxEntrega from '../components/boxEntrega'
 
@@ -33,11 +33,18 @@ const Map = () => {
 			onLoad={onLoad}
 			onUnmount={onUnmount}
 			mapContainerStyle={{
-				height: 'calc(100vh - 130px)',
 				width: '100%',
+				height: 'calc(100vh - 130px)',
 			}}
 		>
-			<></>
+			<Marker
+				position={{
+					lat: -21.5355,
+					lng: -45.45152,
+				}}
+				draggable={true}
+				label='teste teste teste'
+			/>
 		</GoogleMap>
 	) : (
 		<></>

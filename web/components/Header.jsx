@@ -43,6 +43,8 @@ const Header = (props) => {
 						Mapa
 					</Link>
 					<div className='vr'></div>
+					<Link href='/entregas'>Entregas</Link>
+					<div className='vr'></div>
 					<Link href='/conheca'>Conheça</Link>
 					<div className='vr'></div>
 					{props.logged ? (
