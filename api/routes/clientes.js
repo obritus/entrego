@@ -9,7 +9,6 @@ export default express.Router()
 	.get('/', async (req, res) => {
 		try {
 			const Data = await Model.find({})
-
 			res.json(Data)
 		} catch (error) {
 			console.error(error)

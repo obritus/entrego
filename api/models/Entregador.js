@@ -29,6 +29,9 @@ export default mongoose.model('entregadores',
 				type: Number,
 				required: true,
 				default: 0
+			},
+			region: {
+				type: String,
 			}
 		},
 		{ timestamps: true }

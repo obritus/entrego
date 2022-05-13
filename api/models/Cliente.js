@@ -36,6 +36,9 @@ export default mongoose.model('clientes',
 			logotipo: {
 				type: String,
 				default: ''
+			},
+			region: {
+				type: String,
 			}
 		},
 		{ timestamps: true }

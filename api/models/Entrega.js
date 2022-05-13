@@ -41,6 +41,9 @@ export default mongoose.model('entregas',
 					type: Number,
 					required: true
 				},
+				obs: {
+					type: String,
+				}
 			},
 			status: {
 				type: Number,
