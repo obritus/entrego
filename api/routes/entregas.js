@@ -10,13 +10,9 @@ export default express.Router()
 
 		try {
 			const Data = await Model
-				.aggregate()
-				.lookup({
-					from: 'clientes',
-					localField: '_id',
-					foreignField: 'cliente',
-				})
-				.unwind({ path: '$cliente', preserveNullAndEmptyArrays: true })
+				.find()
+				.lean()
+				.populate('cliente')
 
 			res.json(Data)
 		} catch (error) {
@@ -121,11 +117,10 @@ export default express.Router()
 		try {
 			const UniqueId = new Clerobee(10)
 			req.body.id = 'ENT' + UniqueId.generate().toUpperCase()
-			req.body.status = 1
+			req.body.status = 0
 			req.body.price = parseFloat(req.body.price)
 			req.body.contato.latitude = parseFloat(req.body.contato.latitude)
 			req.body.contato.longitude = parseFloat(req.body.contato.longitude)
-			req.body.contato.endereco = req.body.contato.endereco.toUpperCase()
 
 			new Model(req.body).save()
 				.then(data => res.json(data))
@@ -138,7 +133,7 @@ export default express.Router()
 	// ATUALIZAR ENTREGA
 	.patch('/:id', async (req, res) => {
 		try {
-			const Data = await Model.updateOne(req.params.id, req.body)
+			const Data = await Model.updateOne({ _id: req.params.id }, req.body)
 			res.json(Data)
 		}
 		catch (error) {
@@ -153,4 +148,17 @@ export default express.Router()
 
 	.get('/efetuadas', (req, res) => {
 		res.send('Entregas efetuadas: 10')
+	})
+
+	.delete('/:id', async (req, res) => {
+		try {
+			const _id = req.params.id
+			const Data = await Model.deleteOne({ _id })
+
+			res.status(200).json(Data)
+		} catch (error) {
+			console.error(error)
+
+			res.status().json(error)
+		}
 	})

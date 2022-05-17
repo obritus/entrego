@@ -14,6 +14,7 @@ import {
 import Tema from '../Styles'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { BarraDeStatus } from '../App'
+import { Entregas } from '../screens/Home'
 
 const s = StyleSheet.create({
 	Box: {
@@ -53,25 +54,7 @@ const s = StyleSheet.create({
 interface Props {
 	navigation: StackNavigationProp<any, any>
 	route: {
-		params: {
-			id: number
-			price: number
-			status: number
-			cliente: {
-				nome: string
-				logotipo: string | ''
-				latitude: number
-				longitude: number
-			}
-			contato: {
-				nome: string
-				telefone: number
-				latitude: number
-				longitude: number
-				endereco: string
-				observacoes?: string
-			}
-		}
+		params: Entregas
 	}
 }
 
@@ -181,7 +164,7 @@ const EntregaDetalhes: React.FC<Props> = ({ navigation, route }) => {
 			</TouchableOpacity>
 			<Text style={s.TextBold}>Observações</Text>
 			<Text style={{ ...s.Text, marginBottom: 30 }}>
-				{route.params.contato.observacoes}
+				{route.params.contato.obs}
 			</Text>
 			<Button title='Entregar' color={Tema.colors.primary} />
 			<Button

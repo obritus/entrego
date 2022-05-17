@@ -18,7 +18,7 @@ export default mongoose.model('entregadores',
 				required: true
 			},
 			cpf: {
-				type: Number,
+				type: String,
 				unique: true
 			},
 			cnh: {

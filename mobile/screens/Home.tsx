@@ -15,15 +15,17 @@ import { useAuth } from '../components/AuthContext'
 
 import Tema from '../Styles'
 
-interface Entregas {
-	id: number
+export interface Entregas {
+	id: string
 	price: number
-	status: number
 	cliente: {
-		nome: string
+		nome: string | ''
 		logotipo: string | ''
-		latitude: number
-		longitude: number
+		endereco: {
+			latitude: number
+			longitude: number
+			logradouro: string
+		}
 	}
 	contato: {
 		nome: string
@@ -31,31 +33,32 @@ interface Entregas {
 		latitude: number
 		longitude: number
 		endereco: string
-		observacoes?: string
+		obs?: string
 	}
+	status: number
 }
 
 const ObterPermissao = async () => {
-	// try {
-	// 	const granted = await PermissionsAndroid.request(
-	// 		PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-	// 		{
-	// 			title: 'Permissão de localização',
-	// 			message:
-	// 				'Precisamos de sua permissão para acessar sua localização',
-	// 			buttonNeutral: 'Ask Me Later',
-	// 			buttonNegative: 'Cancel',
-	// 			buttonPositive: 'OK',
-	// 		}
-	// 	)
-	// 	if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-	// 		console.log('You can use the camera')
-	// 	} else {
-	// 		console.log('Camera permission denied')
-	// 	}
-	// } catch (err) {
-	// 	console.warn(err)
-	// }
+	try {
+		const granted = await PermissionsAndroid.request(
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+			{
+				title: 'Permissão de localização',
+				message:
+					'Precisamos de sua permissão para acessar sua localização',
+				buttonNeutral: 'Pergunte-me depois',
+				buttonNegative: 'Cancelar',
+				buttonPositive: 'OK',
+			}
+		)
+		if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+			console.log('Você pode usar a localização')
+		} else {
+			console.log('A permissão de uso da localização foi negada')
+		}
+	} catch (err) {
+		console.warn(err)
+	}
 }
 
 export default (props: any) => {
@@ -63,12 +66,13 @@ export default (props: any) => {
 	const { logOut, user } = useAuth()
 
 	React.useEffect(() => {
-		const getEntregas = async () => {
-			const Response = await Api.GetEntregas()
-			const Data = Response.data
-			setEntregas(Data)
-		}
-		getEntregas()
+		Api.GetEntregas()
+			.then((response) => {
+				setEntregas(response.data)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}, [setEntregas])
 
 	return (
@@ -110,8 +114,7 @@ export default (props: any) => {
 
 			<View style={s.EntregasIcon}>
 				<TouchableOpacity
-					// onPress={() => props.navigation.navigate('Entregas')}
-					onPress={ObterPermissao}
+					onPress={() => props.navigation.navigate('Entregas')}
 					style={{
 						width: 100,
 						height: 100,
@@ -156,11 +159,11 @@ export default (props: any) => {
 					entregas.map((entrega: Entregas) => (
 						<Marker
 							key={entrega.id}
-							title={entrega.cliente.nome}
+							title={entrega.cliente?.nome}
 							tracksViewChanges={false}
 							coordinate={{
-								latitude: entrega.cliente.latitude,
-								longitude: entrega.cliente.longitude,
+								latitude: entrega.cliente.endereco.latitude,
+								longitude: entrega.cliente.endereco.longitude,
 							}}
 							icon={require('../assets/marker.png')}
 						>
@@ -191,9 +194,7 @@ export default (props: any) => {
 												color: Tema.colors.primary,
 												marginEnd: 4,
 											}}
-										>
-											2 ENTREGAS DISPONÍVEIS
-										</Text>
+										></Text>
 									</TouchableOpacity>
 								</View>
 							</Callout>
@@ -210,7 +211,7 @@ const s = StyleSheet.create({
 		width: 260,
 	},
 	Title: {
-		fontSize: 12,
+		fontSize: 18,
 		fontFamily: 'Ubuntu Bold',
 		textAlign: 'center',
 		marginBottom: 5,

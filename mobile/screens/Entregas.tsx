@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator()
 const Entregas: React.FC = () => {
 	return (
 		<View style={{ flex: 1 }}>
-			<View style={{ flex: 1 }}>
+			<View style={{ flex: 1, paddingVertical: 32 }}>
 				<Stack.Navigator>
 					<Stack.Screen
 						name='EntregasLista'

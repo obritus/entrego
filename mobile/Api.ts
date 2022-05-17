@@ -3,7 +3,7 @@ import { useAsyncStorage } from '@react-native-async-storage/async-storage'
 
 const api = axios.create({
 	baseURL: process.env.NODE_ENV === 'development'
-	? 'http://192.168.1.2:3005/'
+	? 'http://192.168.1.75:3005/'
 	: `https://api-ux3p6ca4ia-rj.a.run.app/`
 })
 

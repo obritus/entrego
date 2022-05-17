@@ -15,7 +15,6 @@ import Tema from '../Styles'
 import Api from '../Api'
 
 import { useAuth } from '../components/AuthContext'
-import { BarraDeStatus } from '../App'
 
 const s = StyleSheet.create({
 	loginContainer: {

@@ -155,9 +155,9 @@ android {
         release {
             // if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file('entrego.keystore')
-                storePassword "Cr0ss0ver@"
+                storePassword "Newaccount1"
                 keyAlias "EntregoKey"
-                keyPassword "Cr0ss0ver@"
+                keyPassword "Newaccount1"
             // }
         }
 		

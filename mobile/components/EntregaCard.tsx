@@ -46,7 +46,7 @@ interface Props {
 			latitude: number
 		}
 		contato: {
-			endereco: string
+			logradouro: string
 		}
 		price: number
 	}
@@ -108,7 +108,7 @@ const EntregaCard: React.FC<Props> = ({ horizontal, item, onPress }) => {
 						color: horizontal ? '#BD7E7D' : '#FFF',
 					}}
 				>
-					{item.contato.endereco}
+					{item.contato.logradouro}
 				</Text>
 			</View>
 		</TouchableOpacity>

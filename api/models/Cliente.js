@@ -30,8 +30,8 @@ export default mongoose.model('clientes',
 					required: true,
 					trim: true
 				},
-				longitude: { type: Number },
-				latitude: { type: Number }
+				latitude: { type: Number },
+				longitude: { type: Number }
 			},
 			logotipo: {
 				type: String,
@@ -39,6 +39,7 @@ export default mongoose.model('clientes',
 			},
 			region: {
 				type: String,
+				required: true,
 			}
 		},
 		{ timestamps: true }

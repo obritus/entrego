@@ -31,7 +31,7 @@ export default express.Router()
 
 	// -------------------------------------------------------------------------
 
-	.put('/:id', async (req, res) => {
+	.patch('/:id', async (req, res) => {
 		try {
 			if (req.body.senha) {
 				req.body.senha = await GeneratePassword(req.body.senha)
@@ -55,7 +55,7 @@ export default express.Router()
 			res.json(Data)
 		} catch (error) {
 			console.error(error)
-			res.json({ error })
+			res.json({ message: error.message, error })
 		}
 	})
 
@@ -63,13 +63,16 @@ export default express.Router()
 
 	.post('/', async (req, res) => {
 		req.body.senha = await GeneratePassword(req.body.senha)
-
 		new Model(req.body)
 			.save()
-			.then(data => {
-				res.json(data)
-			})
+			.then(data => res.json(data))
 			.catch(error => {
-				res.json({ error })
+				console.error(error)
+				res.json({
+					message: error.code === 11000
+						? 'Email já cadastrado.'
+						: error.message,
+					error
+				})
 			})
 	})

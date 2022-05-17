@@ -31,7 +31,9 @@ export default mongoose.model('entregas',
 				},
 				endereco: {
 					type: String,
-					required: true
+					required: true,
+					trim: true,
+					uppercase: true
 				},
 				latitude: {
 					type: Number,
