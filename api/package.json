@@ -6,8 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"start": "node index.js",
-		"dev": "nodemon index.js",
-		"teste": "ls -la"
+		"dev": "nodemon index.js"
 	},
 	"author": "caiquess4@gmail.com",
 	"license": "ISC",

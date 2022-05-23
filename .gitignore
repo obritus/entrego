@@ -2,89 +2,42 @@
 api/node_modules
 api/.env
 
-
-# Logs
-desktop/logs
-desktop/*.log
-
-# Runtime data
-desktop/pids
-desktop/*.pid
-desktop/*.seed
-
-# Coverage directory used by tools like istanbul
-desktop/coverage
-desktop/.eslintcache
-
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-desktop/node_modules
-
-# OSX
-desktop/.DS_Store
-
-desktop/release/desktop/dist
-desktop/release/build
-desktop/.erb/dll
-
-desktop/.idea
-desktop/npm-debug.log.*
-desktop/*.css.d.ts
-desktop/*.sass.d.ts
-desktop/*.scss.d.ts
-
-
-mobile/node_modules
-# Expo
-mobile/.expo
-mobile/__generated__
-mobile/web-build
-
-# macOS
 mobile/.DS_Store
-
-# Node
+mobile/build/
+mobile/*.pbxuser
+mobile/!default.pbxuser
+mobile/*.mode1v3
+mobile/!default.mode1v3
+mobile/*.mode2v3
+mobile/!default.mode2v3
+mobile/*.perspectivev3
+mobile/!default.perspectivev3
+mobile/xcuserdata
+mobile/*.xccheckout
+mobile/*.moved-aside
+mobile/DerivedData
+mobile/*.hmap
+mobile/*.ipa
+mobile/*.xcuserstate
+mobile/build/
+mobile/.idea
+mobile/.gradle
+mobile/local.properties
+mobile/*.iml
+mobile/*.hprof
+mobile/node_modules/
 mobile/npm-debug.log
 mobile/yarn-error.log
-
-# Ruby
-mobile/.direnv
-
-# Env
-mobile/.envrc.local
-
-# Emacs
-mobile/*~
-
-# Vim
-mobile/.*.swp
-mobile/.*.swo
-mobile/.*.swn
-mobile/.*.swm
-
-# VSCode
-mobile/.history/
-
-# Android
-mobile/*.apk
-mobile/*.hprof
-mobile/android/**/build
-mobile/android/**/.cxx
-mobile/android/**/local.properties
-mobile/android/captures
-mobile/android/expoview/libs/ReactAndroid-temp
-mobile/android/versioned-react-native/ReactAndroid
-mobile/ReactAndroid-temp.aar
-
-# Dynamic Macros
-mobile/ios/Exponent/Supporting/EXBuildConstants.plist.bak
-mobile/ios/Exponent/Supporting/EXBuildConstants.plist.json
-mobile/ios/Exponent/Supporting/EXBuildConstants.plist
-mobile/ios/Exponent/Supporting/GoogleService-Info.plist
-mobile/ios/Exponent/Supporting/Info.plist.bak
-mobile/ios/Exponent/Supporting/Info.plist.json
-mobile/android/expoview/src/main/java/host/exp/exponent/generated/ExponentBuildConstants.java
-mobile/android/desktop/src/androidTest/java/host/exp/exponent/generated/TestBuildConstants.java
-mobile/.kernel-ngrok-url
+mobile/buck-out/
+mobile/.buckd/
+mobile/*.keystore
+mobile/!debug.keystore
+mobile/*/fastlane/report.xml
+mobile/*/fastlane/Preview.html
+mobile/*/fastlane/screenshots
+mobile/*.jsbundle
+mobile/ios/Pods/
+mobile/vendor/bundle/
+mobile/android/wrapper/dists
 
 web/node_modules

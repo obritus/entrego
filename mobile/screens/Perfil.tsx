@@ -1,22 +1,15 @@
-import {
-	PanGestureHandler,
-	State,
-	GestureHandlerRootView,
-} from 'react-native-gesture-handler'
 import * as React from 'react'
 import {
 	View,
 	Text,
 	ImageBackground,
 	StyleSheet,
-	Animated,
 	StatusBar,
+	Button,
 } from 'react-native'
-import { useAuth } from '../components/AuthContext'
+import { useAuth, User } from '../components/AuthContext'
 import Tema from '../Styles'
 import EditProfile from '../components/EditProfile'
-import { BarraDeStatus } from '../App'
-import { DarkTheme } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
 	header: {
@@ -25,79 +18,100 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		paddingBottom: 25,
 	},
-	editarInfo: {
-		textAlign: 'center',
-		color: Tema.colors.light,
-		paddingTop: 10,
-		fontFamily: Tema.fonts.regular,
-	},
 	box: {
 		flex: 1,
-		paddingHorizontal: 30,
+		paddingHorizontal: 32,
+		alignContent: 'space-between',
 		background: Tema.colors.primary,
 	},
-	avatarNome: {
-		height: 150,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		overflow: 'hidden',
-	},
-	separador: {
-		width: 300,
-		height: 10,
-	},
-	swipeBox: {},
 })
 
-const Perfil: React.FC = () => {
+interface Props {
+	navigation: any
+	user: User
+}
+const PerfilBox: React.FC<Props> = ({ user }) => (
+	<View
+		style={{
+			height: 252,
+			alignItems: 'center',
+			paddingTop: 54,
+			marginHorizontal: 32,
+			marginBottom: 30,
+		}}
+	>
+		<View
+			style={{
+				width: 90,
+				height: 90,
+				backgroundColor: '#999',
+				borderRadius: 20,
+			}}
+		>
+			{user.avatar.location && (
+				<ImageBackground
+					source={{
+						uri: user?.avatar?.location,
+					}}
+					style={{
+						flex: 1,
+						borderRadius: 20,
+						overflow: 'hidden',
+					}}
+				/>
+			)}
+		</View>
+		<View
+			style={{
+				width: '100%',
+				flexDirection: 'column',
+				justifyContent: 'space-between',
+				borderBottomColor: '#00000050',
+				borderBottomWidth: 1,
+				flex: 1,
+				paddingTop: 26,
+				paddingBottom: 30,
+			}}
+		>
+			<Text
+				style={{
+					color: '#F1F1F1',
+					fontFamily: Tema.fonts.regular,
+					fontSize: 12,
+					textAlign: 'center',
+				}}
+			>
+				Olá,
+			</Text>
+			<Text
+				style={{
+					fontSize: 20,
+					color: Tema.colors.light,
+					fontFamily: Tema.fonts.bold,
+					textAlign: 'center',
+				}}
+			>
+				{user?.nome}
+			</Text>
+			<Text
+				style={{
+					color: '#F1F1F1',
+					fontFamily: Tema.fonts.regular,
+					fontSize: 12,
+					textAlign: 'center',
+				}}
+			>
+				{user?.email}
+			</Text>
+		</View>
+	</View>
+)
+
+const Perfil: React.FC<{ navigation: any }> = ({ navigation }) => {
 	const { user } = useAuth()
-	const translateY = new Animated.Value(0)
-	const [inputRange, setInputRange] = React.useState(0)
-	let offset = 0
-
-	const animatedEvent = Animated.event(
-		[
-			{
-				nativeEvent: {
-					translationY: translateY,
-				},
-			},
-		],
-		{ useNativeDriver: true }
-	)
-
-	const onHandlerStateChange = (event: any) => {
-		if (event.nativeEvent.oldState === State.ACTIVE) {
-			let opened = false
-			const { translationY } = event.nativeEvent
-			offset += translationY
-
-			if (translationY >= 60) {
-				opened = true
-			} else {
-				translateY.setValue(offset)
-				translateY.setOffset(0)
-				offset = 0
-			}
-
-			Animated.timing(translateY, {
-				toValue: opened ? 500 : 0,
-				duration: 200,
-				useNativeDriver: true,
-			}).start(() => {
-				offset = opened ? 500 : 0
-				translateY.setOffset(offset)
-				translateY.setValue(0)
-			})
-		}
-	}
 
 	return (
-		<GestureHandlerRootView
-			onLayout={(event) => {
-				setInputRange(event.nativeEvent.layout.height / 2)
-			}}
+		<View
 			style={{
 				flex: 1,
 				justifyContent: 'center',
@@ -109,205 +123,70 @@ const Perfil: React.FC = () => {
 				barStyle={'light-content'}
 				backgroundColor={Tema.colors.primary}
 			/>
+			<PerfilBox user={user} />
 			<View style={styles.box}>
-				<EditProfile translateY={translateY} />
-				<Animated.View
+				<View
 					style={{
-						...styles.swipeBox,
+						height: 64,
+						flexDirection: 'row',
+						justifyContent: 'space-between',
 					}}
 				>
-					<Animated.View
-						style={{
-							...styles.avatarNome,
-							opacity: translateY.interpolate({
-								inputRange: [0, 100],
-								outputRange: [1, 0],
-								extrapolate: 'clamp',
-							}),
-						}}
-					>
-						<View
+					<View>
+						<Text
 							style={{
-								width: 90,
-								height: 90,
-								backgroundColor: '#999',
-								borderRadius: 20,
+								color: '#F1F1F1',
+								fontFamily: Tema.fonts.regular,
+								fontSize: 12,
 							}}
 						>
-							<ImageBackground
-								source={{
-									uri: user?.avatar?.location,
-								}}
-								style={{
-									flex: 1,
-									borderRadius: 20,
-									overflow: 'hidden',
-								}}
-							/>
-						</View>
-						<View
+							Dias restantes
+						</Text>
+						<Text
 							style={{
-								marginLeft: 20,
-								flexDirection: 'column',
-								justifyContent: 'center',
-								height: 150,
-								flex: 1,
+								fontSize: 48,
+								textAlign: 'left',
+								color:
+									user?.creditos > 0
+										? Tema.colors.light
+										: Tema.colors.danger,
+								fontFamily: Tema.fonts.bold,
 							}}
 						>
-							<Text
-								style={{
-									color: '#F1F1F1',
-									fontFamily: Tema.fonts.regular,
-									fontSize: 12,
-								}}
-							>
-								Olá,
-							</Text>
-							<Text
-								style={{
-									fontSize: 20,
-									color: Tema.colors.light,
-									fontFamily: Tema.fonts.bold,
-								}}
-							>
-								{user?.nome}
-							</Text>
-							<Text
-								style={{
-									color: '#F1F1F1',
-									fontFamily: 'Ubuntu Italic',
-									fontSize: 12,
-								}}
-							>
-								{user?.email}
-							</Text>
-						</View>
-					</Animated.View>
-					<Animated.View
-						style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							width: '100%',
-							opacity: translateY.interpolate({
-								inputRange: [0, 100],
-								outputRange: [1, 0],
-								extrapolate: 'clamp',
-							}),
-						}}
-					>
-						<View>
-							<Text
-								style={{
-									color: '#F1F1F1',
-									marginBottom: -2,
-									fontFamily: Tema.fonts.regular,
-									fontSize: 12,
-								}}
-							>
-								Dias restantes
-							</Text>
-							<Text
-								style={{
-									fontSize: 36,
-									textAlign: 'left',
-									color:
-										user?.creditos > 0
-											? Tema.colors.light
-											: Tema.colors.danger,
-									fontFamily: Tema.fonts.bold,
-								}}
-							>
-								{user?.creditos}
-							</Text>
-						</View>
-						<View>
-							<Text
-								style={{
-									textAlign: 'right',
-									color: '#F1F1F1',
-									marginBottom: -2,
-									fontFamily: Tema.fonts.regular,
-									fontSize: 12,
-								}}
-							>
-								Entregas
-							</Text>
-							<Text
-								style={{
-									fontSize: 36,
-									textAlign: 'right',
-									color: Tema.colors.light,
-									fontFamily: Tema.fonts.bold,
-								}}
-							>
-								{user?.entregas || 0}
-							</Text>
-						</View>
-					</Animated.View>
-					<PanGestureHandler
-						onGestureEvent={animatedEvent}
-						onHandlerStateChange={onHandlerStateChange}
-					>
-						<Animated.View
+							{user?.creditos}
+						</Text>
+					</View>
+					<View>
+						<Text
 							style={{
-								width: '100%',
-								transform: [
-									{
-										translateY: translateY.interpolate({
-											inputRange: [0, inputRange],
-											outputRange: [0, inputRange],
-											extrapolate: 'clamp',
-										}),
-									},
-								],
+								textAlign: 'right',
+								color: '#F1F1F1',
+								fontFamily: Tema.fonts.regular,
+								fontSize: 12,
 							}}
 						>
-							<Animated.Text
-								style={{
-									textAlign: 'center',
-									color: Tema.colors.light,
-									paddingTop: 30,
-									alignSelf: 'center',
-									fontFamily: Tema.fonts.regular,
-									opacity: translateY.interpolate({
-										inputRange: [0, 100],
-										outputRange: [0.5, 1],
-										extrapolate: 'clamp',
-									}),
-								}}
-							>
-								Editar Informações
-							</Animated.Text>
-							<Animated.Image
-								source={require('../assets/arrow_down.png')}
-								style={{
-									width: 32,
-									height: 32,
-									alignSelf: 'center',
-									opacity: translateY.interpolate({
-										inputRange: [0, 100],
-										outputRange: [0.5, 1],
-										extrapolate: 'clamp',
-									}),
-									transform: [
-										{
-											rotate: translateY.interpolate({
-												inputRange: [0, inputRange],
-												outputRange: [
-													`${0}deg`,
-													`${-180}deg`,
-												],
-												extrapolate: 'clamp',
-											}),
-										},
-									],
-								}}
-							/>
-						</Animated.View>
-					</PanGestureHandler>
-				</Animated.View>
+							Entregas
+						</Text>
+						<Text
+							style={{
+								fontSize: 48,
+								textAlign: 'right',
+								color: Tema.colors.light,
+								fontFamily: Tema.fonts.bold,
+							}}
+						>
+							{user?.entregas || 0}
+						</Text>
+					</View>
+				</View>
 			</View>
-		</GestureHandlerRootView>
+			<View nativeID='Botão voltar'>
+				<Button
+					onPress={() => navigation.goBack()}
+					title='Voltar'
+				></Button>
+			</View>
+		</View>
 	)
 }
 

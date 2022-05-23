@@ -6,7 +6,7 @@ buildscript {
         minSdkVersion = 21
         compileSdkVersion = 30
         targetSdkVersion = 30
-		//playServicesVersion = "17.0.0"
+		playServicesVersion = "18.0.0"
         ndkVersion = "21.4.7075529"
     }
     repositories {
@@ -20,7 +20,9 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+}
 allprojects {
     repositories {
         mavenCentral()
@@ -38,14 +40,12 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
-plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
-}
 repositories {
     mavenCentral()
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+	implementation "com.google.android.gms:play-services-maps:18.0.2"
 }
 compileKotlin {
     kotlinOptions {

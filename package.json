@@ -1,0 +1,7 @@
+{
+	"scripts": {
+		"dev_api": "cd ./api && nodemon index.js",
+		"start_metro": "cd ./mobile && yarn start",
+		"android": "cd ./mobile && yarn android"
+	}
+}

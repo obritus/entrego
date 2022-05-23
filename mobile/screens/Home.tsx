@@ -103,12 +103,12 @@ export default (props: any) => {
 					onPress={() => props.navigation.navigate('Perfil')}
 					style={{ width: 64, height: 64 }}
 				>
-					<ImageBackground
+					{/* <ImageBackground
 						source={{
-							uri: user?.avatar?.location,
+							uri: user?.avatar?.location || '',
 						}}
 						style={s.ProfileIcon}
-					/>
+					/> */}
 				</TouchableOpacity>
 			</View>
 
