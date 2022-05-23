@@ -33,7 +33,7 @@ local.properties
 # node.js
 #
 node_modules/
-android/wrapper/dists
+android/caches/
 npm-debug.log
 yarn-error.log
 

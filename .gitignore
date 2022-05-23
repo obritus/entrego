@@ -38,6 +38,6 @@ mobile/*/fastlane/screenshots
 mobile/*.jsbundle
 mobile/ios/Pods/
 mobile/vendor/bundle/
-mobile/android/wrapper/dists
+mobile/android/caches/
 
 web/node_modules
