@@ -66,13 +66,16 @@ export default (props: any) => {
 	const { logOut, user } = useAuth()
 
 	React.useEffect(() => {
-		Api.GetEntregas()
-			.then((response) => {
-				setEntregas(response.data)
-			})
-			.catch((error) => {
-				console.log(error)
-			})
+		ObterPermissao()
+		setTimeout(() => {
+			Api.GetEntregas({ status: 0 })
+				.then((response) => {
+					setEntregas(response.data)
+				})
+				.catch((error) => {
+					console.log(error)
+				})
+		}, 1000)
 	}, [setEntregas])
 
 	return (
@@ -95,24 +98,25 @@ export default (props: any) => {
 					position: 'absolute',
 					overflow: 'hidden',
 					top: 30,
-					right: 30,
+					left: 30,
 					zIndex: 1100,
 				}}
+				nativeID={'FotoPerfilTopo'}
 			>
 				<TouchableOpacity
 					onPress={() => props.navigation.navigate('Perfil')}
 					style={{ width: 64, height: 64 }}
 				>
-					{/* <ImageBackground
+					<ImageBackground
 						source={{
 							uri: user?.avatar?.location || '',
 						}}
 						style={s.ProfileIcon}
-					/> */}
+					/>
 				</TouchableOpacity>
 			</View>
 
-			<View style={s.EntregasIcon}>
+			<View style={s.EntregasIcon} nativeID='IconeEntrega'>
 				<TouchableOpacity
 					onPress={() => props.navigation.navigate('Entregas')}
 					style={{
@@ -154,6 +158,7 @@ export default (props: any) => {
 				showsMyLocationButton={true}
 				showsBuildings={false}
 				showsIndoors={false}
+				zoomControlEnabled={true}
 			>
 				{entregas.length > 0 &&
 					entregas.map((entrega: Entregas) => (

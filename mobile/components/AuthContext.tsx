@@ -42,11 +42,12 @@ export const AuthProvider: React.FC = ({ children }) => {
 	const [user, setUser] = useState<User>(InitialState)
 	const [loading, setLoading] = useState(true)
 
-	const logOut = async () => {
+	const logOut = async (nav: any) => {
 		try {
 			await AsyncStorage.clear()
 			setAuth(false)
 			setUser(InitialState)
+			nav.navigate('Login')
 		} catch (error) {
 			console.log(error)
 		}

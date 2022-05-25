@@ -7,10 +7,11 @@ import Model from '../models/Entrega.js'
 export default express.Router()
 	.get('/', async (req, res) => {
 		const active = req.query.active
+		const status = req.query.status
 
 		try {
 			const Data = await Model
-				.find()
+				.find({ status })
 				.lean()
 				.populate('cliente')
 

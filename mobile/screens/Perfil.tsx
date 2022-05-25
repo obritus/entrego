@@ -108,7 +108,7 @@ const PerfilBox: React.FC<Props> = ({ user }) => (
 )
 
 const Perfil: React.FC<{ navigation: any }> = ({ navigation }) => {
-	const { user } = useAuth()
+	const { user, logOut } = useAuth()
 
 	return (
 		<View
@@ -185,6 +185,9 @@ const Perfil: React.FC<{ navigation: any }> = ({ navigation }) => {
 					onPress={() => navigation.goBack()}
 					title='Voltar'
 				></Button>
+			</View>
+			<View nativeID='Botão sair'>
+				<Button onPress={() => logOut()} title='Desconectar'></Button>
 			</View>
 		</View>
 	)

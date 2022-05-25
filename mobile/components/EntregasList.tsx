@@ -15,7 +15,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 
 	React.useEffect(() => {
 		const GetEntregas = async () => {
-			const response = await Api.GetEntregas()
+			const response = await Api.GetEntregas({ status: 0 })
 			const data = await response.data
 			setEntregas(data)
 		}
