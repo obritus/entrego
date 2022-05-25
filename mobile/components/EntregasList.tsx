@@ -23,7 +23,9 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	}, [])
 
 	return (
-		<View style={{ flex: 1, justifyContent: 'center' }}>
+		<View
+			style={{ flex: 1, justifyContent: 'center', paddingVertical: 32 }}
+		>
 			{entregas.length > 0 ? (
 				<View style={{ flex: 1 }}>
 					<FlatList

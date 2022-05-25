@@ -54,7 +54,7 @@ const ObterPermissao = async () => {
 		if (granted === PermissionsAndroid.RESULTS.GRANTED) {
 			console.log('Você pode usar a localização')
 		} else {
-			console.log('A permissão de uso da localização foi negada')
+			console.table('A permissão de uso da localização foi negada')
 		}
 	} catch (err) {
 		console.warn(err)
@@ -94,7 +94,7 @@ export default (props: any) => {
 					width: 64,
 					height: 64,
 					borderRadius: 32,
-					backgroundColor: Tema.colors.primary,
+					backgroundColor: '#999',
 					position: 'absolute',
 					overflow: 'hidden',
 					top: 30,
@@ -108,9 +108,11 @@ export default (props: any) => {
 					style={{ width: 64, height: 64 }}
 				>
 					<ImageBackground
-						source={{
-							uri: user?.avatar?.location || '',
-						}}
+						source={
+							user.avatar.location
+								? { uri: user.avatar.location }
+								: require('../assets/capacete.png')
+						}
 						style={s.ProfileIcon}
 					/>
 				</TouchableOpacity>

@@ -20,8 +20,7 @@ const s = StyleSheet.create({
 	Box: {
 		flex: 1,
 		backgroundColor: Tema.colors.light,
-		padding: 30,
-		paddingTop: 0,
+		padding: 36,
 	},
 	Text: {
 		color: Tema.colors.dark,
@@ -71,11 +70,11 @@ const EntregaDetalhes: React.FC<Props> = ({ navigation, route }) => {
 					}}
 				>
 					<ImageBackground
-						source={{
-							uri:
-								route.params.cliente.logotipo ||
-								'https://github.com/google.png',
-						}}
+						source={
+							route.params.cliente.logotipo
+								? { uri: route.params.cliente.logotipo }
+								: require('../assets/capacete.png')
+						}
 						style={{
 							width: 90,
 							height: 90,
