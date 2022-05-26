@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { View, Text, FlatList, ActivityIndicator } from 'react-native'
 import Api from '../Api'
-import { BarraDeStatus } from '../App'
+import { useAuth } from '../components/AuthContext'
 import Tema from '../Styles'
 
 import EntregaCard from './EntregaCard'
@@ -12,6 +12,8 @@ interface Props {
 
 const EntregasList: React.FC<Props> = (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
+	const [entregasRealizadas, setEntregasRealizadas] = React.useState([])
+	const { user } = useAuth()
 
 	React.useEffect(() => {
 		const GetEntregas = async () => {
@@ -19,7 +21,16 @@ const EntregasList: React.FC<Props> = (props: any) => {
 			const data = await response.data
 			setEntregas(data)
 		}
+		const GetEntregasRealizadas = async () => {
+			const response = await Api.GetEntregas({
+				status: 4,
+				userId: user.id,
+			})
+			const data = await response.data
+			setEntregasRealizadas(data)
+		}
 		GetEntregas()
+		GetEntregasRealizadas()
 	}, [])
 
 	return (
@@ -53,7 +64,10 @@ const EntregasList: React.FC<Props> = (props: any) => {
 							color: Tema.colors.primary,
 						}}
 					>
-						{entregas.length} Entregas finalizadas
+						{entregasRealizadas.length > 1 &&
+						entregasRealizadas.length < 1
+							? 'Entregas Realizadas'
+							: 'Entrega Realizada'}
 					</Text>
 					<FlatList
 						style={{
@@ -62,7 +76,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 							maxHeight: 100,
 							flexDirection: 'row',
 						}}
-						data={entregas}
+						data={entregasRealizadas}
 						horizontal={true}
 						renderItem={({ item }) => (
 							<EntregaCard

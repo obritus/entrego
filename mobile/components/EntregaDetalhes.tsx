@@ -71,7 +71,7 @@ const EntregaDetalhes: React.FC<Props> = ({ navigation, route }) => {
 				>
 					<ImageBackground
 						source={
-							route.params.cliente.logotipo
+							route.params?.cliente?.logotipo
 								? { uri: route.params.cliente.logotipo }
 								: require('../assets/capacete.png')
 						}

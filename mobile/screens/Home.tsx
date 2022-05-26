@@ -76,6 +76,8 @@ export default (props: any) => {
 					console.log(error)
 				})
 		}, 1000)
+
+		console.log(props.navigation)
 	}, [setEntregas])
 
 	return (
@@ -173,12 +175,13 @@ export default (props: any) => {
 								longitude: entrega.cliente.endereco.longitude,
 							}}
 							icon={require('../assets/marker.png')}
+							description='Lorem ipsum'
 						>
 							<Callout
 								onPress={() =>
 									props.navigation.navigate('Entregas', {
-										screen: 'Detalhes da entrega',
-										entrega,
+										screen: 'Detalhes',
+										params: entrega,
 									})
 								}
 							>
