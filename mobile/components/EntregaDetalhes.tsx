@@ -9,12 +9,10 @@ import {
 	Image,
 	Linking,
 	ImageBackground,
-	Alert,
 } from 'react-native'
-import Tema from '../Styles'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { BarraDeStatus } from '../App'
 import { Entregas } from '../screens/Home'
+import Tema from '../Styles'
 
 const s = StyleSheet.create({
 	Box: {

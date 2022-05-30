@@ -16,6 +16,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	const { user } = useAuth()
 
 	React.useEffect(() => {
+		console.log(props)
 		const GetEntregas = async () => {
 			const response = await Api.GetEntregas({ status: 0 })
 			const data = await response.data
@@ -24,7 +25,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 		const GetEntregasRealizadas = async () => {
 			const response = await Api.GetEntregas({
 				status: 4,
-				userId: user.id,
+				userId: user._id,
 			})
 			const data = await response.data
 			setEntregasRealizadas(data)
@@ -34,9 +35,28 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	}, [])
 
 	return (
-		<View
-			style={{ flex: 1, justifyContent: 'center', paddingVertical: 32 }}
-		>
+		<View style={{ flex: 1, paddingVertical: 32 }}>
+			<Text
+				style={{
+					fontFamily: 'Ubuntu Bold',
+					fontSize: 18,
+					textAlign: 'center',
+					color: Tema.colors.primary,
+				}}
+			>
+				Entregas disponíveis
+			</Text>
+			<Text
+				style={{
+					fontFamily: 'Ubuntu Regular',
+					fontSize: 14,
+					textAlign: 'center',
+					marginBottom: 16,
+					color: Tema.colors.primary,
+				}}
+			>
+				Entregas disponíveis
+			</Text>
 			{entregas.length > 0 ? (
 				<View style={{ flex: 1 }}>
 					<FlatList
@@ -49,39 +69,6 @@ const EntregasList: React.FC<Props> = (props: any) => {
 						renderItem={({ item }) => (
 							<EntregaCard
 								item={item}
-								onPress={() =>
-									props.navigation.navigate('Detalhes', item)
-								}
-							/>
-						)}
-					/>
-					<Text
-						style={{
-							textAlign: 'center',
-							fontFamily: 'Ubuntu Bold',
-							fontSize: 14,
-							paddingVertical: 15,
-							color: Tema.colors.primary,
-						}}
-					>
-						{entregasRealizadas.length > 1 &&
-						entregasRealizadas.length < 1
-							? 'Entregas Realizadas'
-							: 'Entrega Realizada'}
-					</Text>
-					<FlatList
-						style={{
-							flex: 1,
-							paddingHorizontal: 15,
-							maxHeight: 100,
-							flexDirection: 'row',
-						}}
-						data={entregasRealizadas}
-						horizontal={true}
-						renderItem={({ item }) => (
-							<EntregaCard
-								item={item}
-								horizontal={true}
 								onPress={() =>
 									props.navigation.navigate('Detalhes', item)
 								}

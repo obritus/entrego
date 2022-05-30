@@ -5,6 +5,8 @@
 # Xcode
 #
 build/
+android/wrapper/
+android/cache/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -20,6 +22,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+ios/.xcode.env.local
 
 # Android/IntelliJ
 #
@@ -33,7 +36,6 @@ local.properties
 # node.js
 #
 node_modules/
-android/caches/
 npm-debug.log
 yarn-error.log
 
@@ -50,12 +52,14 @@ buck-out/
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/
 
-*/fastlane/report.xml
-*/fastlane/Preview.html
-*/fastlane/screenshots
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
 
 # Bundle artifact
 *.jsbundle
 
-# CocoaPods
+# Ruby / CocoaPods
 /ios/Pods/
+/vendor/bundle/

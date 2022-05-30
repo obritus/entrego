@@ -111,8 +111,13 @@ const Login: React.FC<Props> = ({ navigation }) => {
 			{loading ? (
 				<ActivityIndicator
 					animating={loading}
-					color={Tema.colors.light}
+					color={Tema.colors.rosa}
 					size='large'
+					style={{
+						flex: 1,
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
 				/>
 			) : (
 				<View style={s.loginContainer}>

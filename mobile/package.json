@@ -2,6 +2,7 @@
 	"name": "entrego",
 	"version": "1.0.0",
 	"private": true,
+	"license": "GPL-3.0",
 	"scripts": {
 		"start": "react-native start",
 		"ios": "react-native run-ios",
@@ -29,17 +30,15 @@
 		"react-native-safe-area-context": "^4.2.5",
 		"react-native-screens": "^3.13.1",
 		"react-native-storage": "^1.0.1",
-		"react-native-svg": "^12.3.0",
-		"styled-components": "^5.3.5"
+		"react-native-svg": "^12.3.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.9",
 		"@babel/runtime": "^7.12.5",
 		"@react-native-community/eslint-config": "^2.0.0",
 		"@types/jest": "^26.0.23",
-		"@types/react-native": "^0.65.0",
+		"@types/react-native": "^0.67.7",
 		"@types/react-test-renderer": "^17.0.1",
-		"@types/styled-components": "^5.1.15",
 		"babel-jest": "^26.6.3",
 		"jest": "^26.6.3",
 		"metro-config": "^0.66.2",
@@ -48,9 +47,7 @@
 		"react-test-renderer": "17.0.2",
 		"typescript": "^3.8.3"
 	},
-	"peerDependencies": {
-		"@types/styled-components": "^5.1.15"
-	},
+	"peerDependencies": {},
 	"resolutions": {
 		"@types/react": "^17"
 	},

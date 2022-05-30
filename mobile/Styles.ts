@@ -1,7 +1,8 @@
 export default {
 	colors: {
 		primary: '#141e30',
-		secondary: '#FCCBCA',
+		secondary: '#4EF4F4',
+		rosa: '#F5CECE',
 		danger: '#d42252',
 		warning: '#ffc107',
 		info: '#05F2F2',

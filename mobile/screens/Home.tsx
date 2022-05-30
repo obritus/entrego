@@ -122,7 +122,11 @@ export default (props: any) => {
 
 			<View style={s.EntregasIcon} nativeID='IconeEntrega'>
 				<TouchableOpacity
-					onPress={() => props.navigation.navigate('Entregas')}
+					onPress={() =>
+						props.navigation.navigate('Entregas', {
+							entregas: entregas,
+						})
+					}
 					style={{
 						width: 100,
 						height: 100,
@@ -150,10 +154,10 @@ export default (props: any) => {
 				style={{ flex: 1 }}
 				provider={PROVIDER_GOOGLE}
 				region={{
-					latitude: -21.572084,
-					longitude: -45.417926,
-					latitudeDelta: 0.115,
-					longitudeDelta: 0.1121,
+					latitude: -21.5698,
+					longitude: -45.4367,
+					latitudeDelta: 0.08,
+					longitudeDelta: 0.08,
 				}}
 				userLocationPriority='passive'
 				userLocationUpdateInterval={2000}
@@ -179,10 +183,10 @@ export default (props: any) => {
 						>
 							<Callout
 								onPress={() =>
-									props.navigation.navigate('Entregas', {
-										screen: 'Detalhes',
-										params: entrega,
-									})
+									props.navigation.navigate(
+										'Entregas',
+										entrega
+									)
 								}
 							>
 								<View style={s.Marker}>
