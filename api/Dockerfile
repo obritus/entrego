@@ -1,9 +1,0 @@
-FROM node:lts-alpine
-ENV HOME=/usr/src/app
-WORKDIR $HOME
-COPY package.json $HOME
-COPY . $HOME
-EXPOSE $PORT
-RUN yarn
-VOLUME /home/kaique/entrego/api /usr/src/app
-CMD ["node", "index.js"]
