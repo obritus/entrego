@@ -90,6 +90,7 @@ export default (props: any) => {
 			<StatusBar
 				barStyle={'dark-content'}
 				backgroundColor={Tema.colors.light}
+				animated
 			/>
 			<View
 				style={{

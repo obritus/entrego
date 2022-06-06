@@ -53,7 +53,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 	const [email, setEmail] = useState('fulaninho@gmail.com')
 	const [senha, setSenha] = useState('123456')
 	const [message, setMessage] = useState('' as string)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	const { setAuth, setUser } = useAuth()
 
@@ -91,6 +91,20 @@ const Login: React.FC<Props> = ({ navigation }) => {
 				console.log(err)
 			})
 	}
+
+	React.useEffect(() => {
+		AsyncStorage.getItem('token')
+			.then((token) => {
+				if (token) {
+					setAuth(true)
+				} else {
+					setLoading(false)
+				}
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}, [])
 
 	return (
 		<ImageBackground

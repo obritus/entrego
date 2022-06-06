@@ -46,7 +46,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 		try {
 			await AsyncStorage.clear()
 			setAuth(false)
-			setUser(InitialState)
+			// setUser(InitialState)
 			nav.navigate('Login')
 		} catch (error) {
 			console.log(error)
@@ -85,7 +85,4 @@ export const AuthProvider: React.FC = ({ children }) => {
 	)
 }
 
-export const useAuth = (): AuthContext => {
-	const context = React.useContext(AuthContext)
-	return context
-}
+export const useAuth = (): AuthContext => React.useContext(AuthContext)

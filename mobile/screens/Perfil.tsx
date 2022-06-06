@@ -187,7 +187,10 @@ const Perfil: React.FC<{ navigation: any }> = ({ navigation }) => {
 				></Button>
 			</View>
 			<View nativeID='Botão sair'>
-				<Button onPress={() => logOut()} title='Desconectar'></Button>
+				<Button
+					onPress={() => logOut(navigation)}
+					title='Desconectar'
+				></Button>
 			</View>
 		</View>
 	)
