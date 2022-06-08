@@ -12,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Tema from './Styles'
 import { useAuth } from './components/AuthContext'
 
-import Home from './screens/Home'
+import Mapa from './screens/Home'
 import Entregas from './screens/Entregas'
 import Perfil from './screens/Perfil'
 import Senha from './screens/Senha'
@@ -46,11 +46,11 @@ const Routes: React.FC<Props> = () => {
 	// SE ESTIVER LOGADO
 	if (auth) {
 		return (
-			<Stack.Navigator screenOptions={{}} initialRouteName='Home'>
+			<Stack.Navigator screenOptions={{}} initialRouteName='Mapa'>
 				<Stack.Screen
 					name='Mapa'
-					component={Home}
-					options={{ header: () => false }}
+					component={Mapa}
+					options={{ header: () => false, animationEnabled: false }}
 				/>
 
 				<Stack.Screen
@@ -62,7 +62,11 @@ const Routes: React.FC<Props> = () => {
 				<Stack.Screen
 					name='Perfil'
 					component={Perfil}
-					options={{ header: () => false }}
+					options={{
+						header: () => false,
+						keyboardHandlingEnabled: false,
+						animationEnabled: false,
+					}}
 				/>
 			</Stack.Navigator>
 		)
@@ -76,6 +80,7 @@ const Routes: React.FC<Props> = () => {
 				component={Login}
 				options={{
 					headerShown: false,
+					animationEnabled: false,
 				}}
 			/>
 			<Stack.Screen

@@ -8,6 +8,7 @@ import {
 	Keyboard,
 	ActivityIndicator,
 	ImageBackground,
+	StatusBar,
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -122,6 +123,10 @@ const Login: React.FC<Props> = ({ navigation }) => {
 			}}
 			source={require('../assets/bg.png')}
 		>
+			<StatusBar
+				barStyle={'light-content'}
+				backgroundColor={Tema.colors.primary}
+			/>
 			{loading ? (
 				<ActivityIndicator
 					animating={loading}
