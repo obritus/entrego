@@ -16,7 +16,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	const { user } = useAuth()
 
 	React.useEffect(() => {
-		console.log(props)
+		console.warn('PROPS DA LISTA', props)
 		const GetEntregas = async () => {
 			const response = await Api.GetEntregas({ status: 0 })
 			const data = await response.data

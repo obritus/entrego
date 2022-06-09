@@ -13,8 +13,7 @@ export default express.Router()
 		try {
 			const Data = await Model
 				.find(Find)
-				.limit(10)
-				.lean(Limit)
+				.limit(Limit)
 				.populate('cliente')
 
 			res.json(Data)

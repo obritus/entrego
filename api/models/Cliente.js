@@ -21,7 +21,7 @@ export default mongoose.model('clientes',
 				trim: true
 			},
 			telefone: {
-				type: Number,
+				type: String,
 				required: true
 			},
 			endereco: {
@@ -38,7 +38,7 @@ export default mongoose.model('clientes',
 				default: ''
 			},
 			region: {
-				type: String,
+				type: Number,
 				required: true,
 			}
 		},

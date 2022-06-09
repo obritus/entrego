@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 
 import { View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -9,7 +9,9 @@ import EntregaDetalhes from '../components/EntregaDetalhes'
 
 const Stack = createNativeStackNavigator()
 
-const Entregas: React.FC = () => {
+type Props = {}
+
+const Entregas: React.FC = (props) => {
 	return (
 		<View style={{ flex: 1 }}>
 			<View style={{ flex: 1 }}>

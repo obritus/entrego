@@ -12,15 +12,18 @@ import {
 import MapView, { Marker, Callout, PROVIDER_GOOGLE } from 'react-native-maps'
 import Api from '../Api'
 import { useAuth } from '../components/AuthContext'
-
+import { useNavigation } from '@react-navigation/native'
 import Tema from '../Styles'
+import MapStyle from '../MapStyle.json'
 
 export interface Entregas {
-	id: string
+	_id: string
 	price: number
 	cliente: {
+		_id: string
 		nome: string | ''
 		logotipo: string | ''
+		telefone: string
 		endereco: {
 			latitude: number
 			longitude: number
@@ -29,7 +32,7 @@ export interface Entregas {
 	}
 	contato: {
 		nome: string
-		telefone: number
+		telefone: string
 		latitude: number
 		longitude: number
 		endereco: string
@@ -65,31 +68,33 @@ export default (props: any) => {
 	const [entregas, setEntregas] = React.useState([])
 	const { logOut, user } = useAuth()
 
+	const navigation = useNavigation()
+
 	React.useEffect(() => {
 		ObterPermissao()
-		setTimeout(() => {
-			Api.GetEntregas({ status: 0 })
-				.then((response) => {
-					setEntregas(response.data)
+		Api.GetEntregas({ status: 0 })
+			.then((response) => {
+				const Filter = response.data.filter((data: Entregas) => {
+					return data.cliente._id === '62a12fe8176132e9211f00c5'
 				})
-				.catch((error) => {
-					console.log(error)
-				})
-		}, 1000)
-
-		console.log(props.navigation)
+				console.warn('Total de entregas:', Filter.length)
+				setEntregas(response.data)
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}, [setEntregas])
 
 	return (
-		<SafeAreaView
+		<View
 			style={{
 				flex: 1,
 				backgroundColor: Tema.colors.light,
 			}}
 		>
 			<StatusBar
-				barStyle={'dark-content'}
-				backgroundColor={Tema.colors.light}
+				barStyle={'light-content'}
+				backgroundColor={Tema.colors.dark}
 				animated
 			/>
 			<View
@@ -168,11 +173,12 @@ export default (props: any) => {
 				showsBuildings={false}
 				showsIndoors={false}
 				zoomControlEnabled={true}
+				customMapStyle={MapStyle}
 			>
 				{entregas.length > 0 &&
 					entregas.map((entrega: Entregas) => (
 						<Marker
-							key={entrega.id}
+							key={entrega._id}
 							title={entrega.cliente?.nome}
 							tracksViewChanges={false}
 							coordinate={{
@@ -184,10 +190,10 @@ export default (props: any) => {
 						>
 							<Callout
 								onPress={() =>
-									props.navigation.navigate(
-										'Entregas',
-										entrega
-									)
+									navigation.navigate('Entregas', {
+										screen: 'EntregaDetalhes',
+										params: entregas,
+									})
 								}
 							>
 								<View style={s.Marker}>
@@ -205,7 +211,7 @@ export default (props: any) => {
 									>
 										<Text
 											style={{
-												fontFamily: 'Ubuntu Regular',
+												fontFamily: Tema.fonts.regular,
 												color: Tema.colors.primary,
 												marginEnd: 4,
 											}}
@@ -216,7 +222,7 @@ export default (props: any) => {
 						</Marker>
 					))}
 			</MapView>
-		</SafeAreaView>
+		</View>
 	)
 }
 
@@ -226,8 +232,8 @@ const s = StyleSheet.create({
 		width: 260,
 	},
 	Title: {
-		fontSize: 18,
-		fontFamily: 'Ubuntu Bold',
+		fontSize: 16,
+		fontFamily: Tema.fonts.bold,
 		textAlign: 'center',
 		marginBottom: 5,
 		color: Tema.colors.primary,
