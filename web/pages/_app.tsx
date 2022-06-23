@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Head from 'next/head'
 
-import '../public/styles/App.css'
+import '../styles/globals.css'
 
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'

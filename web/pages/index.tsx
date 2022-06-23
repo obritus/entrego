@@ -43,7 +43,9 @@ const Map = () => {
 					lng: -45.45152,
 				}}
 				draggable={true}
-				label='teste teste teste'
+				title='Entrega Teste'
+				icon={'./marker.png'}
+				onDrag={(item) => console.log(item.latLng)}
 			/>
 		</GoogleMap>
 	) : (
