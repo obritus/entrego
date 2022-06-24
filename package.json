@@ -1,7 +1,6 @@
 {
-	"scripts": {
-		"dev_api": "cd ./api && nodemon index.js",
-		"start_metro": "cd ./mobile && yarn start",
-		"android": "cd ./mobile && yarn android"
+	"author": {
+		"name": "Caique Souza",
+		"email": "caiquess4@gmail.com"
 	}
 }
