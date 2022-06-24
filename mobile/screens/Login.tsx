@@ -14,6 +14,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Tema from '../Styles'
 import Api from '../Api'
+import Button from '../components/Button'
 
 import { useAuth } from '../components/AuthContext'
 
@@ -193,28 +194,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
 							onChangeText={(text) => setSenha(text)}
 						/>
 					</View>
-					<TouchableOpacity
-						style={{
-							padding: 10,
-							backgroundColor: Tema.colors.secondary,
-							borderRadius: 50,
-							alignItems: 'center',
-							marginBottom: 15,
-							paddingVertical: 20,
-						}}
-						onPress={handleLogin}
-					>
-						<Text
-							style={{
-								color: Tema.colors.dark,
-								fontFamily: 'Ubuntu Bold',
-								fontSize: 24,
-							}}
-						>
-							Entrar
-						</Text>
-					</TouchableOpacity>
-
+					<Button onPress={handleLogin}>Entrar</Button>
 					<TouchableOpacity
 						style={{
 							padding: 10,

@@ -5,11 +5,10 @@ import {
 	ImageBackground,
 	StyleSheet,
 	StatusBar,
-	Button,
 } from 'react-native'
 import { useAuth, User } from '../components/AuthContext'
 import Tema from '../Styles'
-import EditProfile from '../components/EditProfile'
+import Button from '../components/Button'
 
 const styles = StyleSheet.create({
 	header: {
@@ -30,6 +29,7 @@ interface Props {
 	navigation: any
 	user: User
 }
+
 const PerfilBox: React.FC<Props> = ({ user }) => (
 	<View
 		style={{
@@ -180,17 +180,18 @@ const Perfil: React.FC<{ navigation: any }> = ({ navigation }) => {
 					</View>
 				</View>
 			</View>
-			<View nativeID='Botão voltar'>
-				<Button
-					onPress={() => navigation.goBack()}
-					title='Voltar'
-				></Button>
-			</View>
-			<View nativeID='Botão sair'>
+			<View style={{ paddingHorizontal: 32, paddingBottom: 17 }}>
+				<Button onPress={() => navigation.goBack()} size='medium'>
+					Voltar
+				</Button>
 				<Button
 					onPress={() => logOut(navigation)}
-					title='Desconectar'
-				></Button>
+					color={Tema.colors.danger}
+					textColor={Tema.colors.light}
+					size='small'
+				>
+					Sair
+				</Button>
 			</View>
 		</View>
 	)

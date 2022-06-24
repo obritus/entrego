@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator()
 
 type Props = {}
 
-const Entregas: React.FC = (props) => {
+const Entregas: React.FC = () => {
 	return (
 		<View style={{ flex: 1 }}>
 			<View style={{ flex: 1 }}>

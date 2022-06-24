@@ -74,10 +74,15 @@ export default (props: any) => {
 		ObterPermissao()
 		Api.GetEntregas({ status: 0 })
 			.then((response) => {
-				const Filter = response.data.filter((data: Entregas) => {
-					return data.cliente._id === '62a12fe8176132e9211f00c5'
+				type Filtrado = []
+
+				let Filtrado: Filtrado = []
+				response.data.forEach((entrega: Entregas) => {
+					!Filtrado.includes(entrega.cliente._id) &&
+						Filtrado.push(entrega.cliente)
 				})
-				console.warn('Total de entregas:', Filter.length)
+
+				console.log(Filtrado)
 				setEntregas(response.data)
 			})
 			.catch((error) => {

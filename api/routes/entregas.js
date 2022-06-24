@@ -10,9 +10,10 @@ export default express.Router()
 		const Find = status ? { status } : {}
 		const Limit = req.query.limit && parseInt(req.query.limit)
 
+		// { 'cliente.endereco.latitude': { $gt: -21.555575, $lt: -21.553675 } }
 		try {
 			const Data = await Model
-				.find(Find)
+				.find({ 'endereco.latitude': { $lte: -21.555575, $gte: -21.553675 } })
 				.limit(Limit)
 				.populate('cliente')
 
