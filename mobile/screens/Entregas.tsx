@@ -4,8 +4,8 @@ import { View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Tema from '../Styles'
 
-import EntregasList from '../components/EntregasList'
-import EntregaDetalhes from '../components/EntregaDetalhes'
+import EntregasList from '../screens/EntregasList'
+import EntregaDetalhes from '../screens/EntregaDetalhes'
 
 const Stack = createNativeStackNavigator()
 
