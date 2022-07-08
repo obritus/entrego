@@ -8,6 +8,7 @@ module.exports = {
 		colors: {
 			primary: '#141e30',
 			secondary: '#4EF4F4',
+			terciary: '#e3b6b6',
 			rosa: '#F5CECE',
 			danger: '#d42252',
 			warning: '#ffc107',
@@ -17,5 +18,7 @@ module.exports = {
 			dark: '#303030',
 		}
 	},
-	plugins: [],
+	plugins: [
+		require('@tailwindcss/forms')
+	],
 }
