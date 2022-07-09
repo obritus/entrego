@@ -18,7 +18,7 @@ interface AuthContext {
 	user: User
 	setAuth: (auth: boolean) => void
 	setUser: (user: User) => void
-	logOut: () => void
+	logOut: (nav: any) => void
 	setLoading: (auth: boolean) => void
 	loading: boolean
 }
@@ -37,7 +37,11 @@ const InitialState: User = {
 	entregas: 0,
 }
 
-export const AuthProvider: React.FC = ({ children }) => {
+interface Props {
+	children: React.ReactNode
+}
+
+export const AuthProvider: React.FC<Props> = ({ children }) => {
 	const [auth, setAuth] = useState(false)
 	const [user, setUser] = useState<User>(InitialState)
 	const [loading, setLoading] = useState(true)

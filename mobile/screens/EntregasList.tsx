@@ -1,5 +1,11 @@
 import React, { useContext } from 'react'
-import { View, Text, FlatList, ActivityIndicator } from 'react-native'
+import {
+	View,
+	Text,
+	FlatList,
+	ActivityIndicator,
+	ImageBackground,
+} from 'react-native'
 import Api from '../Api'
 import { useAuth } from '../components/AuthContext'
 import Tema from '../Styles'
@@ -16,7 +22,6 @@ const EntregasList: React.FC<Props> = (props: any) => {
 	const { user } = useAuth()
 
 	React.useEffect(() => {
-		console.warn('PROPS DA LISTA', props)
 		const GetEntregas = async () => {
 			const response = await Api.GetEntregas({ status: 0 })
 			const data = await response.data
@@ -58,7 +63,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 				Entregas disponíveis
 			</Text>
 			{entregas.length > 0 ? (
-				<View style={{ flex: 1 }}>
+				<ImageBackground style={{ flex: 1 }}>
 					<FlatList
 						style={{
 							flex: 1,
@@ -75,7 +80,7 @@ const EntregasList: React.FC<Props> = (props: any) => {
 							/>
 						)}
 					/>
-				</View>
+				</ImageBackground>
 			) : (
 				<ActivityIndicator size='large' color={Tema.colors.primary} />
 			)}
