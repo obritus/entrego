@@ -15,7 +15,7 @@ module.exports = {
 			info: '#05F2F2',
 			success: '#3BAD21',
 			light: '#EFF6FF',
-			dark: '#303030',
+			dark: '#000000',
 		}
 	},
 	plugins: [

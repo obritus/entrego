@@ -13,7 +13,7 @@ export default express.Router()
 		const keep = req.body.keep
 
 		// ESCOLHER QUAL MODEL USAR:
-		const Model = req.query.model === 'cliente' ? Cliente : Entregador
+		const Model = req.body.model === 'cliente' ? Cliente : Entregador
 
 		// VERIFICAR SE FOI INFORMADO O EMAIL E SENHA:
 		if (!email || !senha) {

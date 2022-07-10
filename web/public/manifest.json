@@ -1,6 +1,8 @@
 {
-	"short_name": "EntreGO Cliente",
+	"short_name": "EntreGO",
 	"name": "EntreGO - Aplicativo de entregas.",
+	"author": "Caique Souza",
+	"default_locale": "pt_BR"
 	"icons": [
 		{
 			"src": "favicon.ico",
@@ -13,9 +15,9 @@
 			"sizes": "192x192"
 		}
 	],
-	"statusbar": "#F3a",
+	"statusbar": "#FFFFFF",
 	"start_url": ".",
 	"display": "standalone",
 	"theme_color": "#141e30",
-	"background_color": "#141e30"
+	"background": "#141e30"
 }
