@@ -23,7 +23,9 @@ interface AuthContextTypes {
 const AuthContext = createContext<AuthContextTypes>({} as AuthContextTypes)
 
 const Index: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [token, setToken] = useState<string>('')
+	const [token, setToken] = useState<string>(
+		localStorage.getItem('token') || ''
+	)
 	const [user, setUser] = useState<User>({} as User)
 
 	useEffect(() => {

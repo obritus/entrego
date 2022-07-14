@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Api from '../Api'
 import { useAuth } from '../AuthContext'
 
@@ -12,6 +13,7 @@ const Index = () => {
 	const { setUser, setToken } = useAuth()
 	const [message, setMessage] = useState<String>('')
 	const formRef = useRef(null)
+	const navigate = useNavigate()
 	const HandleSubmit = async (e: any) => {
 		e.preventDefault()
 		setMessage('')
@@ -26,6 +28,7 @@ const Index = () => {
 		})
 
 		if (GetLogin.data.auth) {
+			navigate('/', { replace: true })
 			const { email, nome, logotipo, endereco } = GetLogin.data.user
 			setUser({
 				nome,

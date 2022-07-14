@@ -10,8 +10,6 @@ import NotFound from './Pages/404'
 
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
 	const token = localStorage.getItem('token')
-	console.log(token)
-	// const token = true
 	if (!token) {
 		return <Navigate to='/login' />
 	}
@@ -26,8 +24,24 @@ const Rotas: React.FC = () => {
 					<Header />
 					<section className='flex justify-center items-stretch text-light grow w-full lg:flex-row'>
 						<Routes>
-							<Route path='/' element={<App />} />
-							<Route path='login' element={<Login />} />
+							<Route
+								path='/'
+								element={
+									<PrivateRoute>
+										<Map />
+									</PrivateRoute>
+								}
+							/>
+							<Route
+								path='login'
+								element={
+									localStorage.getItem('token') ? (
+										<Navigate to='/' />
+									) : (
+										<Login />
+									)
+								}
+							/>
 							<Route
 								path='mapa'
 								element={
