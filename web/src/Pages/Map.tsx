@@ -1,11 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import {
+	GoogleMap,
+	LoadScript,
+	useJsApiLoader,
+	Marker,
+} from '@react-google-maps/api'
 
 const Index = () => {
+	useEffect(() => {
+		document.title = 'Mapa'
+	}, [])
+
+	const containerStyle = {
+		width: '100%',
+	}
 	return (
-		<div>
-			<h1>Mapa Google</h1>
-		</div>
+		<LoadScript googleMapsApiKey='AIzaSyDIvZg5hysrVjLYfT0KA87ZUuxf949LJWE'>
+			<GoogleMap
+				zoom={14}
+				options={{}}
+				mapContainerStyle={containerStyle}
+				center={{
+					lat: -21.576043,
+					lng: -45.439044,
+				}}
+			>
+				<Marker
+					title='TEsasdasdaste'
+					position={{ lat: -21.576043, lng: -45.439044 }}
+				>
+					asdasdsad
+				</Marker>
+			</GoogleMap>
+		</LoadScript>
 	)
 }
 

@@ -12,8 +12,46 @@ export default express.Router()
 		const senha = req.body.senha
 		const keep = req.body.keep
 
-		// ESCOLHER QUAL MODEL USAR:
-		const Model = req.body.model === 'cliente' ? Cliente : Entregador
+		// VERIFICAR SE FOI INFORMADO O EMAIL E SENHA:
+		if (!email || !senha) {
+			return res.status(400).json({
+				error: 'Email e senha são obrigatórios'
+			})
+		}
+
+		// FAZ A BUSCA NO BANCO DE DADOS:
+		const User = await Entregador
+			.aggregate()
+			.lookup({
+				from: 'images',
+				localField: '_id',
+				foreignField: 'avatar',
+				as: 'logotipo'
+			})
+			.match({ email })
+			//REMOVER ARRAY DO AVATAR, RESULTADO ÚNICO
+			.unwind({ path: '$avatar', preserveNullAndEmptyArrays: true })
+
+		if (User[0]) {
+			if (await CheckPassword(senha, User[0].senha)) {
+				const token = jwt.sign({ user_id: User[0]._id },
+					process.env.SECRET, {
+					expiresIn: keep ? '1y' : '1d'
+				})
+				delete User[0].senha
+				res.json({ auth: true, token, user: User[0] })
+			} else {
+				res.json({ auth: false, msg: 'Senha incorreta.' })
+			}
+		} else {
+			res.json({ auth: false, msg: 'Usuário não cadastrado.' })
+		}
+	})
+
+	.post('/login/cliente', async (req, res) => {
+		const email = req.body.email
+		const senha = req.body.senha
+		const keep = req.body.keep
 
 		// VERIFICAR SE FOI INFORMADO O EMAIL E SENHA:
 		if (!email || !senha) {
@@ -23,13 +61,13 @@ export default express.Router()
 		}
 
 		// FAZ A BUSCA NO BANCO DE DADOS:
-		const User = await Model
+		const User = await Cliente
 			.aggregate()
 			.lookup({
-				from: 'images',
+				from: 'logotipos',
 				localField: '_id',
-				foreignField: req.query.model === 'cliente' ? 'cliente' : 'entregador',
-				as: req.query.model === 'cliente' ? 'logotipo' : 'avatar',
+				foreignField: 'cliente',
+				as: 'logotipo'
 			})
 			.match({ email })
 			//REMOVER ARRAY DO AVATAR, RESULTADO ÚNICO

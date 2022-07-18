@@ -29,8 +29,9 @@ const Nav = () => {
 				</button>
 			</div>
 			<nav
-				className={`flex flex-col w-full absolute top-16 right-0 text-center z-50 ${
-					!menu && 'hidden'
+				className={`bg-secondary flex flex-col w-full absolute top-16 right-0 text-center z-50 ${
+					!menu &&
+					'hidden sm:flex sm:top-0 sm:static sm:flex-row sm:justify-end'
 				}`}
 			>
 				{token && (
@@ -68,6 +69,19 @@ const Nav = () => {
 						{({ isActive }) => (
 							<span className={isActive ? '' : undefined}>
 								Entrar
+							</span>
+						)}
+					</NavLink>
+				)}
+				{!token && (
+					<NavLink
+						to='/login'
+						className='bg-secondary p-4 hover:text-dark hover:text-shadow-1 hover:bg-opacity-75 text-lg'
+						onClick={() => setMenu(false)}
+					>
+						{({ isActive }) => (
+							<span className={isActive ? '' : undefined}>
+								Conheça
 							</span>
 						)}
 					</NavLink>
