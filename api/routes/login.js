@@ -48,7 +48,7 @@ export default express.Router()
 		}
 	})
 
-	.post('/login/cliente', async (req, res) => {
+	.post('/cliente', async (req, res) => {
 		const email = req.body.email
 		const senha = req.body.senha
 		const keep = req.body.keep

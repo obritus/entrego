@@ -24,7 +24,6 @@ const Index = () => {
 			email: Email,
 			senha: Senha,
 			keep: Keep,
-			model: 'cliente',
 		})
 
 		if (GetLogin.data.auth) {

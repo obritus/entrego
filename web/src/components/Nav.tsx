@@ -5,19 +5,22 @@ import { IoClose, IoMenu } from 'react-icons/io5'
 
 const Nav = () => {
 	let navigate = useNavigate()
-	const { setUser, user, setToken, token } = useAuth()
+	const { setUser, setToken, token } = useAuth()
 	const [menu, setMenu] = useState(false)
 
-	const HandleQuit = () => {
-		setMenu(false)
-		localStorage.removeItem('token')
-		setToken('')
+	const HandleQuit = async () => {
+		const RemoverEstados = async () => {
+			setMenu(false)
+			setToken('')
+			setUser({} as User) // LIMPA O ESTADO DO USUÁRIO
+			localStorage.removeItem('token')
+		}
+		await RemoverEstados()
 		navigate('login', { replace: true })
-		setUser({} as User) // LIMPA O ESTADO DO USUÁRIO
 	}
 
 	return (
-		<div className='sm:flex items-center justify-end text-primary h-16 grow font-bold'>
+		<div className='sm:flex items-center justify-end text-primary h-full grow font-bold'>
 			<div
 				className={`flex justify-end items-center h-16 pr-6 sm:hidden`}
 			>
